@@ -56,7 +56,7 @@ void run(void)
 
       write_cpu_log();		/* output some CPU usage log-info (accounts for everything needed up to the current sync-point) */
 
-      if(All.NumCurrentTiStep == 10)
+      if(All.NumCurrentTiStep == 3)
       endrun(0);
       
       if(All.Ti_Current >= TIMEBASE)	/* check whether we reached the final time */
