@@ -1,0 +1,48 @@
+[cli_30]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 30
+[cli_31]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 31
+[cli_0]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 0
+[cli_5]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 5
+[cli_6]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 6
+[cli_10]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 10
+[cli_11]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 11
+[cli_15]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 15
+[cli_16]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 16
+[cli_20]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 20
+[cli_21]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 21
+[cli_25]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 25
+[cli_26]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 26
+[cli_1]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 1
+[cli_35]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 35
+[cli_36]: aborting job:
+application called MPI_Abort(MPI_COMM_WORLD, 173) - process 36
+[proxy:0:1@epcc2] HYD_pmcd_pmip_control_cmd_cb (pm/pmiserv/pmip_cb.c:913): assert (!closed) failed
+[proxy:0:1@epcc2] HYDT_dmxu_poll_wait_for_event (tools/demux/demux_poll.c:76): callback returned error status
+[proxy:0:1@epcc2] main (pm/pmiserv/pmip.c:206): demux engine error waiting for event
+[proxy:0:4@epcc5] HYD_pmcd_pmip_control_cmd_cb (pm/pmiserv/pmip_cb.c:913): assert (!closed) failed
+[proxy:0:4@epcc5] HYDT_dmxu_poll_wait_for_event (tools/demux/demux_poll.c:76): callback returned error status
+[proxy:0:4@epcc5] main (pm/pmiserv/pmip.c:206): demux engine error waiting for event
+[proxy:0:2@epcc3] HYD_pmcd_pmip_control_cmd_cb (pm/pmiserv/pmip_cb.c:913): assert (!closed) failed
+[proxy:0:2@epcc3] HYDT_dmxu_poll_wait_for_event (tools/demux/demux_poll.c:76): callback returned error status
+[proxy:0:2@epcc3] main (pm/pmiserv/pmip.c:206): demux engine error waiting for event
+[proxy:0:3@epcc4] HYD_pmcd_pmip_control_cmd_cb (pm/pmiserv/pmip_cb.c:913): assert (!closed) failed
+[proxy:0:3@epcc4] HYDT_dmxu_poll_wait_for_event (tools/demux/demux_poll.c:76): callback returned error status
+[proxy:0:3@epcc4] main (pm/pmiserv/pmip.c:206): demux engine error waiting for event
+[mpiexec@epcc-head] HYDT_bscu_wait_for_completion (tools/bootstrap/utils/bscu_wait.c:76): one of the processes terminated badly; aborting
+[mpiexec@epcc-head] HYDT_bsci_wait_for_completion (tools/bootstrap/src/bsci_wait.c:23): launcher returned error waiting for completion
+[mpiexec@epcc-head] HYD_pmci_wait_for_completion (pm/pmiserv/pmiserv_pmci.c:218): launcher returned error waiting for completion
+[mpiexec@epcc-head] main (ui/mpich/mpiexec.c:336): process manager error waiting for completion
