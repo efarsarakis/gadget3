@@ -2422,7 +2422,7 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
 	return ninteractions;
 }
 
-#ifdef PMGRID
+
 /*! In the TreePM algorithm, the tree is walked only locally around the
  *  target coordinate.  Tree nodes that fall outside a box of half
  *  side-length Rcut= RCUT*ASMTH*MeshSize can be discarded. The short-range
@@ -2714,17 +2714,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 			else
 			{
-#ifndef ADAPTGRAVSOFT
 
-#ifdef UNEQUALSOFTENINGS
-				35TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				h_inv = 1.0 / h;
-				h3_inv = h_inv * h_inv * h_inv;
-#ifdef DISTORTIONTENSORPS
-				36TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				h5_inv = h_inv * h_inv * h_inv * h_inv * h_inv;
-#endif
-#endif
 				u = r * h_inv;
 				if(u < 0.5)
 					fac = mass * h3_inv * (10.666666666667 + u * u * (32.0 * u - 38.4));
@@ -2732,106 +2722,6 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					fac =
 							mass * h3_inv * (21.333333333333 - 48.0 * u +
 									38.4 * u * u - 10.666666666667 * u * u * u - 0.066666666667 / (u * u * u));
-#ifdef EVALPOTENTIAL
-				37TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				if(u < 0.5)
-					wp = -2.8 + u * u * (5.333333333333 + u * u * (6.4 * u - 9.6));
-				else
-					wp =
-							-3.2 + 0.066666666667 / u + u * u * (10.666666666667 +
-									u * (-16.0 + u * (9.6 - 2.133333333333 * u)));
-
-				facpot = mass * h_inv * wp;
-#endif
-#ifdef DISTORTIONTENSORPS
-				38TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				/*second derivates needed -> calculate them from softend potential,
-	         (see Gadget 1 paper and there g2 function). SIGN?! */
-				if(u < 0.5)
-					fac2 = mass * h5_inv * (76.8 - 96.0 * u);
-				else
-					fac2 = mass * h5_inv * (-0.2 / (u * u * u * u * u) + 48.0 / u - 76.8 + 32.0 * u);
-#endif
-#else
-				39TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				/* interaction is smoothed: only particle-particle, no nodes down here! */
-				dWdr = dWdr_p = corr = 0;
-				h_inv = 1.0 / h;
-				h3_inv = h_inv * h_inv * h_inv;
-				u = r * h_inv;
-
-				if(u > 1.)
-					fac = mass / (r2 * r);
-
-				else if(u < 0.5)
-				{
-					fac = mass * h3_inv * (10.666666666667 + u * u * (32.0 * u - 38.4));
-					dWdr = 6. * KERNEL_COEFF_1 * h3_inv * h_inv * (-2. * u + 3. * u * u);
-				}
-				else
-				{
-					fac = mass * h3_inv * (21.333333333333 - 48.0 * u +
-							38.4 * u * u - 10.666666666667 * u * u * u -
-							0.066666666667 / (u * u * u));
-					dWdr = -6. * KERNEL_COEFF_1 * h3_inv * h_inv * ((1. - u) * (1. - u));
-				}
-
-
-				h_p_inv = 1.0 / h_p;
-				h_p3_inv = h_p_inv * h_p_inv * h_p_inv;
-				u_p = r * h_p_inv;
-
-				if(u_p > 1.)
-					fac_p = mass / (r2 * r);
-
-				else if(u_p < 0.5)
-				{
-					fac_p = mass * h_p3_inv * (10.666666666667 + u_p * u_p * (32.0 * u_p - 38.4));
-					dWdr_p = 6. * KERNEL_COEFF_1 * h_p3_inv * h_p_inv * (-2. * u_p + 3. * u_p * u_p);
-				}
-				else
-				{
-					fac_p = mass * h_p3_inv * (21.333333333333 - 48.0 * u_p +
-							38.4 * u_p * u_p - 10.666666666667 * u_p * u_p * u_p -
-							0.066666666667 / (u_p * u_p * u_p));
-					dWdr_p = -6. * KERNEL_COEFF_1 * h_p3_inv * h_p_inv * (1. - u_p) * (1. - u_p);
-				}
-
-
-				/* force = (fac + fac_p)/2 */
-				fac += fac_p;
-				fac /= 2.;
-
-#ifndef AGS_NOCORRECTION
-				40TH ////////////////////////////////////////////////////////////////////////////////////////////
-				/* correction term */
-				corr =
-						(zeta * omega * dWdr +
-								mass / mass_target * P[particle].AGS_zeta * P[particle].AGS_omega * dWdr_p) / r;
-
-				corr /= 2.;
-
-
-#ifdef AGS_OUTPUTCORR
-				41ST  ////////////////////////////////////////////////////////////////////////////////////////////
-				correction += corr;
-#endif
-
-				/***************************************************************************************************/
-				/* The original correction term is:                                                                */
-				/*   corr = mass * (termI / termII * dWdr +  P[particle].termI / P[particle].termII * dWdr_p) / r; */
-				/*   corr /= 2.;                                                                                   */
-				/* But remember that termI and termII would have a different definition.                           */
-				/***************************************************************************************************/
-
-
-#endif
-				if(particle >= All.MaxPart)
-				{
-					printf("*PROBLEM in ADAPTGRAVSOFT*: we are having a smoothed particle-node interaction!\n");
-					printf("Particle, Node: %i, %i \n", target, particle);
-				}
-#endif
 
 			}
 
@@ -2839,106 +2729,18 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 			if(tabindex < NTAB)
 			{
-#ifdef DISTORTIONTENSORPS
-				42ND  ////////////////////////////////////////////////////////////////////////////////////////////
-				/* save original fac without shortrange_table facor (needed for tidal field calculation) */
-				fac_tidal = fac;
-#endif
 				fac *= shortrange_table[tabindex];
 
 				acc_x += FLT(dx * fac);
 				acc_y += FLT(dy * fac);
 				acc_z += FLT(dz * fac);
 
-#ifdef ADAPTGRAVSOFT
-				43RD  ////////////////////////////////////////////////////////////////////////////////////////////
-				corr *= shortrange_table[tabindex];
 
-				acc_x += FLT(dx * corr);
-				acc_y += FLT(dy * corr);
-				acc_z += FLT(dz * corr);
-#endif
-
-#ifdef DISTORTIONTENSORPS
-				44TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				/*
-	         tidal_tensorps[][] = Matrix of second derivatives of grav. potential, symmetric:
-	         |Txx Txy Txz|   |tidal_tensorps[0][0] tidal_tensorps[0][1] tidal_tensorps[0][2]|
-	         |Tyx Tyy Tyz| = |tidal_tensorps[1][0] tidal_tensorps[1][1] tidal_tensorps[1][2]| 
-	         |Tzx Tzy Tzz|   |tidal_tensorps[2][0] tidal_tensorps[2][1] tidal_tensorps[2][2]|
-				 */
-
-				tidal_tensorps[0][0] += ((-fac_tidal + dx * dx * fac2) * shortrange_table[tabindex]) +
-						dx * dx * fac2 / 3.0 * shortrange_table_tidal[tabindex];
-				tidal_tensorps[0][1] += ((dx * dy * fac2) * shortrange_table[tabindex]) +
-						dx * dy * fac2 / 3.0 * shortrange_table_tidal[tabindex];
-				tidal_tensorps[0][2] += ((dx * dz * fac2) * shortrange_table[tabindex]) +
-						dx * dz * fac2 / 3.0 * shortrange_table_tidal[tabindex];
-				tidal_tensorps[1][1] += ((-fac_tidal + dy * dy * fac2) * shortrange_table[tabindex]) +
-						dy * dy * fac2 / 3.0 * shortrange_table_tidal[tabindex];
-				tidal_tensorps[1][2] += ((dy * dz * fac2) * shortrange_table[tabindex]) +
-						dy * dz * fac2 / 3.0 * shortrange_table_tidal[tabindex];
-				tidal_tensorps[2][2] += ((-fac_tidal + dz * dz * fac2) * shortrange_table[tabindex]) +
-						dz * dz * fac2 / 3.0 * shortrange_table_tidal[tabindex];
-				tidal_tensorps[1][0] = tidal_tensorps[0][1];
-				tidal_tensorps[2][0] = tidal_tensorps[0][2];
-				tidal_tensorps[2][1] = tidal_tensorps[1][2];
-#endif
-#ifdef EVALPOTENTIAL
-				45TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				pot += FLT(facpot * shortrange_table_potential[tabindex]);
-#endif
 			}
 
 			ninteractions++;
 
 
-#ifdef SCALARFIELD
-			46TH  ////////////////////////////////////////////////////////////////////////////////////////////
-			if(ptype != 0)	/* we have a dark matter particle as target */
-			{
-#ifdef PERIODIC
-				47TH  ////////////////////////////////////////////////////////////////////////////////////////////
-				dx_dm = NEAREST(dx_dm);
-				dy_dm = NEAREST(dy_dm);
-				dz_dm = NEAREST(dz_dm);
-#endif
-				r2 = dx_dm * dx_dm + dy_dm * dy_dm + dz_dm * dz_dm;
-				r = sqrt(r2);
-				if(r >= h)
-					fac = mass_dm / (r2 * r);
-				else
-				{
-#ifdef UNEQUALSOFTENINGS
-					48TH  ////////////////////////////////////////////////////////////////////////////////////////////
-					h_inv = 1.0 / h;
-					h3_inv = h_inv * h_inv * h_inv;
-#endif
-					u = r * h_inv;
-					if(u < 0.5)
-						fac = mass_dm * h3_inv * (10.666666666667 + u * u * (32.0 * u - 38.4));
-					else
-						fac =
-								mass_dm * h3_inv * (21.333333333333 - 48.0 * u +
-										38.4 * u * u - 10.666666666667 * u * u * u -
-										0.066666666667 / (u * u * u));
-				}
-
-				/* assemble force with strength, screening length, and target charge.  */
-
-				fac *=
-						All.ScalarBeta * (1 + r / All.ScalarScreeningLength) * exp(-r / All.ScalarScreeningLength);
-				tabindex = (int) (asmthfac * r);
-				if(tabindex < NTAB)
-				{
-					fac *= shortrange_table[tabindex];
-					acc_x += FLT(dx_dm * fac);
-					acc_y += FLT(dy_dm * fac);
-					acc_z += FLT(dz_dm * fac);
-
-				}
-			}
-#endif
 		}
 
 		if(mode == 1)
@@ -2963,47 +2765,19 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		P[target].g.dGravAccel[0] = acc_x;
 		P[target].g.dGravAccel[1] = acc_y;
 		P[target].g.dGravAccel[2] = acc_z;
-#ifdef EVALPOTENTIAL
-		49TH  ////////////////////////////////////////////////////////////////////////////////////////////
-		P[target].p.dPotential = pot;
-#endif
-#ifdef DISTORTIONTENSORPS
-		50TH ////////////////////////////////////////////////////////////////////////////////////////////
-		for(i1 = 0; i1 < 3; i1++)
-			for(i2 = 0; i2 < 3; i2++)
-				P[target].tidal_tensorps[i1][i2] = tidal_tensorps[i1][i2];
-#endif
-#if defined(ADAPTGRAVSOFT) && defined(AGS_OUTPUTCORR)
-		51ST  ////////////////////////////////////////////////////////////////////////////////////////////
-		P[target].AGS_corr = correction;
-#endif
 	}
 	else
 	{
 		GravDataResult[target].Acc[0] = acc_x;
 		GravDataResult[target].Acc[1] = acc_y;
 		GravDataResult[target].Acc[2] = acc_z;
-#ifdef EVALPOTENTIAL
-		52ND  ////////////////////////////////////////////////////////////////////////////////////////////
-		GravDataResult[target].Potential = pot;
-#endif
-#ifdef DISTORTIONTENSORPS
-		53RD  ////////////////////////////////////////////////////////////////////////////////////////////
-		for(i1 = 0; i1 < 3; i1++)
-			for(i2 = 0; i2 < 3; i2++)
-				GravDataResult[target].tidal_tensorps[i1][i2] = tidal_tensorps[i1][i2];
-#endif
-#if defined(ADAPTGRAVSOFT) && defined(AGS_OUTPUTCORR)
-		54TH  ////////////////////////////////////////////////////////////////////////////////////////////
-		GravDataResult[target].AGS_corr = correction;
-#endif
 		*exportflag = nodesinlist;
 	}
 
 	return ninteractions;
 }
 
-#endif
+
 
 
 
