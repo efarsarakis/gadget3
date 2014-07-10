@@ -35,8 +35,8 @@ INCL   = allvars.h proto.h  nrsrc/nrutil.h  Makefile
 #SYSTYPE="Solaris"
 
 #SYSTYPE="all-intel"
-SYSTYPE="archer"
-#SYSTYPE="mvapich-pgi"
+#SYSTYPE="archer"
+SYSTYPE="mvapich-pgi"
 #SYSTYPE="mvapich-intel"
 #SYSTYPE="openmpi-intel"
 
