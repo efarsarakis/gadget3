@@ -153,7 +153,7 @@ FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
 FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
 MPICHLIB =
 
-OPTIMIZE = -fastsse -acc -ta=nvidia -Minfo
+OPTIMIZE = -O0 -acc -ta=nvidia -Minfo
 endif
 
 
