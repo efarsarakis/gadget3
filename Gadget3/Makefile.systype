@@ -7,7 +7,7 @@
 #SYSTYPE="mac"
 #SYSTYPE="archer"
 #SYSTYPE="mvapich-pgi"
-#SYSTYPE="OpenACCboston"
+SYSTYPE="OpenACCboston"
 #SYSTYPE="mvapich-intel"
 #SYSTYPE="all-intel"
 #SYSTYPE="openmpi-intel"

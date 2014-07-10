@@ -157,10 +157,10 @@ OPTIMIZE = -ta=nvidia -acc -Minfo=accel
 endif
 
 ifeq ($(SYSTYPE),"mac")
-#GSL_INCL = -I/shared/apps/gadget/libraries/gsl-gcc/include/
-#GSL_LIBS = -L/shared/apps/gadget/libraries/gsl-gcc/lib/
-#FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
-#FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
+GSL_INCL = -I/opt/local/include/
+GSL_LIBS = -L/opt/local/lib/
+FFTW_INCL= -I/opt/local/include/
+FFTW_LIBS= -L/opt/local/lib/
 #MPICHLIB =
 
 OPTIMIZE = -O3

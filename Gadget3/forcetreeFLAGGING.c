@@ -2451,7 +2451,52 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	integertime ti_Current = All.Ti_Current;
 	double errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 
+#ifdef PERIODIC
+	1ST ////////////////////////////////////////////////////////////////////////////////////////////
 	double xtmp;
+#endif
+#ifdef DISTORTIONTENSORPS
+	2ND ////////////////////////////////////////////////////////////////////////////////////////////
+	int i1, i2;
+	double fac2, h5_inv;
+	double fac_tidal;
+	MyDouble tidal_tensorps[3][3];
+#endif
+
+#ifdef SCALARFIELD
+	3RD ////////////////////////////////////////////////////////////////////////////////////////////
+	double dx_dm = 0, dy_dm = 0, dz_dm = 0, mass_dm = 0;
+#endif
+#ifdef ADAPTIVE_GRAVSOFT_FORGAS
+	4TH ////////////////////////////////////////////////////////////////////////////////////////////
+	double soft = 0;
+#endif
+#ifdef EVALPOTENTIAL
+	5TH ////////////////////////////////////////////////////////////////////////////////////////////
+	double wp, facpot;
+	MyLongDouble pot;
+
+	pot = 0;
+#endif
+
+#ifdef ADAPTGRAVSOFT
+	6TH ////////////////////////////////////////////////////////////////////////////////////////////
+	double h_p, h_p_inv, h_p3_inv, u_p, fac_p, h_max;
+	double zeta, omega, dWdr, dWdr_p, corr;
+	double mass_target;
+	int particle;
+#ifdef AGS_OUTPUTCORR
+	7TH ////////////////////////////////////////////////////////////////////////////////////////////
+	double correction = 0;
+#endif
+#endif
+
+#ifdef DISTORTIONTENSORPS
+	8TH ////////////////////////////////////////////////////////////////////////////////////////////
+	for(i1 = 0; i1 < 3; i1++)
+		for(i2 = 0; i2 < 3; i2++)
+			tidal_tensorps[i1][i2] = 0.0;
+#endif
 
 
 	acc_x = 0;
@@ -2476,25 +2521,61 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		pos_z = P[target].Pos[2];
 		ptype = P[target].Type;
 		aold = All.ErrTolForceAcc * P[target].OldAcc;
+#ifdef ADAPTIVE_GRAVSOFT_FORGAS
+		9TH ////////////////////////////////////////////////////////////////////////////////////////////
+		if(ptype == 0)
+			soft = PPP[target].Hsml;
+#endif
+#ifdef PLACEHIGHRESREGION
+		10TH ////////////////////////////////////////////////////////////////////////////////////////////
+		if(pmforce_is_particle_high_res(ptype, P[target].Pos))
+		{
+			rcut = All.Rcut[1];
+			asmth = All.Asmth[1];
+		}
+#endif
+#ifdef ADAPTGRAVSOFT
+		11TH ////////////////////////////////////////////////////////////////////////////////////////////
+		zeta = P[target].AGS_zeta;
+		omega = P[target].AGS_omega;
+		h = P[target].AGS_Hsml;
+		mass_target = P[target].Mass;
+#endif
 	}
 	else
 	{
 		pos_x = GravDataGet[target].Pos[0];
 		pos_y = GravDataGet[target].Pos[1];
 		pos_z = GravDataGet[target].Pos[2];
+#if defined(UNEQUALSOFTENINGS) || defined(SCALARFIELD)
+		12TH ////////////////////////////////////////////////////////////////////////////////////////////
+		ptype = GravDataGet[target].Type;
+#else
+		13TH ////////////////////////////////////////////////////////////////////////////////////////////
 		ptype = P[0].Type;
-
+#endif
 		aold = All.ErrTolForceAcc * GravDataGet[target].OldAcc;
+#ifdef ADAPTIVE_GRAVSOFT_FORGAS
+		14TH ////////////////////////////////////////////////////////////////////////////////////////////
+		if(ptype == 0)
+			soft = GravDataGet[target].Soft;
+#endif
 	}
 
 	rcut2 = rcut * rcut;
 
 	asmthfac = 0.5 / asmth * (NTAB / 3.0);
 
-
+#if !defined(UNEQUALSOFTENINGS) && !defined(ADAPTGRAVSOFT)
+	15TH ////////////////////////////////////////////////////////////////////////////////////////////
 	h = All.ForceSoftening[ptype];
 	h_inv = 1.0 / h;
 	h3_inv = h_inv * h_inv * h_inv;
+#ifdef DISTORTIONTENSORPS
+	16TH ////////////////////////////////////////////////////////////////////////////////////////////
+	h5_inv = h_inv * h_inv * h_inv * h_inv * h_inv;
+#endif
+#endif
 
 	if(mode == 0)
 	{
@@ -2533,10 +2614,38 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				r2 = dx * dx + dy * dy + dz * dz;
 
 				mass = P[no].Mass;
+#ifdef UNEQUALSOFTENINGS
+				17TH ////////////////////////////////////////////////////////////////////////////////////////////
+#ifdef ADAPTIVE_GRAVSOFT_FORGAS
+				18TH ////////////////////////////////////////////////////////////////////////////////////////////
+				if(ptype == 0)
+					h = soft;
+				else
+					h = All.ForceSoftening[ptype];
 
+				if(P[no].Type == 0)
+				{
+					if(h < PPP[no].Hsml)
+						h = PPP[no].Hsml;
+				}
+				else
+				{
+					if(h < All.ForceSoftening[P[no].Type])
+						h = All.ForceSoftening[P[no].Type];
+				}
+#else
+				h = All.ForceSoftening[ptype];
+				if(h < All.ForceSoftening[P[no].Type])
+					h = All.ForceSoftening[P[no].Type];
+#endif
+#endif
 				if(TakeLevel >= 0)
 				{
 					LOCK_WORKCOUNT;
+#ifdef THREAD_SAFE_COSTS
+					19TH ////////////////////////////////////////////////////////////////////////////////////////////
+#pragma omp critical(_workcount_)
+#endif
 					P[no].GravCost[TakeLevel] += 1.0;
 					UNLOCK_WORKCOUNT;
 				}
@@ -2629,6 +2738,26 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				dy = NEAREST(dy);
 				dz = NEAREST(dz);
 				r2 = dx * dx + dy * dy + dz * dz;
+#ifdef DO_NOT_BRACH_IF
+				20TH ////////////////////////////////////////////////////////////////////////////////////////////
+				dxx = fabs(nop->center[0] - pos_x);
+				dyy = fabs(nop->center[1] - pos_y);
+				dzz = fabs(nop->center[2] - pos_z);
+				eff_dist = rcut + 0.5 * nop->len;
+
+
+				pdxx = NGB_PERIODIC_LONG_X(dxx);
+				pdyy = NGB_PERIODIC_LONG_Y(dyy);
+				pdzz = NGB_PERIODIC_LONG_Z(dzz);
+
+				/* check whether we can stop walking along this branch */
+				if((r2 > rcut2) & ((pdxx > eff_dist) | (pdyy > eff_dist) | (pdzz > eff_dist)))
+				{
+					no = nop->u.d.sibling;
+					continue;
+				}
+#else
+				21ST ////////////////////////////////////////////////////////////////////////////////////////////
 				/* check whether we can stop walking along this branch */
 				if(r2 > rcut2)
 				{
@@ -2655,7 +2784,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 						continue;
 					}
 				}
-
+#endif
 
 				if(errTol2)	/* check Barnes-Hut opening criterion */
 				{
@@ -2668,7 +2797,17 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				}
 				else		/* check relative opening criterion */
 				{
-
+#ifdef DO_NOT_BRACH_IF
+					22ND ////////////////////////////////////////////////////////////////////////////////////////////
+					if((mass * nop->len * nop->len > r2 * r2 * aold) |
+							((dxx < 0.60 * nop->len) & (dyy < 0.60 * nop->len) & (dzz < 0.60 * nop->len)))
+					{
+						/* open cell */
+						no = nop->u.d.nextnode;
+						continue;
+					}
+#else
+					23RD ////////////////////////////////////////////////////////////////////////////////////////////
 					if(mass * nop->len * nop->len > r2 * r2 * aold)
 					{
 						/* open cell */
@@ -2689,13 +2828,69 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 							}
 						}
 					}
-
+#endif
 				}
 
+#ifdef UNEQUALSOFTENINGS
+				24TH ////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef ADAPTIVE_GRAVSOFT_FORGAS
+				25TH ////////////////////////////////////////////////////////////////////////////////////////////
+				h = All.ForceSoftening[ptype];
+				if(h < All.ForceSoftening[extract_max_softening_type(nop->u.d.bitflags)])
+				{
+					h = All.ForceSoftening[extract_max_softening_type(nop->u.d.bitflags)];
+					if(r2 < h * h)
+					{
+						if(maskout_different_softening_flag(nop->u.d.bitflags))	/* bit-5 signals that there are particles of different softening in the node */
+						{
+							no = nop->u.d.nextnode;
+
+							continue;
+						}
+					}
+				}
+#else
+				26TH ////////////////////////////////////////////////////////////////////////////////////////////
+				if(ptype == 0)
+					h = soft;
+				else
+					h = All.ForceSoftening[ptype];
+
+				if(h < nop->maxsoft)
+				{
+					h = nop->maxsoft;
+					if(r2 < h * h)
+					{
+						no = nop->u.d.nextnode;
+						continue;
+					}
+				}
+#endif
+#endif
+#ifdef ADAPTGRAVSOFT
+				27TH ////////////////////////////////////////////////////////////////////////////////////////////
+				h_p = nop->maxsoft;	/* softening of the node */
+				h_max = h >= h_p ? h : h_p;
+
+				if(r2 < h_max * h_max)
+				{
+					no = nop->u.d.nextnode;
+					continue;	/* discard cases where the particle-node separation is less than the bigger
+				   between the target softening and the node softening
+					 */
+				}
+
+				particle = no;
+#endif
 
 				if(TakeLevel >= 0)
 				{
 					LOCK_WORKCOUNT;
+#ifdef THREAD_SAFE_COSTS
+					28TH ////////////////////////////////////////////////////////////////////////////////////////////
+					29th  ////////////////////////////////////////////////////////////////////////////////////////////
+#pragma omp critical(_workcount_)
+#endif
 					nop->GravCost += 1.0;
 					UNLOCK_WORKCOUNT;
 				}
@@ -2706,16 +2901,36 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 			r = sqrt(r2);
 
+#ifdef ADAPTGRAVSOFT
+			30TH ////////////////////////////////////////////////////////////////////////////////////////////
+			h_max = h >= h_p ? h : h_p;
+			if(r >= h_max)
+			{
+				/* no need to worry about softening lengths: interaction is newtonian.
+				 * All particle-node interactions fall here */
+				fac = mass / (r2 * r);
+				corr = 0;
+			}
+#else
+			31ST ////////////////////////////////////////////////////////////////////////////////////////////
 			if(r >= h)
 			{
 				fac = mass / (r2 * r);
-
+#ifdef DISTORTIONTENSORPS
+				32ND ////////////////////////////////////////////////////////////////////////////////////////////
+				/* second derivative of potential needs this factor */
+				fac2 = 3.0 * mass / (r2 * r2 * r);
+#endif
+#ifdef EVALPOTENTIAL
+				33RD ////////////////////////////////////////////////////////////////////////////////////////////
+				facpot = -mass / r;
+#endif
 			}
-
+#endif
 			else
 			{
 #ifndef ADAPTGRAVSOFT
-
+				34TH  ////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef UNEQUALSOFTENINGS
 				35TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				h_inv = 1.0 / h;
