@@ -2452,11 +2452,11 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	double errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 
 #ifdef PERIODIC
-	1ST
+	1ST ////////////////////////////////////////////////////////////////////////////////////////////
 	double xtmp;
 #endif
 #ifdef DISTORTIONTENSORPS
-	2ND
+	2ND ////////////////////////////////////////////////////////////////////////////////////////////
 	int i1, i2;
 	double fac2, h5_inv;
 	double fac_tidal;
@@ -2464,15 +2464,15 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 
 #ifdef SCALARFIELD
-	3RD
+	3RD ////////////////////////////////////////////////////////////////////////////////////////////
 	double dx_dm = 0, dy_dm = 0, dz_dm = 0, mass_dm = 0;
 #endif
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
-	4TH
+	4TH ////////////////////////////////////////////////////////////////////////////////////////////
 	double soft = 0;
 #endif
 #ifdef EVALPOTENTIAL
-	5TH
+	5TH ////////////////////////////////////////////////////////////////////////////////////////////
 	double wp, facpot;
 	MyLongDouble pot;
 
@@ -2480,19 +2480,19 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 
 #ifdef ADAPTGRAVSOFT
-	6TH
+	6TH ////////////////////////////////////////////////////////////////////////////////////////////
 	double h_p, h_p_inv, h_p3_inv, u_p, fac_p, h_max;
 	double zeta, omega, dWdr, dWdr_p, corr;
 	double mass_target;
 	int particle;
 #ifdef AGS_OUTPUTCORR
-	7TH
+	7TH ////////////////////////////////////////////////////////////////////////////////////////////
 	double correction = 0;
 #endif
 #endif
 
 #ifdef DISTORTIONTENSORPS
-	8TH
+	8TH ////////////////////////////////////////////////////////////////////////////////////////////
 	for(i1 = 0; i1 < 3; i1++)
 		for(i2 = 0; i2 < 3; i2++)
 			tidal_tensorps[i1][i2] = 0.0;
@@ -2522,12 +2522,12 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		ptype = P[target].Type;
 		aold = All.ErrTolForceAcc * P[target].OldAcc;
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
-		9TH
+		9TH ////////////////////////////////////////////////////////////////////////////////////////////
 		if(ptype == 0)
 			soft = PPP[target].Hsml;
 #endif
 #ifdef PLACEHIGHRESREGION
-		10TH
+		10TH ////////////////////////////////////////////////////////////////////////////////////////////
 		if(pmforce_is_particle_high_res(ptype, P[target].Pos))
 		{
 			rcut = All.Rcut[1];
@@ -2535,7 +2535,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		}
 #endif
 #ifdef ADAPTGRAVSOFT
-		11TH
+		11TH ////////////////////////////////////////////////////////////////////////////////////////////
 		zeta = P[target].AGS_zeta;
 		omega = P[target].AGS_omega;
 		h = P[target].AGS_Hsml;
@@ -2548,15 +2548,15 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		pos_y = GravDataGet[target].Pos[1];
 		pos_z = GravDataGet[target].Pos[2];
 #if defined(UNEQUALSOFTENINGS) || defined(SCALARFIELD)
-		12TH
+		12TH ////////////////////////////////////////////////////////////////////////////////////////////
 		ptype = GravDataGet[target].Type;
 #else
-		13TH
+		13TH ////////////////////////////////////////////////////////////////////////////////////////////
 		ptype = P[0].Type;
 #endif
 		aold = All.ErrTolForceAcc * GravDataGet[target].OldAcc;
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
-		14TH
+		14TH ////////////////////////////////////////////////////////////////////////////////////////////
 		if(ptype == 0)
 			soft = GravDataGet[target].Soft;
 #endif
@@ -2567,12 +2567,12 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	asmthfac = 0.5 / asmth * (NTAB / 3.0);
 
 #if !defined(UNEQUALSOFTENINGS) && !defined(ADAPTGRAVSOFT)
-	15TH
+	15TH ////////////////////////////////////////////////////////////////////////////////////////////
 	h = All.ForceSoftening[ptype];
 	h_inv = 1.0 / h;
 	h3_inv = h_inv * h_inv * h_inv;
 #ifdef DISTORTIONTENSORPS
-	16TH
+	16TH ////////////////////////////////////////////////////////////////////////////////////////////
 	h5_inv = h_inv * h_inv * h_inv * h_inv * h_inv;
 #endif
 #endif
@@ -2615,9 +2615,9 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 				mass = P[no].Mass;
 #ifdef UNEQUALSOFTENINGS
-				17TH
+				17TH ////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
-				18TH
+				18TH ////////////////////////////////////////////////////////////////////////////////////////////
 				if(ptype == 0)
 					h = soft;
 				else
@@ -2643,7 +2643,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				{
 					LOCK_WORKCOUNT;
 #ifdef THREAD_SAFE_COSTS
-					19TH
+					19TH ////////////////////////////////////////////////////////////////////////////////////////////
 #pragma omp critical(_workcount_)
 #endif
 					P[no].GravCost[TakeLevel] += 1.0;
@@ -2739,7 +2739,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				dz = NEAREST(dz);
 				r2 = dx * dx + dy * dy + dz * dz;
 #ifdef DO_NOT_BRACH_IF
-				20TH
+				20TH ////////////////////////////////////////////////////////////////////////////////////////////
 				dxx = fabs(nop->center[0] - pos_x);
 				dyy = fabs(nop->center[1] - pos_y);
 				dzz = fabs(nop->center[2] - pos_z);
@@ -2757,7 +2757,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					continue;
 				}
 #else
-				21ST
+				21ST ////////////////////////////////////////////////////////////////////////////////////////////
 				/* check whether we can stop walking along this branch */
 				if(r2 > rcut2)
 				{
@@ -2798,7 +2798,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				else		/* check relative opening criterion */
 				{
 #ifdef DO_NOT_BRACH_IF
-					22ND
+					22ND ////////////////////////////////////////////////////////////////////////////////////////////
 					if((mass * nop->len * nop->len > r2 * r2 * aold) |
 							((dxx < 0.60 * nop->len) & (dyy < 0.60 * nop->len) & (dzz < 0.60 * nop->len)))
 					{
@@ -2807,7 +2807,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 						continue;
 					}
 #else
-					23RD
+					23RD ////////////////////////////////////////////////////////////////////////////////////////////
 					if(mass * nop->len * nop->len > r2 * r2 * aold)
 					{
 						/* open cell */
@@ -2832,9 +2832,9 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				}
 
 #ifdef UNEQUALSOFTENINGS
-				24TH
+				24TH ////////////////////////////////////////////////////////////////////////////////////////////
 #ifndef ADAPTIVE_GRAVSOFT_FORGAS
-				25TH
+				25TH ////////////////////////////////////////////////////////////////////////////////////////////
 				h = All.ForceSoftening[ptype];
 				if(h < All.ForceSoftening[extract_max_softening_type(nop->u.d.bitflags)])
 				{
@@ -2850,7 +2850,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					}
 				}
 #else
-				26TH
+				26TH ////////////////////////////////////////////////////////////////////////////////////////////
 				if(ptype == 0)
 					h = soft;
 				else
@@ -2868,7 +2868,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 #endif
 #ifdef ADAPTGRAVSOFT
-				27TH
+				27TH ////////////////////////////////////////////////////////////////////////////////////////////
 				h_p = nop->maxsoft;	/* softening of the node */
 				h_max = h >= h_p ? h : h_p;
 
@@ -2887,7 +2887,8 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				{
 					LOCK_WORKCOUNT;
 #ifdef THREAD_SAFE_COSTS
-					28TH
+					28TH ////////////////////////////////////////////////////////////////////////////////////////////
+					29th  ////////////////////////////////////////////////////////////////////////////////////////////
 #pragma omp critical(_workcount_)
 #endif
 					nop->GravCost += 1.0;
@@ -2901,7 +2902,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			r = sqrt(r2);
 
 #ifdef ADAPTGRAVSOFT
-			30TH
+			30TH ////////////////////////////////////////////////////////////////////////////////////////////
 			h_max = h >= h_p ? h : h_p;
 			if(r >= h_max)
 			{
@@ -2911,12 +2912,12 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				corr = 0;
 			}
 #else
-			31ST
+			31ST ////////////////////////////////////////////////////////////////////////////////////////////
 			if(r >= h)
 			{
 				fac = mass / (r2 * r);
 #ifdef DISTORTIONTENSORPS
-				32ND
+				32ND ////////////////////////////////////////////////////////////////////////////////////////////
 				/* second derivative of potential needs this factor */
 				fac2 = 3.0 * mass / (r2 * r2 * r);
 #endif
