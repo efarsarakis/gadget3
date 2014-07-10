@@ -2452,9 +2452,11 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	double errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 
 #ifdef PERIODIC
+	1ST
 	double xtmp;
 #endif
 #ifdef DISTORTIONTENSORPS
+	2ND
 	int i1, i2;
 	double fac2, h5_inv;
 	double fac_tidal;
@@ -2462,12 +2464,15 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 
 #ifdef SCALARFIELD
+	3RD
 	double dx_dm = 0, dy_dm = 0, dz_dm = 0, mass_dm = 0;
 #endif
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
+	4TH
 	double soft = 0;
 #endif
 #ifdef EVALPOTENTIAL
+	5TH
 	double wp, facpot;
 	MyLongDouble pot;
 
@@ -2475,16 +2480,19 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 
 #ifdef ADAPTGRAVSOFT
+	6TH
 	double h_p, h_p_inv, h_p3_inv, u_p, fac_p, h_max;
 	double zeta, omega, dWdr, dWdr_p, corr;
 	double mass_target;
 	int particle;
 #ifdef AGS_OUTPUTCORR
+	7TH
 	double correction = 0;
 #endif
 #endif
 
 #ifdef DISTORTIONTENSORPS
+	8TH
 	for(i1 = 0; i1 < 3; i1++)
 		for(i2 = 0; i2 < 3; i2++)
 			tidal_tensorps[i1][i2] = 0.0;
@@ -2514,10 +2522,12 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		ptype = P[target].Type;
 		aold = All.ErrTolForceAcc * P[target].OldAcc;
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
+		9TH
 		if(ptype == 0)
 			soft = PPP[target].Hsml;
 #endif
 #ifdef PLACEHIGHRESREGION
+		10TH
 		if(pmforce_is_particle_high_res(ptype, P[target].Pos))
 		{
 			rcut = All.Rcut[1];
@@ -2525,6 +2535,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		}
 #endif
 #ifdef ADAPTGRAVSOFT
+		11TH
 		zeta = P[target].AGS_zeta;
 		omega = P[target].AGS_omega;
 		h = P[target].AGS_Hsml;
@@ -2537,12 +2548,15 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		pos_y = GravDataGet[target].Pos[1];
 		pos_z = GravDataGet[target].Pos[2];
 #if defined(UNEQUALSOFTENINGS) || defined(SCALARFIELD)
+		12TH
 		ptype = GravDataGet[target].Type;
 #else
+		13TH
 		ptype = P[0].Type;
 #endif
 		aold = All.ErrTolForceAcc * GravDataGet[target].OldAcc;
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
+		14TH
 		if(ptype == 0)
 			soft = GravDataGet[target].Soft;
 #endif
@@ -2553,10 +2567,12 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	asmthfac = 0.5 / asmth * (NTAB / 3.0);
 
 #if !defined(UNEQUALSOFTENINGS) && !defined(ADAPTGRAVSOFT)
+	15TH
 	h = All.ForceSoftening[ptype];
 	h_inv = 1.0 / h;
 	h3_inv = h_inv * h_inv * h_inv;
 #ifdef DISTORTIONTENSORPS
+	16TH
 	h5_inv = h_inv * h_inv * h_inv * h_inv * h_inv;
 #endif
 #endif
@@ -2599,7 +2615,9 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 				mass = P[no].Mass;
 #ifdef UNEQUALSOFTENINGS
+				17TH
 #ifdef ADAPTIVE_GRAVSOFT_FORGAS
+				18TH
 				if(ptype == 0)
 					h = soft;
 				else
@@ -2625,6 +2643,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				{
 					LOCK_WORKCOUNT;
 #ifdef THREAD_SAFE_COSTS
+					19TH
 #pragma omp critical(_workcount_)
 #endif
 					P[no].GravCost[TakeLevel] += 1.0;
@@ -2720,6 +2739,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				dz = NEAREST(dz);
 				r2 = dx * dx + dy * dy + dz * dz;
 #ifdef DO_NOT_BRACH_IF
+				20TH
 				dxx = fabs(nop->center[0] - pos_x);
 				dyy = fabs(nop->center[1] - pos_y);
 				dzz = fabs(nop->center[2] - pos_z);
@@ -2737,6 +2757,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					continue;
 				}
 #else
+				21ST
 				/* check whether we can stop walking along this branch */
 				if(r2 > rcut2)
 				{
@@ -2777,6 +2798,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				else		/* check relative opening criterion */
 				{
 #ifdef DO_NOT_BRACH_IF
+					22ND
 					if((mass * nop->len * nop->len > r2 * r2 * aold) |
 							((dxx < 0.60 * nop->len) & (dyy < 0.60 * nop->len) & (dzz < 0.60 * nop->len)))
 					{
@@ -2785,6 +2807,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 						continue;
 					}
 #else
+					23RD
 					if(mass * nop->len * nop->len > r2 * r2 * aold)
 					{
 						/* open cell */
@@ -2809,7 +2832,9 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				}
 
 #ifdef UNEQUALSOFTENINGS
+				24TH
 #ifndef ADAPTIVE_GRAVSOFT_FORGAS
+				25TH
 				h = All.ForceSoftening[ptype];
 				if(h < All.ForceSoftening[extract_max_softening_type(nop->u.d.bitflags)])
 				{
@@ -2825,6 +2850,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					}
 				}
 #else
+				26TH
 				if(ptype == 0)
 					h = soft;
 				else
@@ -2842,6 +2868,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 #endif
 #ifdef ADAPTGRAVSOFT
+				27TH
 				h_p = nop->maxsoft;	/* softening of the node */
 				h_max = h >= h_p ? h : h_p;
 
@@ -2860,6 +2887,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				{
 					LOCK_WORKCOUNT;
 #ifdef THREAD_SAFE_COSTS
+					28TH
 #pragma omp critical(_workcount_)
 #endif
 					nop->GravCost += 1.0;
@@ -2873,6 +2901,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			r = sqrt(r2);
 
 #ifdef ADAPTGRAVSOFT
+			30TH
 			h_max = h >= h_p ? h : h_p;
 			if(r >= h_max)
 			{
@@ -2882,14 +2911,17 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				corr = 0;
 			}
 #else
+			31ST
 			if(r >= h)
 			{
 				fac = mass / (r2 * r);
 #ifdef DISTORTIONTENSORPS
+				32ND
 				/* second derivative of potential needs this factor */
 				fac2 = 3.0 * mass / (r2 * r2 * r);
 #endif
 #ifdef EVALPOTENTIAL
+				33RD ////////////////////////////////////////////////////////////////////////////////////////////
 				facpot = -mass / r;
 #endif
 			}
@@ -2897,10 +2929,13 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			else
 			{
 #ifndef ADAPTGRAVSOFT
+				34TH  ////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef UNEQUALSOFTENINGS
+				35TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				h_inv = 1.0 / h;
 				h3_inv = h_inv * h_inv * h_inv;
 #ifdef DISTORTIONTENSORPS
+				36TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				h5_inv = h_inv * h_inv * h_inv * h_inv * h_inv;
 #endif
 #endif
@@ -2912,6 +2947,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 							mass * h3_inv * (21.333333333333 - 48.0 * u +
 									38.4 * u * u - 10.666666666667 * u * u * u - 0.066666666667 / (u * u * u));
 #ifdef EVALPOTENTIAL
+				37TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				if(u < 0.5)
 					wp = -2.8 + u * u * (5.333333333333 + u * u * (6.4 * u - 9.6));
 				else
@@ -2922,6 +2958,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				facpot = mass * h_inv * wp;
 #endif
 #ifdef DISTORTIONTENSORPS
+				38TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				/*second derivates needed -> calculate them from softend potential,
 	         (see Gadget 1 paper and there g2 function). SIGN?! */
 				if(u < 0.5)
@@ -2930,6 +2967,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					fac2 = mass * h5_inv * (-0.2 / (u * u * u * u * u) + 48.0 / u - 76.8 + 32.0 * u);
 #endif
 #else
+				39TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				/* interaction is smoothed: only particle-particle, no nodes down here! */
 				dWdr = dWdr_p = corr = 0;
 				h_inv = 1.0 / h;
@@ -2979,6 +3017,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				fac /= 2.;
 
 #ifndef AGS_NOCORRECTION
+				40TH ////////////////////////////////////////////////////////////////////////////////////////////
 				/* correction term */
 				corr =
 						(zeta * omega * dWdr +
@@ -2988,6 +3027,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 
 #ifdef AGS_OUTPUTCORR
+				41ST  ////////////////////////////////////////////////////////////////////////////////////////////
 				correction += corr;
 #endif
 
@@ -3014,6 +3054,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			if(tabindex < NTAB)
 			{
 #ifdef DISTORTIONTENSORPS
+				42ND  ////////////////////////////////////////////////////////////////////////////////////////////
 				/* save original fac without shortrange_table facor (needed for tidal field calculation) */
 				fac_tidal = fac;
 #endif
@@ -3024,6 +3065,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				acc_z += FLT(dz * fac);
 
 #ifdef ADAPTGRAVSOFT
+				43RD  ////////////////////////////////////////////////////////////////////////////////////////////
 				corr *= shortrange_table[tabindex];
 
 				acc_x += FLT(dx * corr);
@@ -3032,6 +3074,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 #endif
 
 #ifdef DISTORTIONTENSORPS
+				44TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				/*
 	         tidal_tensorps[][] = Matrix of second derivatives of grav. potential, symmetric:
 	         |Txx Txy Txz|   |tidal_tensorps[0][0] tidal_tensorps[0][1] tidal_tensorps[0][2]|
@@ -3056,6 +3099,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				tidal_tensorps[2][1] = tidal_tensorps[1][2];
 #endif
 #ifdef EVALPOTENTIAL
+				45TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				pot += FLT(facpot * shortrange_table_potential[tabindex]);
 #endif
 			}
@@ -3064,9 +3108,11 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 
 #ifdef SCALARFIELD
+			46TH  ////////////////////////////////////////////////////////////////////////////////////////////
 			if(ptype != 0)	/* we have a dark matter particle as target */
 			{
 #ifdef PERIODIC
+				47TH  ////////////////////////////////////////////////////////////////////////////////////////////
 				dx_dm = NEAREST(dx_dm);
 				dy_dm = NEAREST(dy_dm);
 				dz_dm = NEAREST(dz_dm);
@@ -3078,6 +3124,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 				else
 				{
 #ifdef UNEQUALSOFTENINGS
+					48TH  ////////////////////////////////////////////////////////////////////////////////////////////
 					h_inv = 1.0 / h;
 					h3_inv = h_inv * h_inv * h_inv;
 #endif
@@ -3131,14 +3178,17 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		P[target].g.dGravAccel[1] = acc_y;
 		P[target].g.dGravAccel[2] = acc_z;
 #ifdef EVALPOTENTIAL
+		49TH  ////////////////////////////////////////////////////////////////////////////////////////////
 		P[target].p.dPotential = pot;
 #endif
 #ifdef DISTORTIONTENSORPS
+		50TH ////////////////////////////////////////////////////////////////////////////////////////////
 		for(i1 = 0; i1 < 3; i1++)
 			for(i2 = 0; i2 < 3; i2++)
 				P[target].tidal_tensorps[i1][i2] = tidal_tensorps[i1][i2];
 #endif
 #if defined(ADAPTGRAVSOFT) && defined(AGS_OUTPUTCORR)
+		51ST  ////////////////////////////////////////////////////////////////////////////////////////////
 		P[target].AGS_corr = correction;
 #endif
 	}
@@ -3148,14 +3198,17 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		GravDataResult[target].Acc[1] = acc_y;
 		GravDataResult[target].Acc[2] = acc_z;
 #ifdef EVALPOTENTIAL
+		52ND  ////////////////////////////////////////////////////////////////////////////////////////////
 		GravDataResult[target].Potential = pot;
 #endif
 #ifdef DISTORTIONTENSORPS
+		53RD  ////////////////////////////////////////////////////////////////////////////////////////////
 		for(i1 = 0; i1 < 3; i1++)
 			for(i2 = 0; i2 < 3; i2++)
 				GravDataResult[target].tidal_tensorps[i1][i2] = tidal_tensorps[i1][i2];
 #endif
 #if defined(ADAPTGRAVSOFT) && defined(AGS_OUTPUTCORR)
+		54TH  ////////////////////////////////////////////////////////////////////////////////////////////
 		GravDataResult[target].AGS_corr = correction;
 #endif
 		*exportflag = nodesinlist;
