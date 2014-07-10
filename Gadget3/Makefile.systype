@@ -5,7 +5,8 @@
 # a new system.
 
 #SYSTYPE="archer"
-SYSTYPE="mvapich-pgi"
+#SYSTYPE="mvapich-pgi"
+SYSTYPE="OpenACCboston"
 #SYSTYPE="mvapich-intel"
 #SYSTYPE="all-intel"
 #SYSTYPE="openmpi-intel"
