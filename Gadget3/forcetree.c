@@ -1687,7 +1687,6 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
 	double correction = 0;
 #endif
 #endif
-
 #ifdef DISTORTIONTENSORPS
 	for(i1 = 0; i1 < 3; i1++)
 		for(i2 = 0; i2 < 3; i2++)
