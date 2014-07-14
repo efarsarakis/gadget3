@@ -1463,8 +1463,20 @@ void gravity_tree(void)
 			}
 #endif
 
-			while(1)
+
+			//manos// create array with active particles
+			int manosActiveParticleArray[All.MaxPart];
+			int manosNumActive=0;
+			int manosWhileIndex;
+			while(NextParticle>0)
 			{
+				manosActiveParticleArray[manosNumActive++] = NextParticle;
+				NextParticle = NextActiveParticle[NextParticle];
+			}
+
+
+			for(manosWhileIndex=0;manosWhileIndex<manosNumActive;manosWhileIndex++)
+			{ //manos//while start for calling force_treeevaluate_shortrange() ////////////////////////////////////////////////////////////////////////////
 				int exitFlag = 0;
 				LOCK_NEXPORT;
 #ifdef _OPENMP
@@ -1476,9 +1488,8 @@ void gravity_tree(void)
 				}
 				else
 				{
-					i = NextParticle;
+					i = manosActiveParticleArray[manosWhileIndex]; 		//manos//only point where i is set. Need to find how "NextActiveParticle[]" works...
 					ProcessedFlag[i] = 0;
-					NextParticle = NextActiveParticle[NextParticle];
 				}
 				UNLOCK_NEXPORT;
 				if(exitFlag)
@@ -1556,7 +1567,7 @@ void gravity_tree(void)
 						break;
 				}
 #endif
-			}
+			}//manos//end of while loop calling force_treeevaluate_shortrange /////////////////////////////////////////////////////////////
 
 			return NULL;
 		}

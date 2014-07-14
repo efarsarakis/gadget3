@@ -2507,6 +2507,8 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 		no = Nodes[no].u.d.nextnode;	/* open it */
 	}
 
+
+	//manos//START OF BIG WHILE LOOP!!!! /////////////////////////////////////////////////////////////
 	while(no >= 0)
 	{
 		while(no >= 0)
@@ -2591,7 +2593,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 					}
 					no = Nextnode[no - maxNodes];
 					continue;
-				}
+				} //manos//end of /* pseudo particle if*/ /////////////////////////////////////////////////////////////////////
 
 				nop = &Nodes[no];
 
@@ -2702,7 +2704,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 				no = nop->u.d.sibling;	/* ok, node can be used */
 
-			}
+			}   //manos// end of internal node "else" ////////////////////////////////////////////////////////////////////////
 
 			r = sqrt(r2);
 
@@ -2741,7 +2743,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			ninteractions++;
 
 
-		}
+		}//manos//END OF SECONDARY BIG WHILE LOOP///////////////////////////////////////////////////////////////////////
 
 		if(mode == 1)
 		{
@@ -2757,6 +2759,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			}
 		}
 	}
+	//manos//END OF BIG WHILE LOOP//////////////////////////////////////////////////////////////////////////////
 
 
 	/* store result at the proper place */
