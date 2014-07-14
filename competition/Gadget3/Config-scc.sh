@@ -33,7 +33,7 @@ PMGRID=512
 
 
 #--------------------------------------- Multi-Domain and Top-Level Tree options
-MULTIPLEDOMAINS=4
+MULTIPLEDOMAINS=8
 #TOPNODEFACTOR=3.0
 #KD_HMAX_ESTIMATE           # Alternative way to update HMAX within Tree nodes
 
