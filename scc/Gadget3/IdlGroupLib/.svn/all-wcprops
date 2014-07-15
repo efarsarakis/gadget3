@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib
+END
+export.txt
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/export.txt
+END
+Doxyfile
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/Doxyfile
+END
+groupstuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/groupstuff.c
+END
+show_bhgroup.pro
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/show_bhgroup.pro
+END
+groupstuff.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/groupstuff.h
+END
+show_group.pro
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/show_group.pro
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/Makefile
+END
+show_massfunc.pro
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/cosmo-group/!svn/ver/21034/volker/Gadget3-2012-Benchmark/Gadget3/IdlGroupLib/show_massfunc.pro
+END
