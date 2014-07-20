@@ -1463,102 +1463,112 @@ void *gravity_primary_loop(void *p)
     }
 #endif
 
-  while(1)
-    {
-      int exitFlag = 0;
-      LOCK_NEXPORT;
+	//manos// create array with active particles
+	int manosActiveParticleArray[All.MaxPart];
+	int manosNumActive=0;
+	int manosWhileIndex;
+	while(NextParticle>0)
+	{
+		manosActiveParticleArray[manosNumActive++] = NextParticle;
+		NextParticle = NextActiveParticle[NextParticle];
+	}
+
+
+	for(manosWhileIndex=0;manosWhileIndex<manosNumActive;manosWhileIndex++)
+	{ //manos//while start for calling force_treeevaluate_shortrange() ////////////////////////////////////////////////////////////////////////////
+		int exitFlag = 0;
+		LOCK_NEXPORT;
 #ifdef _OPENMP
 #pragma omp critical(_nexport_)
 #endif
-      if(BufferFullFlag != 0 || NextParticle < 0)
-	{
-	  exitFlag = 1;
-	}
-      else
-	{
-	  i = NextParticle;
-	  ProcessedFlag[i] = 0;
-	  NextParticle = NextActiveParticle[NextParticle];
-	}
-      UNLOCK_NEXPORT;
-      if(exitFlag)
-	break;
+		if(BufferFullFlag != 0 || NextParticle < 0)
+		{
+			exitFlag = 1;
+		}
+		else
+		{
+			i = manosActiveParticleArray[manosWhileIndex]; 		//manos//only point where i is set. Need to find how "NextActiveParticle[]" works...
+			ProcessedFlag[i] = 0;
+		}
+		UNLOCK_NEXPORT;
+		if(exitFlag)
+			break;
 
 #if !defined(PMGRID)
 #if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
-      if(Ewald_iter)
-	{
-	  ret = force_treeevaluate_ewald_correction(i, 0, exportflag, exportnodecount, exportindex);
-	  if(ret >= 0)
-	    {
-	      LOCK_WORKCOUNT;
+		if(Ewald_iter)
+		{
+			ret = force_treeevaluate_ewald_correction(i, 0, exportflag, exportnodecount, exportindex);
+			if(ret >= 0)
+			{
+				LOCK_WORKCOUNT;
 #ifdef _OPENMP
 #pragma omp critical(_workcount_)
 #endif
-	      Ewaldcount += ret;	/* note: ewaldcount may be slightly incorrect for multiple threads if buffer gets filled up */
-	      UNLOCK_WORKCOUNT;
-	    }
-	  else
-	    break;		/* export buffer has filled up */
-	}
-      else
+				Ewaldcount += ret;	/* note: ewaldcount may be slightly incorrect for multiple threads if buffer gets filled up */
+				UNLOCK_WORKCOUNT;
+			}
+			else
+				break;		/* export buffer has filled up */
+		}
+		else
 #endif
-	{
-	  ret = force_treeevaluate(i, 0, exportflag, exportnodecount, exportindex);
-	  if(ret < 0)
-	    break;		/* export buffer has filled up */
+		{
+			ret = force_treeevaluate(i, 0, exportflag, exportnodecount, exportindex);
+			if(ret < 0)
+				break;		/* export buffer has filled up */
 
-	  LOCK_WORKCOUNT;
+			LOCK_WORKCOUNT;
 #ifdef _OPENMP
 #pragma omp critical(_workcount_)
 #endif
-	  Costtotal += ret;
-	  UNLOCK_WORKCOUNT;
-	}
+			Costtotal += ret;
+			UNLOCK_WORKCOUNT;
+		}
 #else
 
 #ifdef NEUTRINOS
-      if(P[i].Type != 2)
+		if(P[i].Type != 2)
 #endif
-	{
-	  ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
-	  if(ret < 0)
-	    break;		/* export buffer has filled up */
+		{
+			ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
+			if(ret < 0)
+				break;		/* export buffer has filled up */
 
-	  LOCK_WORKCOUNT;
+			LOCK_WORKCOUNT;
 #ifdef _OPENMP
 #pragma omp critical(_workcount_)
 #endif
-	  Costtotal += ret;
-	  UNLOCK_WORKCOUNT;
-	}
+			Costtotal += ret;
+			UNLOCK_WORKCOUNT;
+		}
 
 #endif
 
-      ProcessedFlag[i] = 1;	/* particle successfully finished */
+		ProcessedFlag[i] = 1;	/* particle successfully finished */
 
 #ifdef FIXEDTIMEINFIRSTPHASE
-      if(thread_id == 0)
-	{
-	  counter++;
-	  if((counter & 255) == 0)
-	    {
-	      if(timediff(tstart, second()) > FIXEDTIMEINFIRSTPHASE)
+		if(thread_id == 0)
 		{
-		  TimerFlag = 1;
-		  break;
+			counter++;
+			if((counter & 255) == 0)
+			{
+				if(timediff(tstart, second()) > FIXEDTIMEINFIRSTPHASE)
+				{
+					TimerFlag = 1;
+					break;
+				}
+			}
 		}
-	    }
-	}
-      else
-	{
-	  if(TimerFlag)
-	    break;
-	}
+		else
+		{
+			if(TimerFlag)
+				break;
+		}
 #endif
-    }
+	}//manos//end of while loop calling force_treeevaluate_shortrange /////////////////////////////////////////////////////////////
 
-  return NULL;
+	return NULL;
 }
 
 
