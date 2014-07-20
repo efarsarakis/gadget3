@@ -1467,11 +1467,14 @@ void *gravity_primary_loop(void *p)
 	int manosActiveParticleArray[All.MaxPart];
 	int manosNumActive=0;
 	int manosWhileIndex;
+	int wRank;
+	MPI_Comm_rank(MPI_COMM_WORLD, &wRank);
 	while(NextParticle>0)
 	{
 		manosActiveParticleArray[manosNumActive++] = NextParticle;
 		NextParticle = NextActiveParticle[NextParticle];
 	}
+	printf("rank = %d, manosNumActive = %d ", wRank, manosNumActive);
 
 
 	for(manosWhileIndex=0;manosWhileIndex<manosNumActive;manosWhileIndex++)
@@ -1488,7 +1491,7 @@ void *gravity_primary_loop(void *p)
 		else
 		{
 			i = manosActiveParticleArray[manosWhileIndex]; 		//manos//only point where i is set. Need to find how "NextActiveParticle[]" works...
-			ProcessedFlag[i] = 0;
+
 		}
 		UNLOCK_NEXPORT;
 		if(exitFlag)
