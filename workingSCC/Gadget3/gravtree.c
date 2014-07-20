@@ -1475,7 +1475,7 @@ void *gravity_primary_loop(void *p)
 		NextParticle = NextActiveParticle[NextParticle];
 		manosNumActive++;
 	}
-	printf("rank = %d, manosNumActive = %d \n", wRank, manosNumActive);
+	//printf("rank = %d, manosNumActive = %d \n", wRank, manosNumActive);
 
 
 	for(manosWhileIndex=0;manosWhileIndex<manosNumActive;manosWhileIndex++)
