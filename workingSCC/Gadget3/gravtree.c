@@ -1469,12 +1469,13 @@ void *gravity_primary_loop(void *p)
 	int manosWhileIndex;
 	int wRank;
 	MPI_Comm_rank(MPI_COMM_WORLD, &wRank);
-	while(NextParticle>0)
+	while(NextParticle>=0)
 	{
-		manosActiveParticleArray[manosNumActive++] = NextParticle;
+		manosActiveParticleArray[manosNumActive] = NextParticle;
 		NextParticle = NextActiveParticle[NextParticle];
+		manosNumActive++;
 	}
-	printf("rank = %d, manosNumActive = %d ", wRank, manosNumActive);
+	printf("rank = %d, manosNumActive = %d \n", wRank, manosNumActive);
 
 
 	for(manosWhileIndex=0;manosWhileIndex<manosNumActive;manosWhileIndex++)
