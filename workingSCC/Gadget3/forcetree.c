@@ -2435,7 +2435,7 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
  *  memory-access panelty (which reduces cache performance) incurred by the
  *  table.
  */
-#pragma acc routine vector
+#pragma acc routine
 int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *exportnodecount,
 				  int *exportindex)
 {
