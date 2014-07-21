@@ -1501,7 +1501,7 @@ void *gravity_primary_loop(void *p)
 		}
 		UNLOCK_NEXPORT;
 		if(exitFlag)
-			break;
+			//manos//break;
 
 #if !defined(PMGRID)
 #if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
@@ -1518,14 +1518,14 @@ void *gravity_primary_loop(void *p)
 				UNLOCK_WORKCOUNT;
 			}
 			else
-				break;		/* export buffer has filled up */
+				//manos//break;		/* export buffer has filled up */
 		}
 		else
 #endif
 		{
 			ret = force_treeevaluate(i, 0, exportflag, exportnodecount, exportindex);
 			if(ret < 0)
-				break;		/* export buffer has filled up */
+				//manos//break;		/* export buffer has filled up */
 
 			LOCK_WORKCOUNT;
 #ifdef _OPENMP
@@ -1542,7 +1542,7 @@ void *gravity_primary_loop(void *p)
 		{
 			ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
 			if(ret < 0)
-				break;		/* export buffer has filled up */
+				//manos//break;		/* export buffer has filled up */
 
 			LOCK_WORKCOUNT;
 #ifdef _OPENMP
@@ -1565,20 +1565,20 @@ void *gravity_primary_loop(void *p)
 				if(timediff(tstart, second()) > FIXEDTIMEINFIRSTPHASE)
 				{
 					TimerFlag = 1;
-					break;
+					//manos//break;
 				}
 			}
 		}
 		else
 		{
 			if(TimerFlag)
-				break;
+				//manos//break;
 		}
 #endif
 	}//manos//end of while loop calling force_treeevaluate_shortrange /////////////////////////////////////////////////////////////
-
+	}//close acc data region
 	return NULL;
-	}
+
 }
 
 
