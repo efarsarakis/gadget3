@@ -2423,6 +2423,7 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
   return ninteractions;
 }
 
+
 #ifdef PMGRID
 /*! In the TreePM algorithm, the tree is walked only locally around the
  *  target coordinate.  Tree nodes that fall outside a box of half
@@ -2434,6 +2435,7 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
  *  memory-access panelty (which reduces cache performance) incurred by the
  *  table.
  */
+#pragma acc routine vector
 int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *exportnodecount,
 				  int *exportindex)
 {
