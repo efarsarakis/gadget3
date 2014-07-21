@@ -131,6 +131,42 @@ MPICHLIB =
 OPTIMIZE = -O3 -g -Wall #-openmp -lpthread #-liomp5 -mt_mpi -DFFTW_ENABLE_FLOAT -DMKL_SINGLE
 endif
 
+
+ifeq ($(SYSTYPE),"archer")
+CC       = cc
+CXX      = cpc
+FC       = cc
+
+#GSL_INCL = -I/shared/apps/gadget/libraries/gsl-intel/include/
+#GSL_LIBS = -L/shared/apps/gadget/libraries/gsl-intel/lib/
+#FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichIntel/include/
+#FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichIntel/lib/
+#MPICHLIB = 
+OPTIMIZE = -O3 
+endif
+
+
+ifeq ($(SYSTYPE),"OpenACCboston")
+GSL_INCL = -I/shared/apps/gadget/libraries/gsl-gcc/include/
+GSL_LIBS = -L/shared/apps/gadget/libraries/gsl-gcc/lib/
+FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
+FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
+MPICHLIB =
+
+OPTIMIZE = -ta=nvidia -acc -Minfo=accel
+endif
+
+ifeq ($(SYSTYPE),"mac")
+GSL_INCL = -I/opt/local/include/
+GSL_LIBS = -L/opt/local/lib/
+FFTW_INCL= -I/opt/local/include/
+FFTW_LIBS= -L/opt/local/lib/
+#MPICHLIB =
+
+OPTIMIZE = -O3
+endif
+
+
 ifeq ($(SYSTYPE),"mvapich-pgi")
 GSL_INCL = -I/shared/apps/gadget/libraries/gsl-gcc/include/
 GSL_LIBS = -L/shared/apps/gadget/libraries/gsl-gcc/lib/
@@ -828,7 +864,7 @@ OPTIONS = $(OPTIMIZE) $(OPT)
 
 FOPTIONS = $(OPTIMIZE) $(FOPT)
 
-EXEC   = GadgetMedium
+EXEC   = GadgetExec
 
 OBJS  = endrun.o mpi_util.o restart.o subfind_loctree.o fof.o  mymalloc.o  run.o  subfind_nearesttwo.o \
  allocate.o ngb.o second_order.o subfind_potential.o allvars.o forcetree_update.o  parallel_sort.o sfr_eff.o subfind_reshuffle.o \

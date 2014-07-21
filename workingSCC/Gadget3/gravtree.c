@@ -1440,8 +1440,11 @@ void gravity_tree(void)
 
 void *gravity_primary_loop(void *p)
 {
+
+	  int thread_id = *(int *) p;
+#pragma acc data copy(All, NextParticle, thread_id, LOCK_NEXPORT, UNLOCK_NEXPORT, LOCK_WORKCOUNT, UNLOCK_WORKCOUNT)
+	{
   int i, j, ret;
-  int thread_id = *(int *) p;
 
   int *exportflag, *exportnodecount, *exportindex;
 
@@ -1467,8 +1470,8 @@ void *gravity_primary_loop(void *p)
 	int manosActiveParticleArray[All.MaxPart];
 	int manosNumActive=0;
 	int manosWhileIndex;
-	int wRank;
-	MPI_Comm_rank(MPI_COMM_WORLD, &wRank);
+//	int wRank;
+//	MPI_Comm_rank(MPI_COMM_WORLD, &wRank);
 	while(NextParticle>=0)
 	{
 		manosActiveParticleArray[manosNumActive] = NextParticle;
@@ -1478,6 +1481,8 @@ void *gravity_primary_loop(void *p)
 	//printf("rank = %d, manosNumActive = %d \n", wRank, manosNumActive);
 
 
+
+#pragma acc parallel loop
 	for(manosWhileIndex=0;manosWhileIndex<manosNumActive;manosWhileIndex++)
 	{ //manos//while start for calling force_treeevaluate_shortrange() ////////////////////////////////////////////////////////////////////////////
 		int exitFlag = 0;
@@ -1573,6 +1578,7 @@ void *gravity_primary_loop(void *p)
 	}//manos//end of while loop calling force_treeevaluate_shortrange /////////////////////////////////////////////////////////////
 
 	return NULL;
+	}
 }
 
 
