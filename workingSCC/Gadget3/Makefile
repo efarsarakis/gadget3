@@ -153,7 +153,7 @@ FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
 FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
 MPICHLIB =
 
-OPTIMIZE = -ta=nvidia -acc -Minfo=accel -Minline
+OPTIMIZE = -ta=nvidia -acc -Minfo=all -Minline
 endif
 
 ifeq ($(SYSTYPE),"mac")
