@@ -1462,7 +1462,7 @@ void *gravity_primary_loop(void *p)
       tstart = second();
     }
 #endif
-
+//manos// restart files not found, stops at 529 iterations :(
 	//manos// create array with active particles
 	int manosActiveParticleArray[All.MaxPart];
 	int manosNumActive=0;
