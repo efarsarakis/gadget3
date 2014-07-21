@@ -1442,7 +1442,7 @@ void *gravity_primary_loop(void *p)
 {
 
 	  int thread_id = *(int *) p;
-#pragma acc data copy(All, NextParticle, thread_id, LOCK_NEXPORT, UNLOCK_NEXPORT, LOCK_WORKCOUNT, UNLOCK_WORKCOUNT)
+#pragma acc data copy(All)
 	{
   int i, j, ret;
 
