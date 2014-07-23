@@ -1468,10 +1468,13 @@ int m_index, m_active_part[All.MaxPart], m_num_active_part;
 
 //manos get active
 while(NextParticle>=0){
-	printf("ProcessedFlag[%d]=%d",NextParticle, ProcessedFlag[NextParticle]);
+	//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
+
 	m_active_part[m_num_active_part]=NextParticle;
+	ProcessedFlag[NextParticle]=0;
 	NextParticle = NextActiveParticle[NextParticle];
 	m_num_active_part++;
+	ProcessedFlag[NextParticle]=1;
 }
 printf("Active parts with for loop: %d \n", m_index);
 
