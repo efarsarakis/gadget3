@@ -1,0 +1,143 @@
+%  Relevant files
+
+InitCondFile      ../ICs/ICs_512
+OutputDir         ../output
+
+MaxMemSize        2000
+
+BoxSize           200000.0
+
+NumFilesWrittenInParallel 16
+
+
+
+TimebinFile       timebins.txt
+EnergyFile        energy.txt
+InfoFile          info.txt
+TimingsFile       timings.txt
+CpuFile           cpu.txt
+
+SnapshotFileBase  snap
+
+RestartFile       restart
+
+% CPU-time limit
+
+TimeLimitCPU      3600
+ResubmitOn        0
+ResubmitCommand   autosubmit
+
+% Code options
+
+ICFormat              1
+SnapFormat            1
+
+ComovingIntegrationOn 1
+
+NumFilesPerSnapshot       4
+
+CoolingOn       0
+StarformationOn 0
+ 
+%  Caracteristics of run
+
+TimeBegin           0.02    % z=50
+TimeMax             1.0     % end at z=0                                                                                                                                                       
+
+Omega0                0.3   % total matter density                                                                                                                                             
+OmegaLambda           0.7                                                                                                                                                                      
+                                                                                                                                                                                               
+OmegaBaryon           0.04                                                                                                                                                                     
+HubbleParam           0.7     ; only needed for cooling
+                                                                                                                                                                                               
+
+PeriodicBoundariesOn   1                                                                                                                                                                       
+                                                                                                                                                                                               
+% Softening lengths
+                                                                                                                                                                                               
+MinGasHsmlFractional     0.1  % minimum gas smoothing in terms of the gravitational softening length                                                                                           
+                                                                                                                                                                                               
+SofteningGas       10.0
+SofteningHalo      10.0
+SofteningDisk      0                                                                                                                                                                         
+SofteningBulge     0
+SofteningStars     0                                                                                                                                                                        
+SofteningBndry     0         % this will be the black hole particles                                                                                                                        
+                                                                                   
+
+SofteningGasMaxPhys       10.0
+SofteningHaloMaxPhys      10.0
+SofteningDiskMaxPhys      0
+SofteningBulgeMaxPhys     0           
+SofteningStarsMaxPhys     0
+SofteningBndryMaxPhys     0    
+
+
+
+% Output frequency
+
+OutputListOn        0
+OutputListFilename  outputs.txt
+
+TimeBetSnapshot        1.1
+TimeOfFirstSnapshot    0.1
+ 
+CpuTimeBetRestartFile  7200.0  % every 2 hours 
+
+TimeBetStatistics      0.5
+
+MaxRMSDisplacementFac  0.25
+
+% Accuracy of time integration
+
+TypeOfTimestepCriterion 0   
+                            
+ErrTolIntAccuracy       0.025  
+
+
+MaxSizeTimestep        0.015
+MinSizeTimestep        0
+
+
+% Tree algorithm and force accuracy
+
+ErrTolTheta             0.5
+
+TypeOfOpeningCriterion  1
+ErrTolForceAcc          0.002
+
+
+TreeDomainUpdateFrequency    0.1
+
+
+%  Parameters of SPH
+
+DesNumNgb           48
+MaxNumNgbDeviation  1
+
+ArtBulkViscConst    1.0
+
+InitGasTemp         145.0  % initial gas temperature in K, only used if not given in IC file
+
+% Note: IGM temperature stays coupled to CMB temperature until
+% thermalization redshift: z_t = 750 * (Omega_b * h^2) ~ 150
+
+
+MinGasTemp          5.0    
+CourantFac          0.15
+
+
+% Further code parameters
+
+PartAllocFactor       1.2
+
+BufferSize            80
+
+
+% System of units
+
+UnitLength_in_cm         3.085678e21        ;  1.0 kpc
+UnitMass_in_g            1.989e43           ;  1.0e10 solar masses
+UnitVelocity_in_cm_per_s 1e5                ;  1 km/sec
+GravityConstantInternal  0
+
