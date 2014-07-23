@@ -2423,7 +2423,7 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
   return ninteractions;
 }
 
-
+//manos// need to get rid of breaks in order to port to gpu
 #ifdef PMGRID
 /*! In the TreePM algorithm, the tree is walked only locally around the
  *  target coordinate.  Tree nodes that fall outside a box of half
