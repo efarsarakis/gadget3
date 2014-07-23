@@ -1462,7 +1462,8 @@ void *gravity_primary_loop(void *p)
       tstart = second();
     }
 #endif
-
+//manos var to check active parts
+  int m_index=0;
   while(1)
     {
       int exitFlag = 0;
@@ -1479,6 +1480,7 @@ void *gravity_primary_loop(void *p)
 	  i = NextParticle;
 	  ProcessedFlag[i] = 0;
 	  NextParticle = NextActiveParticle[NextParticle];
+	  m_index++;
 	}
       UNLOCK_NEXPORT;
       if(exitFlag)
@@ -1557,7 +1559,7 @@ void *gravity_primary_loop(void *p)
 	}
 #endif
     }
-
+printf("Active parts with while loop: %d \n", m_index);
   return NULL;
 }
 

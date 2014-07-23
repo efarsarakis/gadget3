@@ -138,7 +138,7 @@ FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
 FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
 MPICHLIB =
 
-#OPTIMIZE = -fastsse
+OPTIMIZE = -fastsse
 #OPTIMIZE = -fastsse -O4 -Mipa=fast,inline -Mvect=sse -Munroll=c:1 -Mcache_align
 #OPTIMIZE = -O4 -Mipa=fast,inline -Munroll
 #OPTIMIZE = -O2 -Munroll=c:1 -Mnoframe -Mlre -Mautoinline -Mvect=sse -Mscalarsse -Mcache_align -Mflushz -Mpre
@@ -147,7 +147,7 @@ MPICHLIB =
 #OPTIMIZE = -fastsse -Mipa=fast,inline -Munroll
 #OPTIMIZE = -fastsse -O4 -Mipa=fast,inline,libc,libopt,libinline -Mvect=simd -Mcache_align -Munroll
 #OPTIMIZE = -fastsse -O4 -Mipa=fast,inline -Mvect=sse -Munroll=c:1 -Mcache_align -g
-OPTIMIZE = -fastsse -O4 -Mipa=fast,inline,libc,libopt,libinline -Mvect=simd -Mcache_align -Munroll -g
+#OPTIMIZE = -fastsse -O4 -Mipa=fast,inline,libc,libopt,libinline -Mvect=simd -Mcache_align -Munroll -g
 endif
 
 ifeq ($(SYSTYPE),"mvapich-intel")

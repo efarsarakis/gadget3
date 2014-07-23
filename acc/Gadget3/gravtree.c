@@ -1472,7 +1472,7 @@ while(NextParticle>=0){
 	NextParticle = NextActiveParticle[NextParticle];
 	m_num_active_part++;
 }
-
+printf("Active parts with for loop: %d \n", m_index);
 
 //manos ignore//  while(1)
 //manos acc
