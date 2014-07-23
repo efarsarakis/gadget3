@@ -1476,7 +1476,7 @@ while(NextParticle>=0){
 	m_num_active_part++;
 	ProcessedFlag[m_index]=1;
 }
-printf("Active parts with for loop: %d \n", m_index);
+//printf("Active parts with for loop: %d \n", m_index);
 
 //manos ignore//  while(1)
 //manos acc
