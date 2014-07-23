@@ -1,0 +1,751 @@
+-------------------------------------------------------------------------------------------
+AvailMem:	 Largest =   63746.82 Mb (on task=19), Smallest =   62400.21 Mb (on task=0), Average =   63073.51 Mb
+Total Mem:	 Largest =   64387.90 Mb (on task=0), Smallest =   64387.90 Mb (on task=0), Average =   64387.90 Mb
+Committed_AS:	 Largest =    1987.69 Mb (on task=0), Smallest =     641.08 Mb (on task=19), Average =    1314.38 Mb
+SwapTotal:	 Largest =   23843.99 Mb (on task=19), Smallest =   20463.87 Mb (on task=0), Average =   22153.93 Mb
+SwapFree:	 Largest =   23843.99 Mb (on task=19), Smallest =   20463.87 Mb (on task=0), Average =   22153.93 Mb
+AllocMem:	 Largest =    1987.69 Mb (on task=0), Smallest =     641.08 Mb (on task=19), Average =    1314.38 Mb
+-------------------------------------------------------------------------------------------
+Task with the maximum commited memory
+
+This is P-Gadget, version 3.0.
+
+Running on 38 MPI tasks.
+
+Code was compiled with settings:
+
+        PERIODIC
+        PMGRID=512
+        MULTIPLEDOMAINS=4
+        PEANOHILBERT
+        WALLCLOCK
+        MYSORT
+        NO_ISEND_IRECV_IN_DOMAIN
+        FIX_PATHSCALE_MPI_STATUS_IGNORE_BUG
+        LONGIDS
+        DEBUG
+
+Size of particle structure       120  [bytes]
+
+Size of sph particle structure   76  [bytes]
+Obtaining parameters from file 'param.txt':
+InitCondFile                       ../ICs/ICs_256
+OutputDir                          ../output
+MaxMemSize                         2000
+BoxSize                            250
+NumFilesWrittenInParallel          4
+TimebinFile                        timebins.txt
+EnergyFile                         energy.txt
+InfoFile                           info.txt
+TimingsFile                        timings.txt
+CpuFile                            cpu.txt
+SnapshotFileBase                   snap
+RestartFile                        restart
+TimeLimitCPU                       36000
+ResubmitOn                         0
+ResubmitCommand                    autosubmit
+ICFormat                           1
+SnapFormat                         1
+ComovingIntegrationOn              1
+NumFilesPerSnapshot                1
+CoolingOn                          0
+StarformationOn                    0
+TimeBegin                          0.015625
+TimeMax                            1
+Omega0                             0.3
+OmegaLambda                        0.7
+OmegaBaryon                        0.04
+HubbleParam                        0.7
+PeriodicBoundariesOn               1
+MinGasHsmlFractional               0.1
+SofteningGas                       0
+SofteningHalo                      0.05
+SofteningDisk                      0
+SofteningBulge                     0
+SofteningStars                     0
+SofteningBndry                     0
+SofteningGasMaxPhys                0
+SofteningHaloMaxPhys               0.05
+SofteningDiskMaxPhys               0
+SofteningBulgeMaxPhys              0
+SofteningStarsMaxPhys              0
+SofteningBndryMaxPhys              0
+OutputListOn                       0
+OutputListFilename                 outputs.txt
+TimeBetSnapshot                    1.1
+TimeOfFirstSnapshot                1
+CpuTimeBetRestartFile              7200
+TimeBetStatistics                  0.5
+MaxRMSDisplacementFac              0.25
+TypeOfTimestepCriterion            0
+ErrTolIntAccuracy                  0.025
+MaxSizeTimestep                    0.04
+MinSizeTimestep                    0
+ErrTolTheta                        0.8
+TypeOfOpeningCriterion             1
+ErrTolForceAcc                     0.008
+TreeDomainUpdateFrequency          0.2
+DesNumNgb                          48
+MaxNumNgbDeviation                 1
+ArtBulkViscConst                   1
+InitGasTemp                        145
+MinGasTemp                         5
+CourantFac                         0.15
+PartAllocFactor                    2
+BufferSize                         150
+UnitLength_in_cm                   3.08568e+24
+UnitMass_in_g                      1.989e+43
+UnitVelocity_in_cm_per_s           100000
+GravityConstantInternal            0
+
+stdout will now appear in the file '../output/run_38/logfile.txt'
+
+reading file `../ICs/ICs_256.1' on task=2 (contains 458752 particles.)
+distributing this file to tasks 2-2
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.2' on task=3 (contains 458752 particles.)
+distributing this file to tasks 3-3
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.3' on task=4 (contains 458752 particles.)
+distributing this file to tasks 4-4
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.4' on task=5 (contains 458752 particles.)
+distributing this file to tasks 5-5
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.5' on task=6 (contains 458752 particles.)
+distributing this file to tasks 6-6
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.6' on task=7 (contains 458752 particles.)
+distributing this file to tasks 7-7
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.7' on task=8 (contains 458752 particles.)
+distributing this file to tasks 8-8
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.8' on task=9 (contains 458752 particles.)
+distributing this file to tasks 9-9
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.9' on task=10 (contains 458752 particles.)
+distributing this file to tasks 10-10
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.10' on task=11 (contains 458752 particles.)
+distributing this file to tasks 11-11
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.11' on task=12 (contains 458752 particles.)
+distributing this file to tasks 12-12
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.12' on task=13 (contains 458752 particles.)
+distributing this file to tasks 13-13
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+
+reading file `../ICs/ICs_256.13' on task=14 (contains 458752 particles.)
+distributing this file to tasks 14-14
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.14' on task=15 (contains 458752 particles.)
+distributing this file to tasks 15-15
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.15' on task=16 (contains 458752 particles.)
+distributing this file to tasks 16-16
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.16' on task=17 (contains 458752 particles.)
+distributing this file to tasks 17-17
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+
+reading file `../ICs/ICs_256.17' on task=18 (contains 458752 particles.)
+distributing this file to tasks 18-18
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.19' on task=20 (contains 458752 particles.)
+distributing this file to tasks 20-20
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.18' on task=19 (contains 458752 particles.)
+distributing this file to tasks 19-19
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.20' on task=21 (contains 458752 particles.)
+distributing this file to tasks 21-21
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.21' on task=22 (contains 458752 particles.)
+distributing this file to tasks 22-22
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.23' on task=24 (contains 458752 particles.)
+distributing this file to tasks 24-24
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.22' on task=23 (contains 458752 particles.)
+distributing this file to tasks 23-23
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.24' on task=25 (contains 458752 particles.)
+distributing this file to tasks 25-25
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.26' on task=27 (contains 458752 particles.)
+distributing this file to tasks 27-27
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.25' on task=26 (contains 458752 particles.)
+distributing this file to tasks 26-26
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.27' on task=28 (contains 458752 particles.)
+distributing this file to tasks 28-28
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.29' on task=30 (contains 458752 particles.)
+distributing this file to tasks 30-30
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.30' on task=31 (contains 458752 particles.)
+distributing this file to tasks 31-31
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.31' on task=32 (contains 458752 particles.)
+distributing this file to tasks 32-32
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.28' on task=29 (contains 458752 particles.)
+distributing this file to tasks 29-29
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.32' on task=33 (contains 458752 particles.)
+distributing this file to tasks 33-33
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.33' on task=34 (contains 458752 particles.)
+distributing this file to tasks 34-34
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.34' on task=35 (contains 458752 particles.)
+distributing this file to tasks 35-35
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.35' on task=36 (contains 458752 particles.)
+distributing this file to tasks 36-36
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.36' on task=37 (contains 262144 particles.)
+distributing this file to tasks 37-37
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    262144  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+At 'SPH_DENSITY', density()/density.c/732: Largest Allocation = 199.326 Mbyte (on task=24), Smallest = 199.066 Mbyte, Average = 199.187 Mbyte
+
+------------------------ Allocated Memory Blocks----------------------------------------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Linenumber
+----------------------------------------------------------------------------------------
+  24    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_periodic.c/121
+  24    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_periodic.c/124
+  24    2 0        Exportflag      0.0001       0.0004  allocate_memory()/allocate.c/31
+  24    3 0       Exportindex      0.0001       0.0006  allocate_memory()/allocate.c/32
+  24    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/allocate.c/33
+  24    5 0        Send_count      0.0001       0.0009  allocate_memory()/allocate.c/35
+  24    6 0       Send_offset      0.0001       0.0010  allocate_memory()/allocate.c/36
+  24    7 0        Recv_count      0.0001       0.0012  allocate_memory()/allocate.c/37
+  24    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/allocate.c/38
+  24    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/allocate.c/48
+  24   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/allocate.c/51
+  24   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/allocate.c/59
+  24   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/allocate.c/62
+  24   13 0                 P    101.0525     112.0011  allocate_memory()/allocate.c/68
+  24   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain.c/563
+  24   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain.c/566
+  24   16 0          TopNodes      0.0290     112.0313  domain_allocate()/domain.c/571
+  24   17 0   DomainNodeIndex      0.0020     112.0333  force_treealloc()/forcetree.c/4681
+  24   18 0        Nodes_base     24.2883     136.3216  force_treealloc()/forcetree.c/4684
+  24   19 0     Extnodes_base     16.6982     153.0198  force_treealloc()/forcetree.c/4692
+  24   20 0          Nextnode      3.3707     156.3905  force_treealloc()/forcetree.c/4701
+  24   21 0            Father      3.3684     159.7589  force_treealloc()/forcetree.c/4708
+  24   22 0           Ngblist      1.7305     161.4894  density()/density.c/471
+  24   23 0              Left      1.7305     163.2199  density()/density.c/473
+  24   24 0             Right      1.7305     164.9504  density()/density.c/474
+  24   25 0    DataIndexTable      9.3750     174.3254  density()/density.c/531
+  24   26 0      DataNodeList     25.0000     199.3254  density()/density.c/533
+  24   27 0       DensDataGet      0.0000     199.3254  density()/density.c/690
+  24   28 0    DensDataResult      0.0000     199.3254  density()/density.c/728
+  24   29 0       DensDataOut      0.0000     199.3254  density()/density.c/730
+----------------------------------------------------------------------------------------
+
+At 'PM_PERIODIC', pmforce_periodic()/pm_periodic.c/588: Largest Allocation = 269.51 Mbyte (on task=27), Smallest = 264.852 Mbyte, Average = 267.111 Mbyte
+
+------------------------ Allocated Memory Blocks----------------------------------------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Linenumber
+----------------------------------------------------------------------------------------
+  27    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_periodic.c/121
+  27    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_periodic.c/124
+  27    2 0        Exportflag      0.0001       0.0004  allocate_memory()/allocate.c/31
+  27    3 0       Exportindex      0.0001       0.0006  allocate_memory()/allocate.c/32
+  27    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/allocate.c/33
+  27    5 0        Send_count      0.0001       0.0009  allocate_memory()/allocate.c/35
+  27    6 0       Send_offset      0.0001       0.0010  allocate_memory()/allocate.c/36
+  27    7 0        Recv_count      0.0001       0.0012  allocate_memory()/allocate.c/37
+  27    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/allocate.c/38
+  27    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/allocate.c/48
+  27   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/allocate.c/51
+  27   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/allocate.c/59
+  27   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/allocate.c/62
+  27   13 0                 P    101.0525     112.0011  allocate_memory()/allocate.c/68
+  27   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain.c/563
+  27   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain.c/566
+  27   16 0          TopNodes      0.0290     112.0313  domain_allocate()/domain.c/571
+  27   17 0   DomainNodeIndex      0.0020     112.0333  force_treealloc()/forcetree.c/4681
+  27   18 0        Nodes_base     24.2883     136.3216  force_treealloc()/forcetree.c/4684
+  27   19 0     Extnodes_base     16.6982     153.0198  force_treealloc()/forcetree.c/4692
+  27   20 0          Nextnode      3.3707     156.3905  force_treealloc()/forcetree.c/4701
+  27   21 0            Father      3.3684     159.7589  force_treealloc()/forcetree.c/4708
+  27   22 0           rhogrid     14.0547     173.8136  pm_init_periodi()/pm_periodic.c/151
+  27   23 0         forcegrid     14.0547     187.8683  pm_init_periodi()/pm_periodic.c/158
+  27   24 0              part     41.4549     229.3232  pm_init_periodi()/pm_periodic.c/166
+  27   25 0    part_sortindex     13.8183     243.1415  pm_init_periodi()/pm_periodic.c/173
+  27   26 0   localfield_glob     13.1809     256.3224  pmforce_periodi()/pm_periodic.c/423
+  27   27 0   localfield_d_da     13.1809     269.5033  pmforce_periodi()/pm_periodic.c/425
+  27   28 0   localfield_firs      0.0001     269.5035  pmforce_periodi()/pm_periodic.c/427
+  27   29 0   localfield_coun      0.0001     269.5036  pmforce_periodi()/pm_periodic.c/428
+  27   30 0   localfield_offs      0.0001     269.5038  pmforce_periodi()/pm_periodic.c/429
+  27   31 0   localfield_togo      0.0055     269.5093  pmforce_periodi()/pm_periodic.c/430
+----------------------------------------------------------------------------------------
+
+At 'GRAVTREE', gravity_tree()/gravtree.c/547: Largest Allocation = 216.612 Mbyte (on task=35), Smallest = 213.415 Mbyte, Average = 215.335 Mbyte
+
+------------------------ Allocated Memory Blocks----------------------------------------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Linenumber
+----------------------------------------------------------------------------------------
+  35    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_periodic.c/121
+  35    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_periodic.c/124
+  35    2 0        Exportflag      0.0001       0.0004  allocate_memory()/allocate.c/31
+  35    3 0       Exportindex      0.0001       0.0006  allocate_memory()/allocate.c/32
+  35    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/allocate.c/33
+  35    5 0        Send_count      0.0001       0.0009  allocate_memory()/allocate.c/35
+  35    6 0       Send_offset      0.0001       0.0010  allocate_memory()/allocate.c/36
+  35    7 0        Recv_count      0.0001       0.0012  allocate_memory()/allocate.c/37
+  35    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/allocate.c/38
+  35    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/allocate.c/48
+  35   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/allocate.c/51
+  35   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/allocate.c/59
+  35   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/allocate.c/62
+  35   13 0                 P    101.0525     112.0011  allocate_memory()/allocate.c/68
+  35   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain.c/563
+  35   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain.c/566
+  35   16 0          TopNodes      0.0290     112.0313  domain_allocate()/domain.c/571
+  35   17 0   DomainNodeIndex      0.0020     112.0333  force_treealloc()/forcetree.c/4681
+  35   18 0        Nodes_base     24.2883     136.3216  force_treealloc()/forcetree.c/4684
+  35   19 0     Extnodes_base     16.6982     153.0198  force_treealloc()/forcetree.c/4692
+  35   20 0          Nextnode      3.3707     156.3905  force_treealloc()/forcetree.c/4701
+  35   21 0            Father      3.3684     159.7589  force_treealloc()/forcetree.c/4708
+  35   22 0    DataIndexTable     11.8421     171.6010  gravity_tree()/gravtree.c/185
+  35   23 0      DataNodeList     31.5789     203.1799  gravity_tree()/gravtree.c/187
+  35   24 0       GravDataGet      9.0324     212.2123  gravity_tree()/gravtree.c/461
+  35   25 0    GravDataResult      2.2581     214.4704  gravity_tree()/gravtree.c/543
+  35   26 0       GravDataOut      2.1412     216.6116  gravity_tree()/gravtree.c/545
+----------------------------------------------------------------------------------------
