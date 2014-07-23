@@ -1476,11 +1476,11 @@ while(NextParticle>=0){
 	m_num_active_part++;
 	ProcessedFlag[m_index]=1;
 }
-//printf("Active parts with for loop: %d \n", m_index);
+//manos//printf("Active parts with for loop: %d \n", m_index);
 
 //manos ignore//  while(1)
 //manos acc
-for (m_index=0; m_index<m_num_active_part; m_index++)
+for (m_index=0; m_index<m_num_active_part; m_index++) //manos
     {
       int exitFlag = 0;
       LOCK_NEXPORT;
@@ -1493,7 +1493,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++)
 	}
       else
 	{
-	  i = NextParticle;
+	  i = m_active_part[m_index];
 	  ProcessedFlag[i] = 0;
 //manos ignore//	  NextParticle = NextActiveParticle[NextParticle];
 	}
