@@ -1469,6 +1469,7 @@ m_num_active_part=0;
 //manos get active
 while(NextParticle>=0){
 	//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
+	LOCK_NEXPORT;
 	m_index=NextParticle;
 	m_active_part[m_num_active_part]=m_index;
 	m_temp=ProcessedFlag[m_index];
@@ -1476,6 +1477,7 @@ while(NextParticle>=0){
 	NextParticle = NextActiveParticle[m_index];
 	m_num_active_part++;
 	ProcessedFlag[m_index]=m_temp;
+	UNLOCK_NEXPORT;
 }
 //manos//printf("Active parts with for loop: %d \n", m_index);
 
