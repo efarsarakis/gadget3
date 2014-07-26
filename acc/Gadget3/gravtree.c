@@ -1493,7 +1493,7 @@ NextParticle=m_temp2;
 //#ifdef _OPENMP
 //#pragma omp critical(_nexport_)
 //#endif
-//      if(BufferFullFlag != 0 || NextParticle < 0)
+//      if(BufferFullFlag != 0)
 //	{
 //	  exitFlag = 1;
 //	}
