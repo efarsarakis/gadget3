@@ -1464,9 +1464,10 @@ void *gravity_primary_loop(void *p)
 #endif
 
   //manos variables
-int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp;
+int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_temp2;
 m_num_active_part=0;
 //manos get active
+m_temp2=NextParticle;
 while(NextParticle>=0){
 	//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
 	LOCK_NEXPORT;
@@ -1479,6 +1480,8 @@ while(NextParticle>=0){
 	ProcessedFlag[m_index]=m_temp;
 	UNLOCK_NEXPORT;
 }
+
+NextParticle=m_temp2;
 //manos//printf("Active parts with for loop: %d \n", m_index);
 
 //manos ignore//  while(1)
@@ -1505,7 +1508,6 @@ while(NextParticle>=0){
 //	break;
 
 
-      int m_index=0;
       while(1)
         {
           int exitFlag = 0;
@@ -1522,7 +1524,6 @@ while(NextParticle>=0){
     	  i = NextParticle;
     	  ProcessedFlag[i] = 0;
     	  NextParticle = NextActiveParticle[NextParticle];
-    	  m_index++;
     	}
           UNLOCK_NEXPORT;
           if(exitFlag)
