@@ -1483,26 +1483,50 @@ while(NextParticle>=0){
 
 //manos ignore//  while(1)
 //manos acc
-for (m_index=0; m_index<m_num_active_part; m_index++) //manos
-    {
-      int exitFlag = 0;
-      LOCK_NEXPORT;
-#ifdef _OPENMP
-#pragma omp critical(_nexport_)
-#endif
-      if(BufferFullFlag != 0 || NextParticle < 0)
-	{
-	  exitFlag = 1;
-	}
-      else
-	{
-	  i = m_active_part[m_index];
-	  ProcessedFlag[i] = 0;
-//manos ignore//	  NextParticle = NextActiveParticle[NextParticle];
-	}
-      UNLOCK_NEXPORT;
-      if(exitFlag)
-	break;
+//for (m_index=0; m_index<m_num_active_part; m_index++) //manos
+//    {
+//      int exitFlag = 0;
+//      LOCK_NEXPORT;
+//#ifdef _OPENMP
+//#pragma omp critical(_nexport_)
+//#endif
+//      if(BufferFullFlag != 0 || NextParticle < 0)
+//	{
+//	  exitFlag = 1;
+//	}
+//      else
+//	{
+//	  i = m_active_part[m_index];
+//	  ProcessedFlag[i] = 0;
+////manos ignore//	  NextParticle = NextActiveParticle[NextParticle];
+//	}
+//      UNLOCK_NEXPORT;
+//      if(exitFlag)
+//	break;
+
+
+      int m_index=0;
+      while(1)
+        {
+          int exitFlag = 0;
+          LOCK_NEXPORT;
+    #ifdef _OPENMP
+    #pragma omp critical(_nexport_)
+    #endif
+          if(BufferFullFlag != 0 || NextParticle < 0)
+    	{
+    	  exitFlag = 1;
+    	}
+          else
+    	{
+    	  i = NextParticle;
+    	  ProcessedFlag[i] = 0;
+    	  NextParticle = NextActiveParticle[NextParticle];
+    	  m_index++;
+    	}
+          UNLOCK_NEXPORT;
+          if(exitFlag)
+    	break;
 
 #if !defined(PMGRID)
 #if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
