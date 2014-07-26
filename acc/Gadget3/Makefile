@@ -150,6 +150,27 @@ OPTIMIZE = -fastsse
 #OPTIMIZE = -fastsse -O4 -Mipa=fast,inline,libc,libopt,libinline -Mvect=simd -Mcache_align -Munroll -g
 endif
 
+ifeq ($(SYSTYPE),"acc-boston")
+GSL_INCL = -I/shared/apps/gadget/libraries/gsl-gcc/include/
+GSL_LIBS = -L/shared/apps/gadget/libraries/gsl-gcc/lib/
+FFTW_INCL= -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
+FFTW_LIBS= -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
+MPICHLIB =
+
+OPTIMIZE = -fastsse -ta=nvidia,kepler -acc -Minfo=accel 
+
+endif
+
+ifeq ($(SYSTYPE),"archer")
+CC       = cc
+CXX      = cpc
+FC       = cc
+
+OPTIMIZE = -O3
+endif
+
+
+
 ifeq ($(SYSTYPE),"mvapich-intel")
 GSL_INCL = -I/shared/apps/gadget/libraries/gsl-intel/include/
 GSL_LIBS = -L/shared/apps/gadget/libraries/gsl-intel/lib/
