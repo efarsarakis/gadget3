@@ -1464,17 +1464,18 @@ void *gravity_primary_loop(void *p)
 #endif
 
   //manos variables
-int m_index, m_active_part[All.MaxPart], m_num_active_part;
-
+int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp;
+m_num_active_part=0;
 //manos get active
 while(NextParticle>=0){
 	//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
 	m_index=NextParticle;
 	m_active_part[m_num_active_part]=m_index;
+	m_temp=ProcessedFlag[m_index];
 	ProcessedFlag[m_index]=0;
 	NextParticle = NextActiveParticle[m_index];
 	m_num_active_part++;
-	ProcessedFlag[m_index]=1;
+	ProcessedFlag[m_index]=m_temp;
 }
 //manos//printf("Active parts with for loop: %d \n", m_index);
 
