@@ -1507,28 +1507,8 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
       if(exitFlag)
 	break;
 
-////////////ORIGINAL LOOP!!!/////////////////////
-//      while(1)
-//        {
-//          int exitFlag = 0;
-//          LOCK_NEXPORT;
-//    #ifdef _OPENMP
-//    #pragma omp critical(_nexport_)
-//    #endif
-//          if(BufferFullFlag != 0 || NextParticle < 0)
-//    	{
-//    	  exitFlag = 1;
-//    	}
-//          else
-//    	{
-//    	  i = NextParticle;
-//    	  ProcessedFlag[i] = 0;
-//    	  NextParticle = NextActiveParticle[NextParticle];
-//    	}
-//          UNLOCK_NEXPORT;
-//          if(exitFlag)
-//    	break;
-//////////END OF ORIGINAL LOOP!!!//////////////////////
+
+      ///changes to here work!!! :D :D
 
 
 
