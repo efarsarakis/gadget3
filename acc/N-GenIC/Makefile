@@ -34,6 +34,7 @@ INCL   = allvars.h proto.h  nrsrc/nrutil.h  Makefile
 #SYSTYPE="RZG_LinuxCluster-gcc"
 #SYSTYPE="Solaris"
 
+SYSTYPE="archer"
 #SYSTYPE="all-intel"
 SYSTYPE="mvapich-pgi"
 #SYSTYPE="mvapich-intel"
@@ -77,6 +78,25 @@ MPICHLIB =
 HDF5INCL =  -DH5_USE_16_API
 HDF5LIB  =  -lhdf5
 endif
+
+
+ifeq ($(SYSTYPE),"archer")
+
+$(info ****************** Using mvapich-pgi config ********************)
+
+CC       =   cc
+OPTIMIZE =  -O3
+#GSL_INCL =  -I/shared/apps/gadget/libraries/gsl-intel/include/
+#GSL_LIBS =  -L/shared/apps/gadget/libraries/gsl-intel/lib/
+#FFTW_INCL=  -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
+#FFTW_LIBS=  -L/shared/apps/gadget/libraries/fftw2-mvapichPGI/lib/
+#MPICHLIB =
+#HDF5INCL =  -DH5_USE_16_API
+#HDF5LIB  =  -lhdf5
+endif
+
+
+
 
 ifeq ($(SYSTYPE),"mvapich-intel")
 
