@@ -1554,7 +1554,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
       if(P[i].Type != 2)
 #endif
 	{
-	  ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
+	  force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex, *ret);
 	  if(ret < 0)
 	    break;		/* export buffer has filled up */
 
