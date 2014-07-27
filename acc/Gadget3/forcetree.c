@@ -2705,7 +2705,8 @@ void force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *e
 			  }
 			  UNLOCK_NEXPORT;
 			  if(exitFlag)
-			    return -1;
+				&m_returnValue=-1;
+			    return;
 
 			  exportnodecount[task] = 0;
 			  exportindex[task] = nexp;
@@ -3218,6 +3219,7 @@ void force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *e
     }
   &m_returnValue = ninteractions;
   //return ninteractions;
+  return;
 }
 
 #endif
