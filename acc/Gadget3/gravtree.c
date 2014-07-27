@@ -1464,10 +1464,10 @@ void *gravity_primary_loop(void *p)
 #endif
 
   //manos variables
-int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_temp2;
+int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
 m_num_active_part=0;
 //manos get active
-m_temp2=NextParticle;
+
 while(NextParticle>=0){
 	//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
 	LOCK_NEXPORT;

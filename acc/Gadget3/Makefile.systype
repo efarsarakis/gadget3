@@ -5,10 +5,11 @@
 # a new system.
 #SYSTYPE="acc-boston"
 #SYSTYPE="archer"
-SYSTYPE="mvapich-pgi"
+#SYSTYPE="mvapich-pgi"
 #SYSTYPE="mvapich-intel"
 #SYSTYPE="all-intel"
 #SYSTYPE="openmpi-intel"
+SYSTYPE="pgprof"
 
 #SYSTYPE="Darwin"
 #SYSTYPE="odyssey"
