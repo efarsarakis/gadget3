@@ -1033,6 +1033,6 @@ complile_time_info.c: $(CONFIG)
 	$(PERL) prepare-config.perl $(CONFIG)
 
 clean:
-	rm -f $(OBJS) $(FOBJS) $(EXEC) gadgetconfig.h
+	rm -f $(OBJS) $(FOBJS) $(EXEC) gadgetconfig.h *.oo
 
 
