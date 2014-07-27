@@ -1486,6 +1486,8 @@ while(NextParticle>=0){
 
 
 //manos acc
+
+#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
 for (m_index=0; m_index<m_num_active_part; m_index++) //manos
     {
       int exitFlag = 0;
