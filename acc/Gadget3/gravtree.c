@@ -1554,7 +1554,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
       if(P[i].Type != 2)
 #endif
 	{
-	  force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex, &ret);
+	  ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
 	  if(ret < 0)
 	    break;		/* export buffer has filled up */
 
@@ -1642,7 +1642,7 @@ void *gravity_secondary_loop(void *p)
 	  UNLOCK_WORKCOUNT;
 	}
 #else
-      force_treeevaluate_shortrange(j, 1, &nodesinlist, &dummy, &dummy, &ret);
+      ret = force_treeevaluate_shortrange(j, 1, &nodesinlist, &dummy, &dummy);
       LOCK_WORKCOUNT;
 #ifdef _OPENMP
 #pragma omp critical(_workcount_)

@@ -2434,8 +2434,8 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
  *  memory-access panelty (which reduces cache performance) incurred by the
  *  table.
  */
-void force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *exportnodecount,
-				  int *exportindex, int *m_returnValue)
+int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *exportnodecount,
+				  int *exportindex)
 {
   struct NODE *nop = 0;
   int no, nodesinlist, ptype, ninteractions, nexp, tabindex, task, listindex = 0;
@@ -2705,8 +2705,7 @@ void force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *e
 			  }
 			  UNLOCK_NEXPORT;
 			  if(exitFlag)
-				m_returnValue=-1;
-			    return;
+			    return -1;
 
 			  exportnodecount[task] = 0;
 			  exportindex[task] = nexp;
@@ -3217,9 +3216,8 @@ void force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *e
 #endif
       *exportflag = nodesinlist;
     }
-  m_returnValue = ninteractions;
-  //return ninteractions;
-  return;
+
+  return ninteractions;
 }
 
 #endif
