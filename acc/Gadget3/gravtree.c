@@ -1642,7 +1642,7 @@ void *gravity_secondary_loop(void *p)
 	  UNLOCK_WORKCOUNT;
 	}
 #else
-      ret = force_treeevaluate_shortrange(j, 1, &nodesinlist, &dummy, &dummy);
+      force_treeevaluate_shortrange(j, 1, &nodesinlist, &dummy, &dummy, *ret);
       LOCK_WORKCOUNT;
 #ifdef _OPENMP
 #pragma omp critical(_workcount_)
