@@ -2422,7 +2422,7 @@ int force_treeevaluate(int target, int mode, int *exportflag, int *exportnodecou
 	return ninteractions;
 }
 
-#ifdef PMGRID
+
 /*! In the TreePM algorithm, the tree is walked only locally around the
  *  target coordinate.  Tree nodes that fall outside a box of half
  *  side-length Rcut= RCUT*ASMTH*MeshSize can be discarded. The short-range
@@ -2452,7 +2452,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	double errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 
 #ifdef PERIODIC
-	//seen1ST ////////////////////////////////////////////////////////////////////////////////////////////
+	seen1ST ////////////////////////////////////////////////////////////////////////////////////////////
 	double xtmp;
 #endif
 
@@ -2791,7 +2791,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	return ninteractions;
 }
 
-#endif
+
 
 
 
