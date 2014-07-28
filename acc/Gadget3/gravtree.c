@@ -1454,6 +1454,7 @@ void *gravity_primary_loop(void *p)
     exportflag[j] = -1;
 
 #ifdef FIXEDTIMEINFIRSTPHASE
+  1st/////////////////////////////////////////////////////////////////////////////////////////////////
   int counter = 0;
   double tstart;
 
@@ -1493,6 +1494,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
       int exitFlag = 0;
       LOCK_NEXPORT;
 #ifdef _OPENMP
+      2nd/////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma omp critical(_nexport_)
 #endif
       if(BufferFullFlag != 0)
@@ -1520,7 +1522,9 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 
 
 #if !defined(PMGRID)
+      3rd/////////////////////////////////////////////////////////////////////////////////////////////////
 #if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
+      4th/////////////////////////////////////////////////////////////////////////////////////////////////
       if(Ewald_iter)
 	{
 	  ret = force_treeevaluate_ewald_correction(i, 0, exportflag, exportnodecount, exportindex);
@@ -1528,6 +1532,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 	    {
 	      LOCK_WORKCOUNT;
 #ifdef _OPENMP
+	      5th/////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma omp critical(_workcount_)
 #endif
 	      Ewaldcount += ret;	/* note: ewaldcount may be slightly incorrect for multiple threads if buffer gets filled up */
@@ -1545,6 +1550,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 
 	  LOCK_WORKCOUNT;
 #ifdef _OPENMP
+	  6th/////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma omp critical(_workcount_)
 #endif
 	  Costtotal += ret;
@@ -1553,6 +1559,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 #else
 
 #ifdef NEUTRINOS
+      7th/////////////////////////////////////////////////////////////////////////////////////////////////
       if(P[i].Type != 2)
 #endif
 	{
@@ -1562,6 +1569,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 
 	  LOCK_WORKCOUNT;
 #ifdef _OPENMP
+	  8th/////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma omp critical(_workcount_)
 #endif
 	  Costtotal += ret;
@@ -1573,6 +1581,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
       ProcessedFlag[i] = 1;	/* particle successfully finished */
 
 #ifdef FIXEDTIMEINFIRSTPHASE
+      9th/////////////////////////////////////////////////////////////////////////////////////////////////
       if(thread_id == 0)
 	{
 	  counter++;
