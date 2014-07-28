@@ -38,7 +38,8 @@ static int last;
 /*! length of lock-up table for short-range force kernel in TreePM algorithm */
 #define NTAB 1000
 /*! variables for short-range lookup table */
-static float shortrange_table[NTAB], shortrange_table_potential[NTAB];
+//static float shortrange_table[NTAB],
+static float shortrange_table_potential[NTAB];
 #ifdef DISTORTIONTENSORPS
 static float shortrange_table_tidal[NTAB];
 #endif
@@ -100,9 +101,9 @@ static double fac_intp;
 /*
  * Manos /// function to get the pointer to static shortrange_table array::
  */
-void get_shortrange_table(float *returnArrayPointer){
-	returnArrayPointer = shortrange_table;
-}
+//void get_shortrange_table(float *returnArrayPointer){
+//	returnArrayPointer = shortrange_table;
+//}
 
 
 

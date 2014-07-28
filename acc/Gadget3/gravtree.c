@@ -95,7 +95,7 @@ long long N_nodesinlist;
 
 int Ewald_iter;			/* global in file scope, for simplicity */
 
-
+extern float shortrange_table[1000];
 
 void sum_top_level_node_costfactors(void);
 
@@ -1462,8 +1462,8 @@ void gravity_tree(void)
 			int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
 			m_num_active_part=0;
 			int NTAB = 1000;
-			float *shortrange_table;
-			get_shortrange_table(shortrange_table);
+//			float *shortrange_table;
+//			get_shortrange_table(shortrange_table);
 			//manos get active
 
 			while(NextParticle>=0){

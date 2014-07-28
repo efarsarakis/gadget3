@@ -9,7 +9,7 @@
 #endif
 #endif
 
-
+#define NTAB 1000
 #define BITFLAG_TOPLEVEL                   0
 #define BITFLAG_DEPENDS_ON_LOCAL_MASS      1
 #define BITFLAG_MAX_SOFTENING_TYPE         2	/* bits 2-4 */
@@ -23,7 +23,9 @@
 #define maskout_different_softening_flag(x) (x & (1 << BITFLAG_MIXED_SOFTENINGS_IN_NODE))
 #define extract_max_softening_type(x) ((x >> BITFLAG_MAX_SOFTENING_TYPE) & 7)
 
-void get_shortrange_table(float *returnArrayPointer);
+//void get_shortrange_table(float *returnArrayPointer);
+
+float shortrange_table[1000];
 
 void force_update_tree(void);
 
