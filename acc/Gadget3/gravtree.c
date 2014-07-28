@@ -1680,6 +1680,7 @@ void gravity_tree(void)
 																	{ //m
 																		//return -1;
 																		m_ninteractions=-1;
+																		ret=-1;
 
 																	} //m
 					//////////return statement to fix.........
