@@ -97,6 +97,14 @@ static double fac_intp;
 #endif
 
 
+/*
+ * Manos /// function to get the pointer to static shortrange_table array::
+ */
+void get_shortrange_table(float *returnArrayPointer){
+	returnArrayPointer = shortrange_table;
+}
+
+
 
 /*! This function is a driver routine for constructing the gravitational
  *  oct-tree, which is done by calling a small number of other functions.

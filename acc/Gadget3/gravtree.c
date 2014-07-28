@@ -9,7 +9,7 @@
 
 #include "allvars.h"
 #include "proto.h"
-#include "forcetree.c"
+
 
 #ifdef NUM_THREADS
 #include <pthread.h>
@@ -1459,6 +1459,9 @@ void gravity_tree(void)
 			//manos variables
 			int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
 			m_num_active_part=0;
+			int NTAB = 1000;
+			float shortrange_table[NTAB];
+			get_shortrange_table(float shortrange_table);
 			//manos get active
 
 			while(NextParticle>=0){

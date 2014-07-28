@@ -23,6 +23,7 @@
 #define maskout_different_softening_flag(x) (x & (1 << BITFLAG_MIXED_SOFTENINGS_IN_NODE))
 #define extract_max_softening_type(x) ((x >> BITFLAG_MAX_SOFTENING_TYPE) & 7)
 
+void get_shortrange_table(float *returnArrayPointer);
 
 void force_update_tree(void);
 
