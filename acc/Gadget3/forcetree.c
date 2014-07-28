@@ -100,8 +100,12 @@ static double fac_intp;
 /*
  * Manos /// function to get the pointer to static shortrange_table array::
  */
-void get_shortrange_table(float *returnArrayPointer){
-	returnArrayPointer = shortrange_table;
+void get_shortrange_table(float returnArrayPointer[NTAB]){
+	int m_index;
+	for(m_index=0; m_index<NTAB; m_index++){
+		returnArrayPointer[m_index] = shortrange_table[m_index];
+	}
+
 }
 
 
