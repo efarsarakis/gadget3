@@ -1453,16 +1453,7 @@ void *gravity_primary_loop(void *p)
   for(j = 0; j < NTask; j++)
     exportflag[j] = -1;
 
-#ifdef FIXEDTIMEINFIRSTPHASE
-  1st/////////////////////////////////////////////////////////////////////////////////////////////////
-  int counter = 0;
-  double tstart;
 
-  if(thread_id == 0)
-    {
-      tstart = second();
-    }
-#endif
 
   //manos variables
 int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
@@ -1493,10 +1484,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
     {
       int exitFlag = 0;
       LOCK_NEXPORT;
-#ifdef _OPENMP
-      2nd/////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma omp critical(_nexport_)
-#endif
+
       if(BufferFullFlag != 0)
 	{
 	  exitFlag = 1;
@@ -1523,55 +1511,27 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 
 #if !defined(PMGRID)
       3rd/////////////////////////////////////////////////////////////////////////////////////////////////
-#if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
-      4th/////////////////////////////////////////////////////////////////////////////////////////////////
-      if(Ewald_iter)
-	{
-	  ret = force_treeevaluate_ewald_correction(i, 0, exportflag, exportnodecount, exportindex);
-	  if(ret >= 0)
-	    {
-	      LOCK_WORKCOUNT;
-#ifdef _OPENMP
-	      5th/////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma omp critical(_workcount_)
-#endif
-	      Ewaldcount += ret;	/* note: ewaldcount may be slightly incorrect for multiple threads if buffer gets filled up */
-	      UNLOCK_WORKCOUNT;
-	    }
-	  else
-	    break;		/* export buffer has filled up */
-	}
-      else
-#endif
+
 	{
 	  ret = force_treeevaluate(i, 0, exportflag, exportnodecount, exportindex);
 	  if(ret < 0)
 	    break;		/* export buffer has filled up */
 
 	  LOCK_WORKCOUNT;
-#ifdef _OPENMP
-	  6th/////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma omp critical(_workcount_)
-#endif
+
 	  Costtotal += ret;
 	  UNLOCK_WORKCOUNT;
 	}
 #else
+      4th////////////////////////
 
-#ifdef NEUTRINOS
-      7th/////////////////////////////////////////////////////////////////////////////////////////////////
-      if(P[i].Type != 2)
-#endif
 	{
 	  ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
 	  if(ret < 0)
 	    break;		/* export buffer has filled up */
 
 	  LOCK_WORKCOUNT;
-#ifdef _OPENMP
-	  8th/////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma omp critical(_workcount_)
-#endif
+
 	  Costtotal += ret;
 	  UNLOCK_WORKCOUNT;
 	}
@@ -1580,26 +1540,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 
       ProcessedFlag[i] = 1;	/* particle successfully finished */
 
-#ifdef FIXEDTIMEINFIRSTPHASE
-      9th/////////////////////////////////////////////////////////////////////////////////////////////////
-      if(thread_id == 0)
-	{
-	  counter++;
-	  if((counter & 255) == 0)
-	    {
-	      if(timediff(tstart, second()) > FIXEDTIMEINFIRSTPHASE)
-		{
-		  TimerFlag = 1;
-		  break;
-		}
-	    }
-	}
-      else
-	{
-	  if(TimerFlag)
-	    break;
-	}
-#endif
+
     }
 
   return NULL;
