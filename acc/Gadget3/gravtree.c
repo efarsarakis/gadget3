@@ -9,6 +9,7 @@
 
 #include "allvars.h"
 #include "proto.h"
+#include "forcetree.h"
 
 #ifdef NUM_THREADS
 #include <pthread.h>
@@ -1535,7 +1536,7 @@ void gravity_tree(void)
 						int m_maxNodes = MaxNodes;
 						integertime m_ti_Current = All.Ti_Current;
 						double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-
+						int m_exitFlag = 0;
 
 						//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
 						double m_xtmp;
@@ -1649,7 +1650,7 @@ void gravity_tree(void)
 
 											if(m_exportnodecount[m_task] == NODELISTLENGTH)
 											{
-												int m_exitFlag = 0;
+												//int m_exitFlag=0;
 												LOCK_NEXPORT;
 #pragma omp critical(_nexport_)
 												{
@@ -1669,7 +1670,7 @@ void gravity_tree(void)
 												if(m_exitFlag)
 												{ //m
 													//return -1;
-													ninteractions=-1;
+													m_ninteractions=-1;
 
 												} //m
 //////////return statement to fix.........
