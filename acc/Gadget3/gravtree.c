@@ -43,7 +43,9 @@ pthread_mutex_t mutex_partnodedrift;
 #define UNLOCK_WORKCOUNT
 #endif
 
-
+//manos//
+#define LOCK_PARTNODEDRIFT
+#define UNLOCK_PARTNODEDRIFT
 
 #ifdef STATICBRANDT
 inline double OmegaR(int i, int mode)
