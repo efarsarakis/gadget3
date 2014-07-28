@@ -2567,7 +2567,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	asmthfac = 0.5 / asmth * (NTAB / 3.0);
 
 #if !defined(UNEQUALSOFTENINGS) && !defined(ADAPTGRAVSOFT)
-	15TH ////////////////////////////////////////////////////////////////////////////////////////////
+	//used/15TH ////////////////////////////////////////////////////////////////////////////////////////////
 	h = All.ForceSoftening[ptype];
 	h_inv = 1.0 / h;
 	h3_inv = h_inv * h_inv * h_inv;
