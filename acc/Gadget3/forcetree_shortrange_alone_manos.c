@@ -107,8 +107,8 @@ static double fac_intp;
  *  memory-access panelty (which reduces cache performance) incurred by the
  *  table.
  */
-int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *exportnodecount,
-		int *exportindex)
+int force_treeevaluate_shortrange(int m_target, int m_mode, int *m_exportflag, int *m_exportnodecount,
+		int *m_exportindex)
 {
 	struct NODE *m_nop = 0;
 	int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
@@ -140,30 +140,30 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	m_rcut = All.Rcut[0];
 	m_asmth = All.Asmth[0];
 
-	if(mode != 0 && mode != 1)
+	if(m_mode != 0 && m_mode != 1)
 	{
-		printf("%d %d %d %d %d\n", target, mode, *exportflag, *exportnodecount, *exportindex);
+		printf("%d %d %d %d %d\n", m_target, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
 		endrun(444);
 	}
 
-	if(mode == 0)
+	if(m_mode == 0)
 	{
-		m_pos_x = P[target].Pos[0];
-		m_pos_y = P[target].Pos[1];
-		m_pos_z = P[target].Pos[2];
-		m_ptype = P[target].Type;
-		m_aold = All.ErrTolForceAcc * P[target].OldAcc;
+		m_pos_x = P[m_target].Pos[0];
+		m_pos_y = P[m_target].Pos[1];
+		m_pos_z = P[m_target].Pos[2];
+		m_ptype = P[m_target].Type;
+		m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
 	}
 	else
 	{
-		m_pos_x = GravDataGet[target].Pos[0];
-		m_pos_y = GravDataGet[target].Pos[1];
-		m_pos_z = GravDataGet[target].Pos[2];
+		m_pos_x = GravDataGet[m_target].Pos[0];
+		m_pos_y = GravDataGet[m_target].Pos[1];
+		m_pos_z = GravDataGet[m_target].Pos[2];
 		//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
 		m_ptype = P[0].Type;
 
-		m_aold = All.ErrTolForceAcc * GravDataGet[target].OldAcc;
+		m_aold = All.ErrTolForceAcc * GravDataGet[m_target].OldAcc;
 
 	}
 
@@ -177,14 +177,14 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 	m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
 
 
-	if(mode == 0)
+	if(m_mode == 0)
 	{
 		m_no = m_maxPart;		/* root node */
 	}
 	else
 	{
 		m_nodesinlist++;
-		m_no = GravDataGet[target].NodeList[0];
+		m_no = GravDataGet[m_target].NodeList[0];
 		m_no = Nodes[m_no].u.d.nextnode;	/* open it */
 	}
 
@@ -228,15 +228,15 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 			{
 				if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 				{
-					if(mode == 0)
+					if(m_mode == 0)
 					{
-						if(exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != target)
+						if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 						{
-							exportflag[m_task] = target;
-							exportnodecount[m_task] = NODELISTLENGTH;
+							m_exportflag[m_task] = m_target;
+							m_exportnodecount[m_task] = NODELISTLENGTH;
 						}
 
-						if(exportnodecount[m_task] == NODELISTLENGTH)
+						if(m_exportnodecount[m_task] == NODELISTLENGTH)
 						{
 							int m_exitFlag = 0;
 							LOCK_NEXPORT;
@@ -258,18 +258,18 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 							if(m_exitFlag)
 								return -1;
 
-							exportnodecount[m_task] = 0;
-							exportindex[m_task] = m_nexp;
+							m_exportnodecount[m_task] = 0;
+							m_exportindex[m_task] = m_nexp;
 							DataIndexTable[m_nexp].Task = m_task;
-							DataIndexTable[m_nexp].Index = target;
+							DataIndexTable[m_nexp].Index = m_target;
 							DataIndexTable[m_nexp].IndexGet = m_nexp;
 						}
 
-						DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
+						DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
 								DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
-						if(exportnodecount[m_task] < NODELISTLENGTH)
-							DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
+						if(m_exportnodecount[m_task] < NODELISTLENGTH)
+							DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
 					}
 					m_no = Nextnode[m_no - m_maxNodes];
 					continue;
@@ -277,7 +277,7 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 				m_nop = &Nodes[m_no];
 
-				if(mode == 1)
+				if(m_mode == 1)
 				{
 					if(m_nop->u.d.bitflags & (1 << BITFLAG_TOPLEVEL))	/* we reached a top-level node again, which means that we are done with the branch */
 					{
@@ -427,12 +427,12 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 		}
 
-		if(mode == 1)
+		if(m_mode == 1)
 		{
 			m_listindex++;
 			if(m_listindex < NODELISTLENGTH)
 			{
-				m_no = GravDataGet[target].NodeList[m_listindex];
+				m_no = GravDataGet[m_target].NodeList[m_listindex];
 				if(m_no >= 0)
 				{
 					m_nodesinlist++;
@@ -444,18 +444,18 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 
 	/* store result at the proper place */
-	if(mode == 0)
+	if(m_mode == 0)
 	{
-		P[target].g.dGravAccel[0] = m_acc_x;
-		P[target].g.dGravAccel[1] = m_acc_y;
-		P[target].g.dGravAccel[2] = m_acc_z;
+		P[m_target].g.dGravAccel[0] = m_acc_x;
+		P[m_target].g.dGravAccel[1] = m_acc_y;
+		P[m_target].g.dGravAccel[2] = m_acc_z;
 	}
 	else
 	{
-		GravDataResult[target].Acc[0] = m_acc_x;
-		GravDataResult[target].Acc[1] = m_acc_y;
-		GravDataResult[target].Acc[2] = m_acc_z;
-		*exportflag = m_nodesinlist;
+		GravDataResult[m_target].Acc[0] = m_acc_x;
+		GravDataResult[m_target].Acc[1] = m_acc_y;
+		GravDataResult[m_target].Acc[2] = m_acc_z;
+		*m_exportflag = m_nodesinlist;
 	}
 
 	return m_ninteractions;
