@@ -1509,21 +1509,6 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 
 
 
-#if !defined(PMGRID)
-      3rd/////////////////////////////////////////////////////////////////////////////////////////////////
-
-	{
-	  ret = force_treeevaluate(i, 0, exportflag, exportnodecount, exportindex);
-	  if(ret < 0)
-	    break;		/* export buffer has filled up */
-
-	  LOCK_WORKCOUNT;
-
-	  Costtotal += ret;
-	  UNLOCK_WORKCOUNT;
-	}
-#else
-      4th////////////////////////
 
 	{
 	  ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
@@ -1536,7 +1521,7 @@ for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 	  UNLOCK_WORKCOUNT;
 	}
 
-#endif
+
 
       ProcessedFlag[i] = 1;	/* particle successfully finished */
 
