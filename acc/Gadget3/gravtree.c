@@ -1462,7 +1462,7 @@ void gravity_tree(void)
 			int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
 			m_num_active_part=0;
 			int NTAB = 1000;
-			float shortrange_table[NTAB];
+			float *shortrange_table;
 			get_shortrange_table(float shortrange_table);
 			//manos get active
 
