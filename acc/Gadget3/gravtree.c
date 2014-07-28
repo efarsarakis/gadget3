@@ -1515,8 +1515,11 @@ void gravity_tree(void)
 					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					////////////// INLINE shortrange start...   //////////////////////////////////////////
 
-					(int m_target, int m_mode, int *m_exportflag, int *m_exportnodecount,
-							int *m_exportindex)
+						int m_target = i;
+						int m_mode = 0;
+						int *m_exportflag = exportflag;
+						int *m_exportnodecount = exportnodecount;
+						int *m_exportindex = exportindex;
 							{
 						struct NODE *m_nop = 0;
 						int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
