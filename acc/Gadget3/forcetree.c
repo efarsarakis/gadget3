@@ -2457,10 +2457,6 @@ int force_treeevaluate_shortrange(int target, int mode, int *exportflag, int *ex
 
 
 
-
-
-
-
 	acc_x = 0;
 	acc_y = 0;
 	acc_z = 0;
