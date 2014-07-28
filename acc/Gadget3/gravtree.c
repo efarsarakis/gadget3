@@ -1740,7 +1740,10 @@ void gravity_tree(void)
 									{
 										LOCK_PARTNODEDRIFT;
 #pragma omp critical(_partnodedrift_)
-										force_drift_node(m_no, m_ti_Current);
+////////manos//////// temp commenting to find other problems if there...//////////////////////
+/////////////
+////////////
+										//force_drift_node(m_no, m_ti_Current);
 										UNLOCK_PARTNODEDRIFT;
 									}
 
