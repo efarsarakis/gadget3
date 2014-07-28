@@ -9,7 +9,7 @@
 
 #include "allvars.h"
 #include "proto.h"
-#include "forcetree.h"
+#include "forcetree.c"
 
 #ifdef NUM_THREADS
 #include <pthread.h>
