@@ -1485,11 +1485,11 @@ void gravity_tree(void)
 
 			MyLongDouble m_acc_x;
 
-#pragma acc data copy(BufferFullFlag)
+#pragma acc data copy(BufferFullFlag) private(m_no)
 			{
 
 
-#pragma acc parallel loop private(m_no)
+#pragma acc parallel loop
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
