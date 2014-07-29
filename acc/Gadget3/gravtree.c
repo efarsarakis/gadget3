@@ -1499,7 +1499,7 @@ void gravity_tree(void)
 			double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
 			MyLongDouble m_acc_y, m_acc_z;
 			// cache some global vars in local vars to help compiler with alias analysis
-s
+
 			double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 			m_exitFlag = 0;
 
