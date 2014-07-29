@@ -1483,45 +1483,10 @@ void gravity_tree(void)
 
 			//manos acc
 
-			//manos//shortrange variables
-			MyLongDouble m_acc_x;
-			int m_no;
-			int m_nodesinlist;
-			int exitFlag, m_ptype;
-
-
-			struct NODE *m_nop;
-			int m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex;
-			double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
-			double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
-			double m_pos_x, m_pos_y, m_pos_z, m_aold;
-			double m_eff_dist;
-			double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
-			MyLongDouble m_acc_y, m_acc_z;
-			// cache some global vars in local vars to help compiler with alias analysis
-
-			double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-			exitFlag = 0;
-
-			//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
-			double m_xtmp;
-
-			int mode = 0;
-
-			//manos// end shortrange variables
-
-
-
-#pragma acc data copy(BufferFullFlag, P, All, exitFlag) create(m_acc_x, m_acc_y, m_acc_z)
-			//create(m_acc_x, m_no, exitFlag, \
-//		m_nodesinlist, m_ptype)
-			{
-
-
-#pragma acc parallel loop private(m_index, m_acc_x,m_acc_y, m_acc_z) //reduction(+:BufferFullFlag)
+#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
-
+				int exitFlag = 0;
 				LOCK_NEXPORT;
 
 				if(BufferFullFlag != 0 || m_break)
@@ -1530,8 +1495,8 @@ void gravity_tree(void)
 				}
 				else
 				{
-				//	i = m_active_part[m_index];
-					ProcessedFlag[m_index] = 0;
+					i = m_active_part[m_index];
+					ProcessedFlag[i] = 0;
 				}
 				UNLOCK_NEXPORT;
 
@@ -1550,16 +1515,28 @@ void gravity_tree(void)
 					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					////////////// INLINE shortrange start...   //////////////////////////////////////////
 
-						//int m_index = i;
-						mode = 0;
-
+						int m_target = i;
+						int m_mode = 0;
+						int *m_exportflag = exportflag;
+						int *m_exportnodecount = exportnodecount;
+						int *m_exportindex = exportindex;
 
 						{
-											m_nop = 0;
-											m_listindex = 0;
-
+											struct NODE *m_nop = 0;
+											int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
+											double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
+											double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
+											double m_pos_x, m_pos_y, m_pos_z, m_aold;
+											double m_eff_dist;
+											double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
+											MyLongDouble m_acc_x, m_acc_y, m_acc_z;
 											// cache some global vars in local vars to help compiler with alias analysis
-											exitFlag = 0;
+											int m_maxPart = All.MaxPart;
+											int m_bunchSize = All.BunchSize;
+											int m_maxNodes = MaxNodes;
+											integertime m_ti_Current = All.Ti_Current;
+											double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
+											int m_exitFlag = 0;
 
 											//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
 											double m_xtmp;
@@ -1575,30 +1552,30 @@ void gravity_tree(void)
 											m_rcut = All.Rcut[0];
 											m_asmth = All.Asmth[0];
 
-											if(mode != 0 && mode != 1)
+											if(m_mode != 0 && m_mode != 1)
 											{
-												printf("%d %d %d %d %d\n", m_index, mode, *exportflag, *exportnodecount, *exportindex);
+												printf("%d %d %d %d %d\n", m_target, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
 												endrun(444);
 											}
 
-											if(mode == 0)
+											if(m_mode == 0)
 											{
-												m_pos_x = P[m_index].Pos[0];
-												m_pos_y = P[m_index].Pos[1];
-												m_pos_z = P[m_index].Pos[2];
-												m_ptype = P[m_index].Type;
-												m_aold = All.ErrTolForceAcc * P[m_index].OldAcc;
+												m_pos_x = P[m_target].Pos[0];
+												m_pos_y = P[m_target].Pos[1];
+												m_pos_z = P[m_target].Pos[2];
+												m_ptype = P[m_target].Type;
+												m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
 											}
 											else
 											{
-												m_pos_x = GravDataGet[m_index].Pos[0];
-												m_pos_y = GravDataGet[m_index].Pos[1];
-												m_pos_z = GravDataGet[m_index].Pos[2];
+												m_pos_x = GravDataGet[m_target].Pos[0];
+												m_pos_y = GravDataGet[m_target].Pos[1];
+												m_pos_z = GravDataGet[m_target].Pos[2];
 												//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
 												m_ptype = P[0].Type;
 
-												m_aold = All.ErrTolForceAcc * GravDataGet[m_index].OldAcc;
+												m_aold = All.ErrTolForceAcc * GravDataGet[m_target].OldAcc;
 
 											}
 
@@ -1612,14 +1589,14 @@ void gravity_tree(void)
 											m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
 
 
-											if(mode == 0)
+											if(m_mode == 0)
 											{
-												m_no = All.MaxPart;		/* root node */
+												m_no = m_maxPart;		/* root node */
 											}
 											else
 											{
 												m_nodesinlist++;
-												m_no = GravDataGet[m_index].NodeList[0];
+												m_no = GravDataGet[m_target].NodeList[0];
 												m_no = Nodes[m_no].u.d.nextnode;	/* open it */
 											}
 
@@ -1627,17 +1604,17 @@ void gravity_tree(void)
 											{
 												while(m_no >= 0)
 												{
-													if(m_no < All.MaxPart)
+													if(m_no < m_maxPart)
 													{
 														/* the index of the node is the index of the particle */
-														if(P[m_no].Ti_current != All.Ti_Current)
+														if(P[m_no].Ti_current != m_ti_Current)
 														{
 															LOCK_PARTNODEDRIFT;
 					#pragma omp critical(_partnodedrift_)
-////////manos//////// temp commenting to find other problems if there...//////////////////////
-/////////////
-////////////
-															drift_particle(m_no, All.Ti_Current);
+					////////manos//////// temp commenting to find other problems if there...//////////////////////
+					/////////////
+					////////////
+															//drift_particle(m_no, m_ti_Current);
 															UNLOCK_PARTNODEDRIFT;
 														}
 
@@ -1664,27 +1641,27 @@ void gravity_tree(void)
 													}
 													else			/* we have an  internal node */
 													{
-														if(m_no >= All.MaxPart + MaxNodes)	/* pseudo particle */
+														if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 														{
-															if(mode == 0)
+															if(m_mode == 0)
 															{
-																if(exportflag[m_task = DomainTask[m_no - (All.MaxPart + MaxNodes)]] != m_index)
+																if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 																{
-																	exportflag[m_task] = m_index;
-																	exportnodecount[m_task] = NODELISTLENGTH;
+																	m_exportflag[m_task] = m_target;
+																	m_exportnodecount[m_task] = NODELISTLENGTH;
 																}
 
-																if(exportnodecount[m_task] == NODELISTLENGTH)
+																if(m_exportnodecount[m_task] == NODELISTLENGTH)
 																{
-																	//int exitFlag=0;
+																	//int m_exitFlag=0;
 																	LOCK_NEXPORT;
 					#pragma omp critical(_nexport_)
 																	{
-																		if(Nexport >= All.BunchSize)
+																		if(Nexport >= m_bunchSize)
 																		{
 																			/* out of buffer space. Need to discard work for this particle and interrupt */
 																			BufferFullFlag = 1;
-																			exitFlag = 1;
+																			m_exitFlag = 1;
 																		}
 																		else
 																		{
@@ -1693,7 +1670,7 @@ void gravity_tree(void)
 																		}
 																	}
 																	UNLOCK_NEXPORT;
-																	if(exitFlag)
+																	if(m_exitFlag)
 																	{ //m
 																		//return -1;
 																		m_ninteractions=-1;
@@ -1704,42 +1681,42 @@ void gravity_tree(void)
 																	//m
 																	else
 																	{
-																	exportnodecount[m_task] = 0;
-																	exportindex[m_task] = m_nexp;
+																	m_exportnodecount[m_task] = 0;
+																	m_exportindex[m_task] = m_nexp;
 																	DataIndexTable[m_nexp].Task = m_task;
-																	DataIndexTable[m_nexp].Index = m_index;
+																	DataIndexTable[m_nexp].Index = m_target;
 																	DataIndexTable[m_nexp].IndexGet = m_nexp;
 																	}
 																}
-																if(exitFlag){
+																if(m_exitFlag){
 																	continue;
 																}
 																else{
 
 
-																DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
-																		DomainNodeIndex[m_no - (All.MaxPart + MaxNodes)];
+																DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
+																		DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
-																if(exportnodecount[m_task] < NODELISTLENGTH)
-																	DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
+																if(m_exportnodecount[m_task] < NODELISTLENGTH)
+																	DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
 																}
 															}
-															if(exitFlag){
+															if(m_exitFlag){
 																continue;
 															}
 															else{
-															m_no = Nextnode[m_no - MaxNodes];
+															m_no = Nextnode[m_no - m_maxNodes];
 															continue;
 															}
 														}
-														if(exitFlag){
+														if(m_exitFlag){
 															continue;
 														}
 														else{
 
 														m_nop = &Nodes[m_no];
 
-														if(mode == 1)
+														if(m_mode == 1)
 														{
 															if(m_nop->u.d.bitflags & (1 << BITFLAG_TOPLEVEL))	/* we reached a top-level node again, which means that we are done with the branch */
 															{
@@ -1755,16 +1732,15 @@ void gravity_tree(void)
 															continue;
 														}
 
-														if(m_nop->Ti_current != All.Ti_Current)
+														if(m_nop->Ti_current != m_ti_Current)
 														{
 															LOCK_PARTNODEDRIFT;
 					#pragma omp critical(_partnodedrift_)
-////////manos//////// temp commenting to find other problems if there...//////////////////////
-/////////////
-////////////
-															force_drift_node(m_no, All.Ti_Current);
+					////////manos//////// temp commenting to find other problems if there...//////////////////////
+					/////////////
+					////////////
+															//force_drift_node(m_no, m_ti_Current);
 															UNLOCK_PARTNODEDRIFT;
-
 														}
 
 														m_mass = m_nop->u.d.mass;
@@ -1855,7 +1831,7 @@ void gravity_tree(void)
 													}
 													}
 
-													if(exitFlag)
+													if(m_exitFlag)
 													{
 														continue;
 													}
@@ -1902,16 +1878,16 @@ void gravity_tree(void)
 
 												}
 												}
-												if(exitFlag){
+												if(m_exitFlag){
 													continue;
 												}
 												else{
-												if(mode == 1)
+												if(m_mode == 1)
 												{
 													m_listindex++;
 													if(m_listindex < NODELISTLENGTH)
 													{
-														m_no = GravDataGet[m_index].NodeList[m_listindex];
+														m_no = GravDataGet[m_target].NodeList[m_listindex];
 														if(m_no >= 0)
 														{
 															m_nodesinlist++;
@@ -1922,23 +1898,23 @@ void gravity_tree(void)
 											}
 											}
 
-											if(exitFlag){
+											if(m_exitFlag){
 												continue;
 											}
 											else{
 											/* store result at the proper place */
-											if(mode == 0)
+											if(m_mode == 0)
 											{
-												P[m_index].g.dGravAccel[0] = m_acc_x;
-												P[m_index].g.dGravAccel[1] = m_acc_y;
-												P[m_index].g.dGravAccel[2] = m_acc_z;
+												P[m_target].g.dGravAccel[0] = m_acc_x;
+												P[m_target].g.dGravAccel[1] = m_acc_y;
+												P[m_target].g.dGravAccel[2] = m_acc_z;
 											}
 											else
 											{
-												GravDataResult[m_index].Acc[0] = m_acc_x;
-												GravDataResult[m_index].Acc[1] = m_acc_y;
-												GravDataResult[m_index].Acc[2] = m_acc_z;
-												*exportflag = m_nodesinlist;
+												GravDataResult[m_target].Acc[0] = m_acc_x;
+												GravDataResult[m_target].Acc[1] = m_acc_y;
+												GravDataResult[m_target].Acc[2] = m_acc_z;
+												*m_exportflag = m_nodesinlist;
 											}
 											}
 
@@ -1964,12 +1940,10 @@ void gravity_tree(void)
 					Costtotal += ret;
 					UNLOCK_WORKCOUNT;
 
-					ProcessedFlag[m_index] = 1;	/* particle successfully finished */
+					ProcessedFlag[i] = 1;	/* particle successfully finished */
 					}
 				}///manos//end m_break part (containing whole shortrange function)
 			}//manos// end of for loop
-
-			}//manos// end of data region
 
 			return NULL;
 		}
