@@ -1489,7 +1489,7 @@ void gravity_tree(void)
 			{
 
 
-#pragma acc kernels
+#pragma acc parallel loop reduction(sum:BufferFullFlag)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
