@@ -1506,6 +1506,8 @@ s
 			//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
 			double m_xtmp;
 
+			int mode = 0;
+
 			//manos// end shortrange variables
 
 
@@ -1553,7 +1555,7 @@ s
 
 
 						{
-											*m_nop = 0;
+											m_nop = 0;
 											m_listindex = 0;
 
 											// cache some global vars in local vars to help compiler with alias analysis
