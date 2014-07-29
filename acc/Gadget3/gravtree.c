@@ -1485,7 +1485,7 @@ void gravity_tree(void)
 
 			MyLongDouble m_acc_x;
 
-#pragma acc for private(m_acc_x)
+#pragma acc loop private(m_acc_x)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
