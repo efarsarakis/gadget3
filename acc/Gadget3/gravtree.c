@@ -1485,7 +1485,7 @@ void gravity_tree(void)
 
 			MyLongDouble m_acc_x;
 
-#pragma acc parallel loop copyin(P[0:All.MaxPart],ProcessedFlag[0:All.MaxPart]) private(m_acc_x, P->GravCost)
+#pragma acc kernels loop copyin(P[0:All.MaxPart],ProcessedFlag[0:All.MaxPart]) private(m_acc_x, P->GravCost)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
