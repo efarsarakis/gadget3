@@ -1517,7 +1517,7 @@ void gravity_tree(void)
 			m_bunchSize = All.BunchSize;
 			m_maxNodes = MaxNodes;
 			m_ti_Current = All.Ti_Current;
-			m_errTol2 = All.ErrTolForceTheta * All.ErrTolTheta;
+			m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 
 
 			//manos//end shotrange vars
