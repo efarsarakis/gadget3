@@ -1484,7 +1484,8 @@ void gravity_tree(void)
 
 			//manos acc
 
-#pragma acc data copy(BufferFullFlag, P, All, m_break) create(m_acc_x){
+#pragma acc data copy(BufferFullFlag, P, All, m_break) create(m_acc_x)
+			{
 
 //#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
 #pragma acc parallel loop private(m_index, m_acc_x)
