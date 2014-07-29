@@ -1617,7 +1617,7 @@ void gravity_tree(void)
 					////////manos//////// temp commenting to find other problems if there...//////////////////////
 					/////////////
 					////////////
-															//drift_particle(m_no, m_ti_Current);
+															drift_particle(m_no, m_ti_Current);
 															UNLOCK_PARTNODEDRIFT;
 														}
 
@@ -1742,7 +1742,7 @@ void gravity_tree(void)
 					////////manos//////// temp commenting to find other problems if there...//////////////////////
 					/////////////
 					////////////
-															//force_drift_node(m_no, m_ti_Current);
+															force_drift_node(m_no, m_ti_Current);
 															UNLOCK_PARTNODEDRIFT;
 														}
 
