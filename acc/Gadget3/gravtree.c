@@ -1512,7 +1512,7 @@ void gravity_tree(void)
 
 
 
-#pragma acc data copyin(BufferFullFlag, P, All)
+#pragma acc data copyin(BufferFullFlag, P, All) create(m_acc_x)
 			//create(m_acc_x, m_no, m_exitFlag, \
 //		m_nodesinlist, m_ptype)
 			{
