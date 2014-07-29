@@ -1489,7 +1489,7 @@ void gravity_tree(void)
 			{
 
 
-#pragma acc parallel loop
+#pragma acc parallel loop private(m_no)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
