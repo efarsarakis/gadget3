@@ -1486,7 +1486,8 @@ void gravity_tree(void)
 			MyLongDouble m_acc_x;
 			int m_no;
 
-#pragma acc data copy(BufferFullFlag, P, All) create(m_acc_x, m_no)
+#pragma acc data copy(BufferFullFlag, P, All) create(m_acc_x, m_no, m_exitFlag \
+		m_nodesinlist)
 			{
 
 

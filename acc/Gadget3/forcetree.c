@@ -36,7 +36,7 @@ static int last;
 
 
 /*! length of lock-up table for short-range force kernel in TreePM algorithm */
-#define NTAB 1000
+//#define NTAB 1000
 /*! variables for short-range lookup table */
 //static float shortrange_table[NTAB],
 static float shortrange_table_potential[NTAB];
