@@ -1483,7 +1483,8 @@ void gravity_tree(void)
 
 			//manos acc
 
-#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart]) private(MyLongDouble m_acc_x)
+#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
+#pragma acc data private(m_acc_x)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 				int exitFlag = 0;
