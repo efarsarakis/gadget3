@@ -1518,7 +1518,7 @@ void gravity_tree(void)
 			{
 
 
-#pragma acc kernels loop private(m_index)//, m_acc_x, m_no, m_exitFlag, m_nodesinlinst, m_ptype)
+#pragma acc kernels loop private(m_index, m_acc_x, m_no, m_exitFlag, m_nodesinlinst, m_ptype)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
@@ -1638,7 +1638,7 @@ void gravity_tree(void)
 ////////manos//////// temp commenting to find other problems if there...//////////////////////
 /////////////
 ////////////
-															drift_particle(m_no, All.Ti_Current);
+															//drift_particle(m_no, All.Ti_Current);
 															UNLOCK_PARTNODEDRIFT;
 														}
 
@@ -1763,7 +1763,7 @@ void gravity_tree(void)
 ////////manos//////// temp commenting to find other problems if there...//////////////////////
 /////////////
 ////////////
-															force_drift_node(m_no, All.Ti_Current);
+															//force_drift_node(m_no, All.Ti_Current);
 															UNLOCK_PARTNODEDRIFT;
 
 														}
