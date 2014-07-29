@@ -1485,7 +1485,7 @@ void gravity_tree(void)
 
 			MyLongDouble m_acc_x;
 
-
+#pragma acc data copy(BufferFullFlag)
 			{
 
 
