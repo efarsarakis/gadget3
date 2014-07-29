@@ -1533,7 +1533,7 @@ void gravity_tree(void)
 
 						{
 											struct NODE *m_nop = 0;
-											int , m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
+											int m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
 											double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
 											double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
 											double m_pos_x, m_pos_y, m_pos_z, m_aold;
