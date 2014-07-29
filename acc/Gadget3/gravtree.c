@@ -1764,6 +1764,7 @@ void gravity_tree(void)
 ////////////
 															force_drift_node(m_no, All.Ti_Current);
 															UNLOCK_PARTNODEDRIFT;
+
 														}
 
 														m_mass = m_nop->u.d.mass;
