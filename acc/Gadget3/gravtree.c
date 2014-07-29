@@ -1514,7 +1514,7 @@ void gravity_tree(void)
 
 //#pragma acc data copy(BufferFullFlag, P, All) create(m_acc_x, m_no, m_exitFlag, \
 //		m_nodesinlist, m_ptype)
-//			{
+			{
 
 
 #pragma acc kernels loop (private m_acc_x, m_no, m_exitFlag, m_nodesinlinst, m_ptype)
