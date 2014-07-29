@@ -1482,6 +1482,45 @@ void gravity_tree(void)
 			m_break = 0;
 			MyLongDouble m_acc_x;
 
+
+			//manos//shortrange vars
+
+			//input
+			int *m_exportflag = exportflag;
+			int *m_exportnodecount = exportnodecount;
+			int *m_exportindex = exportindex;
+
+			//private
+			struct NODE *m_nop = 0;
+			int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
+			double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
+			double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
+			double m_pos_x, m_pos_y, m_pos_z, m_aold;
+			double m_eff_dist;
+			double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
+			MyLongDouble m_acc_y, m_acc_z;
+			// cache some global vars in local vars to help compiler with alias analysis
+			int m_maxPart = All.MaxPart;
+			int m_bunchSize = All.BunchSize;
+			int m_maxNodes = MaxNodes;
+			integertime m_ti_Current = All.Ti_Current;
+			double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
+			int m_exitFlag = 0;
+
+			//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
+			double m_xtmp;
+
+			//initializations
+
+
+			m_maxPart = All.MaxPart;
+			m_bunchSize = All.BunchSize;
+			m_maxNodes = MaxNodes;
+			m_ti_Current = All.Ti_Current;
+			m_errTol2 = All.ErrTolForceTheta * All.ErrTolTheta;
+
+
+			//manos//end shotrange vars
 			//manos acc
 
 #pragma acc data copy(BufferFullFlag, P, All, m_break) create(m_acc_x)
@@ -1520,32 +1559,15 @@ void gravity_tree(void)
 					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					////////////// INLINE shortrange start...   //////////////////////////////////////////
 
-						int m_target = i;
-						int m_mode = 0;
-						int *m_exportflag = exportflag;
-						int *m_exportnodecount = exportnodecount;
-						int *m_exportindex = exportindex;
-
 						{
-											struct NODE *m_nop = 0;
-											int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
-											double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
-											double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
-											double m_pos_x, m_pos_y, m_pos_z, m_aold;
-											double m_eff_dist;
-											double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
-											MyLongDouble m_acc_y, m_acc_z;
-											// cache some global vars in local vars to help compiler with alias analysis
-											int m_maxPart = All.MaxPart;
-											int m_bunchSize = All.BunchSize;
-											int m_maxNodes = MaxNodes;
-											integertime m_ti_Current = All.Ti_Current;
-											double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-											int m_exitFlag = 0;
 
-											//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
-											double m_xtmp;
+							int m_target = i;
+							int m_mode = 0;
 
+
+							m_nop=0;
+							m_listindex=0;
+							m_exitFlag = 0;
 
 
 											m_acc_x = 0;
