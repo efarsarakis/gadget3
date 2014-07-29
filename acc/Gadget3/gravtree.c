@@ -1487,7 +1487,7 @@ void gravity_tree(void)
 			MyLongDouble m_acc_x;
 			int m_no;
 			int m_nodesinlist;
-			int m_exitFlag, m_ptype;
+			int exitFlag, m_ptype;
 
 
 			struct NODE *m_nop;
@@ -1501,24 +1501,24 @@ void gravity_tree(void)
 			// cache some global vars in local vars to help compiler with alias analysis
 
 			double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-			m_exitFlag = 0;
+			exitFlag = 0;
 
 			//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
 			double m_xtmp;
 
 			int mode = 0;
-			int exitFlag = 0;
+
 			//manos// end shortrange variables
 
 
 
-#pragma acc data copyin(BufferFullFlag, P, All) create(m_acc_x, m_acc_y, m_acc_z)
-			//create(m_acc_x, m_no, m_exitFlag, \
+#pragma acc data copyin(BufferFullFlag, P, All, exitFlag) create(m_acc_x, m_acc_y, m_acc_z)
+			//create(m_acc_x, m_no, exitFlag, \
 //		m_nodesinlist, m_ptype)
 			{
 
 
-#pragma acc kernels loop private(m_index, exitFlag, m_acc_x,m_acc_y, m_acc_z)
+#pragma acc kernels loop private(m_index, m_acc_x,m_acc_y, m_acc_z)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
@@ -1559,7 +1559,7 @@ void gravity_tree(void)
 											m_listindex = 0;
 
 											// cache some global vars in local vars to help compiler with alias analysis
-											m_exitFlag = 0;
+											exitFlag = 0;
 
 											//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
 											double m_xtmp;
@@ -1676,7 +1676,7 @@ void gravity_tree(void)
 
 																if(exportnodecount[m_task] == NODELISTLENGTH)
 																{
-																	//int m_exitFlag=0;
+																	//int exitFlag=0;
 																	LOCK_NEXPORT;
 					#pragma omp critical(_nexport_)
 																	{
@@ -1684,7 +1684,7 @@ void gravity_tree(void)
 																		{
 																			/* out of buffer space. Need to discard work for this particle and interrupt */
 																			BufferFullFlag = 1;
-																			m_exitFlag = 1;
+																			exitFlag = 1;
 																		}
 																		else
 																		{
@@ -1693,7 +1693,7 @@ void gravity_tree(void)
 																		}
 																	}
 																	UNLOCK_NEXPORT;
-																	if(m_exitFlag)
+																	if(exitFlag)
 																	{ //m
 																		//return -1;
 																		m_ninteractions=-1;
@@ -1711,7 +1711,7 @@ void gravity_tree(void)
 																	DataIndexTable[m_nexp].IndexGet = m_nexp;
 																	}
 																}
-																if(m_exitFlag){
+																if(exitFlag){
 																	continue;
 																}
 																else{
@@ -1724,7 +1724,7 @@ void gravity_tree(void)
 																	DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
 																}
 															}
-															if(m_exitFlag){
+															if(exitFlag){
 																continue;
 															}
 															else{
@@ -1732,7 +1732,7 @@ void gravity_tree(void)
 															continue;
 															}
 														}
-														if(m_exitFlag){
+														if(exitFlag){
 															continue;
 														}
 														else{
@@ -1855,7 +1855,7 @@ void gravity_tree(void)
 													}
 													}
 
-													if(m_exitFlag)
+													if(exitFlag)
 													{
 														continue;
 													}
@@ -1902,7 +1902,7 @@ void gravity_tree(void)
 
 												}
 												}
-												if(m_exitFlag){
+												if(exitFlag){
 													continue;
 												}
 												else{
@@ -1922,7 +1922,7 @@ void gravity_tree(void)
 											}
 											}
 
-											if(m_exitFlag){
+											if(exitFlag){
 												continue;
 											}
 											else{
