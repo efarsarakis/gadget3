@@ -1485,6 +1485,8 @@ void gravity_tree(void)
 
 			MyLongDouble m_acc_x;
 			int m_no;
+			int m_nodesinlist;
+			int m_exitFlag;
 
 #pragma acc data copy(BufferFullFlag, P, All) create(m_acc_x, m_no, m_exitFlag, \
 		m_nodesinlist)
@@ -1532,7 +1534,7 @@ void gravity_tree(void)
 
 						{
 											struct NODE *m_nop = 0;
-											int m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
+											int , m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
 											double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
 											double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
 											double m_pos_x, m_pos_y, m_pos_z, m_aold;
@@ -1545,7 +1547,7 @@ void gravity_tree(void)
 											int m_maxNodes = MaxNodes;
 											integertime m_ti_Current = All.Ti_Current;
 											double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-											int m_exitFlag = 0;
+											m_exitFlag = 0;
 
 											//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
 											double m_xtmp;
