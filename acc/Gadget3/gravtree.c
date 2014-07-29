@@ -1512,7 +1512,7 @@ void gravity_tree(void)
 
 
 
-#pragma acc data copy(BufferFullFlag, P, All, exitFlag) create(m_acc_x, m_acc_y, m_acc_z)
+#pragma acc data copy(P, All, exitFlag) create(m_acc_x, m_acc_y, m_acc_z)
 			//create(m_acc_x, m_no, exitFlag, \
 //		m_nodesinlist, m_ptype)
 			{
@@ -1524,7 +1524,7 @@ void gravity_tree(void)
 
 				LOCK_NEXPORT;
 
-				if(BufferFullFlag != 0 || m_break)
+				if(exitFlag || m_break)
 				{
 					exitFlag = 1;
 				}
@@ -1683,7 +1683,7 @@ void gravity_tree(void)
 																		if(Nexport >= All.BunchSize)
 																		{
 																			/* out of buffer space. Need to discard work for this particle and interrupt */
-																			BufferFullFlag = 1;
+																			//BufferFullFlag = 1;
 																			exitFlag = 1;
 																		}
 																		else
