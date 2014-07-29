@@ -1481,37 +1481,6 @@ void gravity_tree(void)
 			//manos//printf("Active parts with for loop: %d \n", m_index);
 			m_break = 0;
 
-
-
-			//manos// shortrange var declarations...:
-
-			int m_target = i;
-			int m_mode = 0;
-			int *m_exportflag = exportflag;
-			int *m_exportnodecount = exportnodecount;
-			int *m_exportindex = exportindex;
-
-
-			struct NODE *m_nop = 0;
-			int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex;
-			double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
-			double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
-			double m_pos_x, m_pos_y, m_pos_z, m_aold;
-			double m_eff_dist;
-			double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
-			MyLongDouble m_acc_x, m_acc_y, m_acc_z;
-			// cache some global vars in local vars to help compiler with alias analysis
-			int m_maxPart;
-			int m_bunchSize;
-			int m_maxNodes;
-			integertime m_ti_Current;
-			double m_errTol2;
-			int m_exitFlag;
-
-			double m_xtmp;
-
-			//manos// end shotrange var declaration...
-
 			//manos acc
 
 #pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
@@ -1546,25 +1515,31 @@ void gravity_tree(void)
 					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					////////////// INLINE shortrange start...   //////////////////////////////////////////
 
-						m_target = i;
-						m_mode = 0;
-						m_exportflag = exportflag;
-						m_exportnodecount = exportnodecount;
-						m_exportindex = exportindex;
+						int m_target = i;
+						int m_mode = 0;
+						int *m_exportflag = exportflag;
+						int *m_exportnodecount = exportnodecount;
+						int *m_exportindex = exportindex;
 
 						{
-											m_nop = 0;
-											m_listindex = 0;
+											struct NODE *m_nop = 0;
+											int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
+											double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
+											double m_dxx, m_dyy, m_dzz, m_pdxx, m_pdyy, m_pdzz;
+											double m_pos_x, m_pos_y, m_pos_z, m_aold;
+											double m_eff_dist;
+											double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
+											MyLongDouble m_acc_x, m_acc_y, m_acc_z;
 											// cache some global vars in local vars to help compiler with alias analysis
-											m_maxPart = All.MaxPart;
-											m_bunchSize = All.BunchSize;
-											m_maxNodes = MaxNodes;
-											m_ti_Current = All.Ti_Current;
-											m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-											m_exitFlag = 0;
+											int m_maxPart = All.MaxPart;
+											int m_bunchSize = All.BunchSize;
+											int m_maxNodes = MaxNodes;
+											integertime m_ti_Current = All.Ti_Current;
+											double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
+											int m_exitFlag = 0;
 
 											//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
-
+											double m_xtmp;
 
 
 
