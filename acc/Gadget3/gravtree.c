@@ -1949,6 +1949,8 @@ void gravity_tree(void)
 				}///manos//end m_break part (containing whole shortrange function)
 			}//manos// end of for loop
 
+		}//manos// end of data region
+
 			return NULL;
 		}
 
