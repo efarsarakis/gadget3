@@ -1483,10 +1483,12 @@ void gravity_tree(void)
 
 			//manos acc
 
-#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
-#pragma acc data private(m_acc_x)
+			MyLongDouble m_acc_x;
+
+#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart]) private(m_acc_x)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
+
 				int exitFlag = 0;
 				LOCK_NEXPORT;
 
@@ -1530,7 +1532,7 @@ void gravity_tree(void)
 											double m_pos_x, m_pos_y, m_pos_z, m_aold;
 											double m_eff_dist;
 											double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
-											MyLongDouble m_acc_x, m_acc_y, m_acc_z;
+											MyLongDouble m_acc_y, m_acc_z;
 											// cache some global vars in local vars to help compiler with alias analysis
 											int m_maxPart = All.MaxPart;
 											int m_bunchSize = All.BunchSize;
