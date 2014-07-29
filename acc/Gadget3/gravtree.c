@@ -1507,7 +1507,7 @@ void gravity_tree(void)
 			double m_xtmp;
 
 			int mode = 0;
-
+			int exitFlag = 0;
 			//manos// end shortrange variables
 
 
@@ -1518,11 +1518,10 @@ void gravity_tree(void)
 			{
 
 
-#pragma acc kernels loop private(m_index)//, m_acc_x, m_no, m_exitFlag, m_nodesinlinst, m_ptype)
+#pragma acc kernels loop private(m_index, exitFlag)//, m_acc_x, m_no, m_exitFlag, m_nodesinlinst, m_ptype)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
-				int exitFlag = 0;
 				LOCK_NEXPORT;
 
 				if(BufferFullFlag != 0 || m_break)
