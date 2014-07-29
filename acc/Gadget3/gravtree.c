@@ -1518,7 +1518,7 @@ void gravity_tree(void)
 			{
 
 
-#pragma acc kernels loop private(m_index, exitFlag, m_acc_x, m_no, nodesinlinst, ptype)
+#pragma acc kernels loop private(m_index, exitFlag, m_acc_x)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 
