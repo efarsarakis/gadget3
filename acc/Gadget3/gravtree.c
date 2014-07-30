@@ -1646,7 +1646,7 @@ void gravity_tree(void)
 					/////////////
 					////////////
 															//drift_particle(m_no, m_ti_Current);
-															printf("Drift-particle()");
+															//printf("Drift-particle()");
 															UNLOCK_PARTNODEDRIFT;
 														}
 
@@ -1772,7 +1772,7 @@ void gravity_tree(void)
 					/////////////
 					////////////
 															//force_drift_node(m_no, m_ti_Current);
-															printf("Force_drift_node()");
+															//printf("Force_drift_node()");
 															UNLOCK_PARTNODEDRIFT;
 														}
 
