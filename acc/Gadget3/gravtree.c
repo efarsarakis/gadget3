@@ -1523,7 +1523,7 @@ void gravity_tree(void)
 			//manos//end shotrange vars
 			//manos acc
 
-#pragma acc data copy(ProcessedFlag[0:All.MaxPart],P[0:All.MaxPart],BufferFullFlag, All, m_break) create(m_acc_x, m_acc_y, m_acc_z)
+#pragma acc data copy(ProcessedFlag[0:All.MaxPart],P[0:All.MaxPart], All, m_break) create(m_acc_x, m_acc_y, m_acc_z)
 			{
 
 //#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
@@ -1533,7 +1533,8 @@ void gravity_tree(void)
 				int exitFlag = 0;
 				LOCK_NEXPORT;
 
-				if(BufferFullFlag != 0 || m_break)
+				//if(BufferFullFlag != 0 || m_break)
+				if(m_break)
 				{
 					exitFlag = 1;
 				}
@@ -1687,7 +1688,7 @@ void gravity_tree(void)
 																		if(Nexport >= m_bunchSize)
 																		{
 																			/* out of buffer space. Need to discard work for this particle and interrupt */
-																			BufferFullFlag = 1;
+																			//BufferFullFlag = 1;
 																			m_exitFlag = 1;
 																		}
 																		else
@@ -1973,6 +1974,8 @@ void gravity_tree(void)
 			}//manos// end of for loop
 
 		}//manos// end of data region
+
+			if(m_break)BufferFullFlag = 1;
 
 			return NULL;
 		}
