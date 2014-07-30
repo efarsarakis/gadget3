@@ -1604,7 +1604,7 @@ void gravity_tree(void)
 												m_pos_y = GravDataGet[m_target].Pos[1];
 												m_pos_z = GravDataGet[m_target].Pos[2];
 												//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
-												//m_ptype = P[0].Type;
+												m_ptype = P[0].Type;
 
 												m_aold = All.ErrTolForceAcc * GravDataGet[m_target].OldAcc;
 
