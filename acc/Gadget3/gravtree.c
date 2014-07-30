@@ -1523,7 +1523,7 @@ void gravity_tree(void)
 			//manos//end shotrange vars
 			//manos acc
 
-#pragma acc data copy(BufferFullFlag, P, All, m_break) create(m_acc_x, m_acc_y, m_acc_z)
+#pragma acc data copy(ProcessedFlag[0:All.MaxPart],P[0:All.MaxPart],BufferFullFlag, P, All, m_break) create(m_acc_x, m_acc_y, m_acc_z)
 			{
 
 //#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
