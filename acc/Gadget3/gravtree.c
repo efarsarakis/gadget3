@@ -1524,12 +1524,12 @@ void gravity_tree(void)
 			//manos acc
 
 #pragma acc data copy(ProcessedFlag[0:All.MaxPart],P[0:All.MaxPart], All, m_break) create(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
-		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_no)
+		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_no, m_exitFlag)
 			{
 
 //#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
 #pragma acc parallel loop private(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
-		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_index, m_break, m_no) reduction(+:m_break)
+		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_index, m_break, m_no, m_exitFlag) reduction(+:m_break,m_exitFlag)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 			{
 				int exitFlag = 0;
