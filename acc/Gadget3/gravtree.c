@@ -1645,7 +1645,7 @@ void gravity_tree(void)
 					////////manos//////// temp commenting to find other problems if there...//////////////////////
 					/////////////
 					////////////
-															//drift_particle(m_no, m_ti_Current);
+															drift_particle(m_no, m_ti_Current);
 															//printf("Drift-particle()");
 															UNLOCK_PARTNODEDRIFT;
 														}
@@ -1771,7 +1771,7 @@ void gravity_tree(void)
 					////////manos//////// temp commenting to find other problems if there...//////////////////////
 					/////////////
 					////////////
-															//force_drift_node(m_no, m_ti_Current);
+															force_drift_node(m_no, m_ti_Current);
 															//printf("Force_drift_node()");
 															UNLOCK_PARTNODEDRIFT;
 														}
@@ -1973,14 +1973,22 @@ void gravity_tree(void)
 					Costtotal += ret;
 					UNLOCK_WORKCOUNT;
 
+
+
 					ProcessedFlag[i] = 1;	/* particle successfully finished */
 					}
 				}///manos//end m_break part (containing whole shortrange function)
+
+				if(m_break || m_exitFlag)printf("At step: %d :::: m_break=%d, m_exitFlag=%d         ", m_index, m_break, m_exitFlag);
+
+
 			}//manos// end of for loop
 
 		}//manos// end of data region
 
 			if(m_break)BufferFullFlag = 1;
+
+
 
 			return NULL;
 		}
