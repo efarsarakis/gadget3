@@ -1707,6 +1707,7 @@ void gravity_tree(void)
 																		//return -1;
 																		m_ninteractions=-1;
 																		ret=-1;
+																		printf("STEPPPPPP %d: return!!!!", m_index);
 
 																	} //m
 					//////////return statement to fix.........
@@ -1963,6 +1964,8 @@ void gravity_tree(void)
 
 					if(ret < 0)
 						m_break=1;		/* export buffer has filled up */
+
+					if(m_break || m_exitFlag)printf("At step: %d :::: m_break=%d, m_exitFlag=%d         ", m_index, m_break, m_exitFlag);
 
 					if(m_break){
 						continue;
