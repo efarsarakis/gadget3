@@ -1527,41 +1527,41 @@ void gravity_tree(void)
 		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_no, m_exitFlag)
 			{
 
-				//#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
+//#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
 #pragma acc parallel loop private(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
 		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_index, m_break, m_no, m_exitFlag) \
-		reduction(+:m_break,m_exitFlag)
-				for (m_index=0; m_index<m_num_active_part; m_index++) //manos
+				reduction(+:m_break,m_exitFlag)
+			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
+			{
+				int exitFlag = 0;
+				LOCK_NEXPORT;
+
+				//if(BufferFullFlag != 0 || m_break)
+				if(m_break)
 				{
-					int exitFlag = 0;
-					LOCK_NEXPORT;
+					exitFlag = 1;
+				}
+				else
+				{
+					i = m_active_part[m_index];
+					ProcessedFlag[i] = 0;
+				}
+				UNLOCK_NEXPORT;
 
-					//if(BufferFullFlag != 0 || m_break)
-					if(m_break)
-					{
-						exitFlag = 1;
-					}
-					else
-					{
-						i = m_active_part[m_index];
-						ProcessedFlag[i] = 0;
-					}
-					UNLOCK_NEXPORT;
+				if(exitFlag || m_break)
+				{
+					m_break=1;
+				}
+				else
+				{
 
-					if(exitFlag || m_break)
-					{
-						m_break=1;
-					}
-					else
-					{
-
-						//inlining it//ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
+					//inlining it//ret = force_treeevaluate_shortrange(i, 0, exportflag, exportnodecount, exportindex);
 
 
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						////////////// INLINE shortrange start...   //////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					////////////// INLINE shortrange start...   //////////////////////////////////////////
 
 						{
 
@@ -1574,369 +1574,420 @@ void gravity_tree(void)
 							m_exitFlag = 0;
 
 
-							m_acc_x = 0;
-							m_acc_y = 0;
-							m_acc_z = 0;
-							m_ninteractions = 0;
-							m_nodesinlist = 0;
+											m_acc_x = 0;
+											m_acc_y = 0;
+											m_acc_z = 0;
+											m_ninteractions = 0;
+											m_nodesinlist = 0;
 
-							m_rcut = All.Rcut[0];
-							m_asmth = All.Asmth[0];
+											m_rcut = All.Rcut[0];
+											m_asmth = All.Asmth[0];
 
-							if(m_mode != 0 && m_mode != 1)
-							{
-								printf("%d %d %d %d %d\n", m_index, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
-								endrun(444);
-							}
+											if(m_mode != 0 && m_mode != 1)
+											{
+												printf("%d %d %d %d %d\n", m_target, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
+												endrun(444);
+											}
 
-							if(m_mode == 0)
-							{
-								m_pos_x = P[m_index].Pos[0];
-								m_pos_y = P[m_index].Pos[1];
-								m_pos_z = P[m_index].Pos[2];
-								m_ptype = P[m_index].Type;
-								m_aold = All.ErrTolForceAcc * P[m_index].OldAcc;
-
-							}
-							else
-							{
-								m_pos_x = GravDataGet[m_index].Pos[0];
-								m_pos_y = GravDataGet[m_index].Pos[1];
-								m_pos_z = GravDataGet[m_index].Pos[2];
-								//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
-								m_ptype = P[0].Type;
-
-								m_aold = All.ErrTolForceAcc * GravDataGet[m_index].OldAcc;
-
-							}
-
-							m_rcut2 = m_rcut * m_rcut;
-
-							m_asmthfac = 0.5 / m_asmth * (NTAB / 3.0);
-
-							//used/15TH ////////////////////////////////////////////////////////////////////////////////////////////
-							m_h = All.ForceSoftening[m_ptype];
-							m_h_inv = 1.0 / m_h;
-							m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
-
-
-							if(m_mode == 0)
-							{
-								m_no = m_maxPart;		/* root node */
-							}
-							else
-							{
-								m_nodesinlist++;
-								m_no = GravDataGet[m_index].NodeList[0];
-								m_no = Nodes[m_no].u.d.nextnode;	/* open it */
-							}
-
-							while(m_no >= 0)
-							{
-								while(m_no >= 0)
-								{
-									if(m_no < m_maxPart)
-									{
-										/* the index of the node is the index of the particle */
-										if(P[m_no].Ti_current != m_ti_Current)
-										{
-											LOCK_PARTNODEDRIFT;
-#pragma omp critical(_partnodedrift_)
-											//drift_particle(m_no, m_ti_Current);
-											UNLOCK_PARTNODEDRIFT;
-										}
-
-										m_dx = P[m_no].Pos[0] - m_pos_x;
-										m_dy = P[m_no].Pos[1] - m_pos_y;
-										m_dz = P[m_no].Pos[2] - m_pos_z;
-
-										m_dx = NEAREST(m_dx);
-										m_dy = NEAREST(m_dy);
-										m_dz = NEAREST(m_dz);
-
-										m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
-
-										m_mass = P[m_no].Mass;
-
-										if(TakeLevel >= 0)
-										{
-											LOCK_WORKCOUNT;
-
-											P[m_no].GravCost[TakeLevel] += 1.0;
-											UNLOCK_WORKCOUNT;
-										}
-										m_no = Nextnode[m_no];
-									}
-									else			/* we have an  internal node */
-									{
-										if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
-										{
 											if(m_mode == 0)
 											{
-												if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_index)
-												{
-													m_exportflag[m_task] = m_index;
-													m_exportnodecount[m_task] = NODELISTLENGTH;
-												}
+												m_pos_x = P[m_target].Pos[0];
+												m_pos_y = P[m_target].Pos[1];
+												m_pos_z = P[m_target].Pos[2];
+												m_ptype = P[m_target].Type;
+												m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
-												if(m_exportnodecount[m_task] == NODELISTLENGTH)
+											}
+											else
+											{
+												m_pos_x = GravDataGet[m_target].Pos[0];
+												m_pos_y = GravDataGet[m_target].Pos[1];
+												m_pos_z = GravDataGet[m_target].Pos[2];
+												//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
+												m_ptype = P[0].Type;
+
+												m_aold = All.ErrTolForceAcc * GravDataGet[m_target].OldAcc;
+
+											}
+
+											m_rcut2 = m_rcut * m_rcut;
+
+											m_asmthfac = 0.5 / m_asmth * (NTAB / 3.0);
+
+											//used/15TH ////////////////////////////////////////////////////////////////////////////////////////////
+											m_h = All.ForceSoftening[m_ptype];
+											m_h_inv = 1.0 / m_h;
+											m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
+
+
+											if(m_mode == 0)
+											{
+												m_no = m_maxPart;		/* root node */
+											}
+											else
+											{
+												m_nodesinlist++;
+												m_no = GravDataGet[m_target].NodeList[0];
+												m_no = Nodes[m_no].u.d.nextnode;	/* open it */
+											}
+
+											while(m_no >= 0)
+											{
+												while(m_no >= 0)
 												{
-													int m_exitFlag = 0;
-													LOCK_NEXPORT;
-#pragma omp critical(_nexport_)
+													if(m_no < m_maxPart)
 													{
-														if(Nexport >= m_bunchSize)
+														/* the index of the node is the index of the particle */
+														if(P[m_no].Ti_current != m_ti_Current)
 														{
-															/* out of buffer space. Need to discard work for this particle and interrupt */
-															BufferFullFlag = 1;
-															m_exitFlag = 1;
+															LOCK_PARTNODEDRIFT;
+					#pragma omp critical(_partnodedrift_)
+					////////manos//////// temp commenting to find other problems if there...//////////////////////
+					/////////////
+					////////////
+															drift_particle(m_no, m_ti_Current);
+															//printf("Drift-particle()");
+															UNLOCK_PARTNODEDRIFT;
 														}
-														else
+
+														m_dx = P[m_no].Pos[0] - m_pos_x;
+														m_dy = P[m_no].Pos[1] - m_pos_y;
+														m_dz = P[m_no].Pos[2] - m_pos_z;
+
+														m_dx = NEAREST(m_dx);
+														m_dy = NEAREST(m_dy);
+														m_dz = NEAREST(m_dz);
+
+														m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
+
+														m_mass = P[m_no].Mass;
+
+														if(TakeLevel >= 0)
 														{
-															m_nexp = Nexport;
-															Nexport++;
+															LOCK_WORKCOUNT;
+
+															P[m_no].GravCost[TakeLevel] += 1.0;
+															UNLOCK_WORKCOUNT;
 														}
+														m_no = Nextnode[m_no];
 													}
-													UNLOCK_NEXPORT;
-													//							if(m_exitFlag)
-													//								return -1;
-
-													m_exportnodecount[m_task] = 0;
-													m_exportindex[m_task] = m_nexp;
-													DataIndexTable[m_nexp].Task = m_task;
-													DataIndexTable[m_nexp].Index = m_index;
-													DataIndexTable[m_nexp].IndexGet = m_nexp;
-												}
-
-												DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
-														DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
-
-												if(m_exportnodecount[m_task] < NODELISTLENGTH)
-													DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
-											}
-											m_no = Nextnode[m_no - m_maxNodes];
-											continue;
-										}
-
-										m_nop = &Nodes[m_no];
-
-										if(m_mode == 1)
-										{
-											if(m_nop->u.d.bitflags & (1 << BITFLAG_TOPLEVEL))	/* we reached a top-level node again, which means that we are done with the branch */
-											{
-												m_no = -1;
-												continue;
-											}
-										}
-
-										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
-										{
-											/* open cell */
-											m_no = m_nop->u.d.nextnode;
-											continue;
-										}
-
-										if(m_nop->Ti_current != m_ti_Current)
-										{
-											LOCK_PARTNODEDRIFT;
-#pragma omp critical(_partnodedrift_)
-											//force_drift_node(m_no, m_ti_Current);
-											UNLOCK_PARTNODEDRIFT;
-										}
-
-										m_mass = m_nop->u.d.mass;
-
-										m_dx = m_nop->u.d.s[0] - m_pos_x;
-										m_dy = m_nop->u.d.s[1] - m_pos_y;
-										m_dz = m_nop->u.d.s[2] - m_pos_z;
-
-										m_dx = NEAREST(m_dx);
-										m_dy = NEAREST(m_dy);
-										m_dz = NEAREST(m_dz);
-										m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
-										//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
-										/* check whether we can stop walking along this branch */
-										if(m_r2 > m_rcut2)
-										{
-											m_eff_dist = m_rcut + 0.5 * m_nop->len;
-
-											m_dist = NEAREST(m_nop->center[0] - m_pos_x);
-											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
-											{
-												m_no = m_nop->u.d.sibling;
-												continue;
-											}
-
-											m_dist = NEAREST(m_nop->center[1] - m_pos_y);
-											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
-											{
-												m_no = m_nop->u.d.sibling;
-												continue;
-											}
-
-											m_dist = NEAREST(m_nop->center[2] - m_pos_z);
-											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
-											{
-												m_no = m_nop->u.d.sibling;
-												continue;
-											}
-										}
-
-
-										if(m_errTol2)	/* check Barnes-Hut opening criterion */
-										{
-											if(m_nop->len * m_nop->len > m_r2 * m_errTol2)
-											{
-												/* open cell */
-												m_no = m_nop->u.d.nextnode;
-												continue;
-											}
-										}
-										else		/* check relative opening criterion */
-										{
-
-											//used/23RD ////////////////////////////////////////////////////////////////////////////////////////////
-											if(m_mass * m_nop->len * m_nop->len > m_r2 * m_r2 * m_aold)
-											{
-												/* open cell */
-												m_no = m_nop->u.d.nextnode;
-												continue;
-											}
-
-											/* check in addition whether we lie inside the cell */
-
-											if(fabs(m_nop->center[0] - m_pos_x) < 0.60 * m_nop->len)
-											{
-												if(fabs(m_nop->center[1] - m_pos_y) < 0.60 * m_nop->len)
-												{
-													if(fabs(m_nop->center[2] - m_pos_z) < 0.60 * m_nop->len)
+													else			/* we have an  internal node */
 													{
-														m_no = m_nop->u.d.nextnode;
+														if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
+														{
+															if(m_mode == 0)
+															{
+																if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
+																{
+																	m_exportflag[m_task] = m_target;
+																	m_exportnodecount[m_task] = NODELISTLENGTH;
+																}
+
+																if(m_exportnodecount[m_task] == NODELISTLENGTH)
+																{
+																	//int m_exitFlag=0;
+																	LOCK_NEXPORT;
+					#pragma omp critical(_nexport_)
+																	{
+																		if(Nexport >= m_bunchSize)
+																		{
+																			/* out of buffer space. Need to discard work for this particle and interrupt */
+																			//BufferFullFlag = 1;
+																			m_exitFlag = 1;
+																		}
+																		else
+																		{
+																			m_nexp = Nexport;
+																			Nexport++;
+																		}
+																	}
+																	UNLOCK_NEXPORT;
+																	if(m_exitFlag)
+																	{ //m
+																		//return -1;
+																		m_ninteractions=-1;
+																		ret=-1;
+																		printf("STEPPPPPP %d: return!!!!", m_index);
+
+																	} //m
+					//////////return statement to fix.........
+																	//m
+																	else
+																	{
+																	m_exportnodecount[m_task] = 0;
+																	m_exportindex[m_task] = m_nexp;
+																	DataIndexTable[m_nexp].Task = m_task;
+																	DataIndexTable[m_nexp].Index = m_target;
+																	DataIndexTable[m_nexp].IndexGet = m_nexp;
+																	}
+																}
+																if(m_exitFlag){
+																	continue;
+																}
+																else{
+
+
+																DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
+																		DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
+
+																if(m_exportnodecount[m_task] < NODELISTLENGTH)
+																	DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
+																}
+															}
+															if(m_exitFlag){
+																continue;
+															}
+															else{
+															m_no = Nextnode[m_no - m_maxNodes];
+															continue;
+															}
+														}
+														if(m_exitFlag){
+															continue;
+														}
+														else{
+
+														m_nop = &Nodes[m_no];
+
+														if(m_mode == 1)
+														{
+															if(m_nop->u.d.bitflags & (1 << BITFLAG_TOPLEVEL))	/* we reached a top-level node again, which means that we are done with the branch */
+															{
+																m_no = -1;
+																continue;
+															}
+														}
+
+														if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
+														{
+															/* open cell */
+															m_no = m_nop->u.d.nextnode;
+															continue;
+														}
+
+														if(m_nop->Ti_current != m_ti_Current)
+														{
+															LOCK_PARTNODEDRIFT;
+					#pragma omp critical(_partnodedrift_)
+					////////manos//////// temp commenting to find other problems if there...//////////////////////
+					/////////////
+					////////////
+															force_drift_node(m_no, m_ti_Current);
+															//printf("Force_drift_node()");
+															UNLOCK_PARTNODEDRIFT;
+														}
+
+														m_mass = m_nop->u.d.mass;
+
+														m_dx = m_nop->u.d.s[0] - m_pos_x;
+														m_dy = m_nop->u.d.s[1] - m_pos_y;
+														m_dz = m_nop->u.d.s[2] - m_pos_z;
+
+														m_dx = NEAREST(m_dx);
+														m_dy = NEAREST(m_dy);
+														m_dz = NEAREST(m_dz);
+														m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
+														//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
+														/* check whether we can stop walking along this branch */
+														if(m_r2 > m_rcut2)
+														{
+															m_eff_dist = m_rcut + 0.5 * m_nop->len;
+
+															m_dist = NEAREST(m_nop->center[0] - m_pos_x);
+															if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+															{
+																m_no = m_nop->u.d.sibling;
+																continue;
+															}
+
+															m_dist = NEAREST(m_nop->center[1] - m_pos_y);
+															if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+															{
+																m_no = m_nop->u.d.sibling;
+																continue;
+															}
+
+															m_dist = NEAREST(m_nop->center[2] - m_pos_z);
+															if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+															{
+																m_no = m_nop->u.d.sibling;
+																continue;
+															}
+														}
+
+
+														if(m_errTol2)	/* check Barnes-Hut opening criterion */
+														{
+															if(m_nop->len * m_nop->len > m_r2 * m_errTol2)
+															{
+																/* open cell */
+																m_no = m_nop->u.d.nextnode;
+																continue;
+															}
+														}
+														else		/* check relative opening criterion */
+														{
+
+															//used/23RD ////////////////////////////////////////////////////////////////////////////////////////////
+															if(m_mass * m_nop->len * m_nop->len > m_r2 * m_r2 * m_aold)
+															{
+																/* open cell */
+																m_no = m_nop->u.d.nextnode;
+																continue;
+															}
+
+															/* check in addition whether we lie inside the cell */
+
+															if(fabs(m_nop->center[0] - m_pos_x) < 0.60 * m_nop->len)
+															{
+																if(fabs(m_nop->center[1] - m_pos_y) < 0.60 * m_nop->len)
+																{
+																	if(fabs(m_nop->center[2] - m_pos_z) < 0.60 * m_nop->len)
+																	{
+																		m_no = m_nop->u.d.nextnode;
+																		continue;
+																	}
+																}
+															}
+
+														}
+
+
+														if(TakeLevel >= 0)
+														{
+															LOCK_WORKCOUNT;
+															m_nop->GravCost += 1.0;
+															UNLOCK_WORKCOUNT;
+														}
+
+														m_no = m_nop->u.d.sibling;	/* ok, node can be used */
+
+													}
+													}
+
+													if(m_exitFlag)
+													{
 														continue;
 													}
+													else{
+
+
+
+													m_r = sqrt(m_r2);
+
+													//used/31ST ////////////////////////////////////////////////////////////////////////////////////////////
+													if(m_r >= m_h)
+													{
+														m_fac = m_mass / (m_r2 * m_r);
+													}
+
+													else
+													{
+
+														//used34TH  ////////////////////////////////////////////////////////////////////////////////////////////
+														m_u = m_r * m_h_inv;
+														if(m_u < 0.5)
+															m_fac = m_mass * m_h3_inv * (10.666666666667 + m_u * m_u * (32.0 * m_u - 38.4));
+														else
+															m_fac =
+																	m_mass * m_h3_inv * (21.333333333333 - 48.0 * m_u +
+																			38.4 * m_u * m_u - 10.666666666667 * m_u * m_u * m_u - 0.066666666667 / (m_u * m_u * m_u));
+
+
+													}
+
+													m_tabindex = (int) (m_asmthfac * m_r);
+
+													if(m_tabindex < NTAB)
+													{
+														m_fac *= shortrange_table[m_tabindex];
+
+														m_acc_x += FLT(m_dx * m_fac);
+														m_acc_y += FLT(m_dy * m_fac);
+														m_acc_z += FLT(m_dz * m_fac);
+													}
+
+													m_ninteractions++;
+
+
+												}
+												}
+												if(m_exitFlag){
+													continue;
+												}
+												else{
+												if(m_mode == 1)
+												{
+													m_listindex++;
+													if(m_listindex < NODELISTLENGTH)
+													{
+														m_no = GravDataGet[m_target].NodeList[m_listindex];
+														if(m_no >= 0)
+														{
+															m_nodesinlist++;
+															m_no = Nodes[m_no].u.d.nextnode;	/* open it */
+														}
+													}
 												}
 											}
+											}
 
-										}
+											if(m_exitFlag){
+												continue;
+											}
+											else{
+											/* store result at the proper place */
+											if(m_mode == 0)
+											{
+												P[m_target].g.dGravAccel[0] = m_acc_x;
+												P[m_target].g.dGravAccel[1] = m_acc_y;
+												P[m_target].g.dGravAccel[2] = m_acc_z;
+											}
+											else
+											{
+												GravDataResult[m_target].Acc[0] = m_acc_x;
+												GravDataResult[m_target].Acc[1] = m_acc_y;
+												GravDataResult[m_target].Acc[2] = m_acc_z;
+												*m_exportflag = m_nodesinlist;
+											}
+											}
 
-
-										if(TakeLevel >= 0)
-										{
-											LOCK_WORKCOUNT;
-											m_nop->GravCost += 1.0;
-											UNLOCK_WORKCOUNT;
-										}
-
-										m_no = m_nop->u.d.sibling;	/* ok, node can be used */
-
-									}
-
-									m_r = sqrt(m_r2);
-
-									//used/31ST ////////////////////////////////////////////////////////////////////////////////////////////
-									if(m_r >= m_h)
-									{
-										m_fac = m_mass / (m_r2 * m_r);
-									}
-
-									else
-									{
-
-										//used34TH  ////////////////////////////////////////////////////////////////////////////////////////////
-										m_u = m_r * m_h_inv;
-										if(m_u < 0.5)
-											m_fac = m_mass * m_h3_inv * (10.666666666667 + m_u * m_u * (32.0 * m_u - 38.4));
-										else
-											m_fac =
-													m_mass * m_h3_inv * (21.333333333333 - 48.0 * m_u +
-															38.4 * m_u * m_u - 10.666666666667 * m_u * m_u * m_u - 0.066666666667 / (m_u * m_u * m_u));
+											ret = m_ninteractions;
+												}
 
 
-									}
-
-									m_tabindex = (int) (m_asmthfac * m_r);
-
-									if(m_tabindex < NTAB)
-									{
-										m_fac *= shortrange_table[m_tabindex];
-
-										m_acc_x += FLT(m_dx * m_fac);
-										m_acc_y += FLT(m_dy * m_fac);
-										m_acc_z += FLT(m_dz * m_fac);
-									}
-
-									m_ninteractions++;
+					//////////////INLINE shortrange finish... ////////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-								}
-
-								if(m_mode == 1)
-								{
-									m_listindex++;
-									if(m_listindex < NODELISTLENGTH)
-									{
-										m_no = GravDataGet[m_index].NodeList[m_listindex];
-										if(m_no >= 0)
-										{
-											m_nodesinlist++;
-											m_no = Nodes[m_no].u.d.nextnode;	/* open it */
-										}
-									}
-								}
-							}
-
-
-							/* store result at the proper place */
-							if(m_mode == 0)
-							{
-								P[m_index].g.dGravAccel[0] = m_acc_x;
-								P[m_index].g.dGravAccel[1] = m_acc_y;
-								P[m_index].g.dGravAccel[2] = m_acc_z;
-							}
-							else
-							{
-								GravDataResult[m_index].Acc[0] = m_acc_x;
-								GravDataResult[m_index].Acc[1] = m_acc_y;
-								GravDataResult[m_index].Acc[2] = m_acc_z;
-								*m_exportflag = m_nodesinlist;
-							}
-
-							ret = m_ninteractions;
-						}
-
-
-						//////////////INLINE shortrange finish... ////////////////////////////////////////////
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-						if(ret < 0)
-							m_break=1;		/* export buffer has filled up */
-
-						if(m_break || m_exitFlag)printf("At step: %d :::: m_break=%d, m_exitFlag=%d         ", m_index, m_break, m_exitFlag);
-
-						if(m_break){
-							continue;
-						}
-						else{
-							LOCK_WORKCOUNT;
-
-							Costtotal += ret;
-							UNLOCK_WORKCOUNT;
-
-
-
-							ProcessedFlag[i] = 1;	/* particle successfully finished */
-						}
-					}///manos//end m_break part (containing whole shortrange function)
+					if(ret < 0)
+						m_break=1;		/* export buffer has filled up */
 
 					if(m_break || m_exitFlag)printf("At step: %d :::: m_break=%d, m_exitFlag=%d         ", m_index, m_break, m_exitFlag);
 
+					if(m_break){
+						continue;
+					}
+					else{
+					LOCK_WORKCOUNT;
 
-				}//manos// end of for loop
+					Costtotal += ret;
+					UNLOCK_WORKCOUNT;
 
-			}//manos// end of data region
+
+
+					ProcessedFlag[i] = 1;	/* particle successfully finished */
+					}
+				}///manos//end m_break part (containing whole shortrange function)
+
+				if(m_break || m_exitFlag)printf("At step: %d :::: m_break=%d, m_exitFlag=%d         ", m_index, m_break, m_exitFlag);
+
+
+			}//manos// end of for loop
+
+		}//manos// end of data region
 
 			if(m_break)BufferFullFlag = 1;
 
