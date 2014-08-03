@@ -190,6 +190,14 @@ FC       = cc
 OPTIMIZE = -O3
 endif
 
+ifeq ($(SYSTYPE),"swan")
+CC       = cc
+CXX      = cpc
+FC       = cc
+
+OPTIMIZE = -O3
+endif
+
 
 
 ifeq ($(SYSTYPE),"mvapich-intel")
