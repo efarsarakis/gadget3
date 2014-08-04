@@ -186,8 +186,7 @@ ifeq ($(SYSTYPE),"archer")
 CC       = cc
 CXX      = cpc
 FC       = cc
-GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
-GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
+
 
 OPTIMIZE = -O3
 endif
@@ -196,6 +195,8 @@ ifeq ($(SYSTYPE),"swan")
 CC       = cc
 CXX      = cpc
 FC       = cc
+GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
+GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
 
 OPTIMIZE = -O3
 endif
