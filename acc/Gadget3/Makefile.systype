@@ -9,7 +9,7 @@
 
 SYSTYPE="acc-swan"
 
-SYSTYPE="swan"
+#SYSTYPE="swan"
 
 #SYSTYPE="archer"
 #SYSTYPE="mvapich-intel"
