@@ -1641,7 +1641,7 @@ void gravity_tree(void)
 														if(P[m_no].Ti_current != m_ti_Current)
 														{
 															LOCK_PARTNODEDRIFT;
-					#pragma omp critical(_partnodedrift_)
+			//manos//		#pragma omp critical(_partnodedrift_)
 					////////manos//////// temp commenting to find other problems if there...//////////////////////
 					/////////////
 					////////////
@@ -1687,7 +1687,7 @@ void gravity_tree(void)
 																{
 																	//int m_exitFlag=0;
 																	LOCK_NEXPORT;
-//					#pragma omp critical(_nexport_)
+//manos//					#pragma omp critical(_nexport_)
 																	{
 																		if(Nexport >= m_bunchSize)
 																		{
@@ -1767,7 +1767,7 @@ void gravity_tree(void)
 														if(m_nop->Ti_current != m_ti_Current)
 														{
 															LOCK_PARTNODEDRIFT;
-//					#pragma omp critical(_partnodedrift_)
+//manos//					#pragma omp critical(_partnodedrift_)
 					////////manos//////// temp commenting to find other problems if there...//////////////////////
 					/////////////
 					////////////
