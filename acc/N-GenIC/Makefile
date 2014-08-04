@@ -86,7 +86,7 @@ ifeq ($(SYSTYPE),"archer")
 $(info ****************** Using mvapich-pgi config ********************)
 
 CC       =   cc
-OPTIMIZE =  -O3
+OPTIMIZE =  -g
 #GSL_INCL =  -I/shared/apps/gadget/libraries/gsl-intel/include/
 #GSL_LIBS =  -L/shared/apps/gadget/libraries/gsl-intel/lib/
 #FFTW_INCL=  -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
@@ -101,7 +101,7 @@ ifeq ($(SYSTYPE),"swan")
 $(info ****************** Using swan config ********************)
 
 CC       =   cc
-OPTIMIZE =  -O3
+OPTIMIZE =  -g
 GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
 GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
 #FFTW_INCL=  -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
