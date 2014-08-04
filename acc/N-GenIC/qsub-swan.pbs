@@ -5,8 +5,8 @@
 # set -x      # Print commands and their arguments as they are executed.
 
 # PBS job options (name, compute nodes, job time)
-#PBS -N GadgetTest
-#PBS -l select=5
+#PBS -N NGenIC
+#PBS -l select=2
 #PBS -l walltime=00:10:00
 
 # Replace [budget code] below with your project code (e.g. t01)
