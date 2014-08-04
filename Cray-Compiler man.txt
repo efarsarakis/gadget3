@@ -1,0 +1,1858 @@
+manualCraycc 
+craycc(1)                                          Last changed: 05-02-2014
+
+NAME
+     cc — Invokes the Cray C Compiler
+
+SYNOPSIS
+     cc
+     [-c]
+     [-C]
+     [-D macro[=def]]
+     [-E]
+     [-g]
+     [-G level]
+     [-h arg]
+     [-I incldir]
+     [-K trap=opt[,opt]...]
+     [-l libfile]
+     [-L ldir]
+     [-M]
+     [-nostdinc]
+     [-o outfile]
+     [-O level]
+     [-P]
+     [-S]
+     [-U macro]
+     [-V]
+     [-W phase,"opt..."]
+     [-X npes]
+     [-Y phase,dirname]
+     [-#] [-##] [-###]
+     files ...
+
+IMPLEMENTATION
+     Cray Linux Environment (CLE)
+
+DESCRIPTION
+     The cc command invokes the Cray C compiler. The compiler conforms to
+     the ISO/IEC 9899:1999 and to the American National Standards Institute
+     (ANSI) X3.159-1989 standards.
+
+     Typically, the cc command processes the source files named on the
+     command line, generates a binary object file (sourcefile.o), links the
+     binary object file, and generates an executable file (named a.out by
+     default). Other files used and created by the C compiler are discussed
+     under the FILES section.
+
+     For a more detailed description of the cc command, see the Cray C and
+     C++ Reference Manual. Information contained in this man page may
+     differ from the reference manual. Where the information differs, this
+     man page supersedes the information contained in the reference manual.
+
+   Conflicting Options
+     If you specify conflicting options, the option specified last on the
+     command line overrides the previously specified option. Exceptions to
+     this rule are noted in the individual option descriptions.
+
+   Conflicts between Options and #pragma Directives
+     Most #pragma directives override corresponding command-line options.
+     Exceptions to this rule are noted in option or #pragma directive
+     descriptions.
+
+   Arguments to the -h Option
+     The arguments to the -h option can be used to direct specific compiler
+     actions. To specify more than one argument, separate individual
+     arguments with commas but without intervening spaces.
+
+   Command-line Options
+     The cc command accepts the following options, which are grouped
+     according to functionality.
+
+   Standard Conformance Language Options
+     -h [no]c99
+               Enables or disables language features new to the C99
+               standard and Cray C compiler, while providing support for
+               features that were previously defined as Cray extensions. If
+               the previous implementation of the Cray extension differed
+               from the C99 standard, both implementations will be
+               available when the -h c99 option is enabled. The -h c99
+               option is also required for C99 features not previously
+               supported as extensions.
+
+               When -h noc99 is used, C99 language features such as
+               variable-length arrays (VLAs) and restricted pointers that
+               were available as extensions previously to adoption of the
+               C99 standard remain available to you.
+
+               The default is -h c99.
+
+     -h [no]conform, -h [no]stdc
+               Specify strict conformance to the ISO C standard. The
+               defaults are -h noconform and -h nostdc. The -h noconform
+               and -h nostdc options specify partial conformance to the
+               standard.
+
+               Note:  By default, the compiler calls the Cray mathlib
+               versions of intrinsic functions (abs, cos, exp, for example)
+               which do not set errno and do not raise IEEE-754 underflow
+               exceptions. If -hconform is specified, the compiler calls
+               the stdc glibc versions of the runtime intrinsic functions.
+
+     -h [no]tolerant
+               Allows the use of older, less standard C constructs, thereby
+               making it easier to port code written for previous C
+               compilers. Errors involving comparisons or assignments of
+               pointers and integers become warnings. The compiler
+               generates casts so that the types agree. With -h notolerant,
+               the compiler is intolerant of the older constructs.
+
+               The -h tolerant option causes the compiler to tolerate
+               accessing an object with one type through a pointer to an
+               entirely different type. For example, a pointer to a long
+               might be used to access an object declared with type double.
+               Such references violate the C standard and should be
+               eliminated if possible. They can reduce the effectiveness of
+               alias analysis and inhibit optimization.
+
+               The default is -h notolerant.
+
+     -h [no]gnu
+               Enables the compiler to recognize a subset of the GCC
+               version 4.4.4 extensions to C listed in the GCC C Language
+               Extensions table.
+
+               The default is -h nognu.
+
+               For descriptions of the GCC C language extensions, see
+               http://gnu.gcc.org/onlinedocs (link to URL
+               http://gnu.gcc.org/onlinedocs) .
+
+                          GCC C Language Extensions
+   ------------------------------------------------------------------------
+   GCC C Language Extension         Description
+   ------------------------------------------------------------------------
+   Typeof                           typeof: referring to the type of an
+                                    expression
+   Lvalues                          Using ?:, and casts in lvalues
+   Conditionals                     Omitting the middle operand of a ?:
+                                    expression
+   Long Long                        Double-word integers: long long int
+   Complex                          Data types for complex numbers
+   Statement Exprs                  Putting statements and declarations
+                                    inside expressions
+   Zero Length                      Zero-length arrays
+   Variable Length                  Arrays whose length is computed at run
+                                    time
+   Empty Structures                 Structures with no members
+   Variadic Macros                  Macros with a variable number of
+                                    arguments
+   Escaped Newlines                 Slightly looser rules for escaped
+                                    newlines
+   Multiline strings                String literals with embedded newlines
+   Initializers                     Non-constant initializers
+   Compound Literals                Compound literals give structures,
+                                    unions, or arrays as values
+   Designated Inits                 Labeling elements of initializers
+   Cast to Union                    Casting to union type from any member
+                                    of the union
+   Case Ranges                      'case 1 ... 9' and such
+   Mixed Declarations               Mixing declarations and code
+   Attribute Syntax                 Formal syntax for attributes
+   Function Prototypes              Prototype declarations and old-style
+                                    definitions
+   C++ Comments                     C++ comments are recognized
+   Dollar Signs                     Dollar sign is allowed in identifiers
+   Character Escapes                \e stands for the character <ESC>
+   Alignment                        Inquiring about the alignment of a type
+                                    or variable
+   Inline                           Defining inline functions (as fast as
+                                    macros)
+   Alternate Keywords               __const__, __asm__, and so on, for
+                                    header files
+   Incomplete Enums                 enum foo;, with details to follow
+   Function Names                   Printable string, which is the name of
+                                    the current function
+   Return Address                   Getting the return or frame address of
+                                    a function
+   Unnamed Fields                   Unnamed struct/union fields within
+                                    structs/unions
+   Function Attributes: nothrow;    Declaring that functions have no side
+   format, format_arg; deprecated;  effects, or that they can never return
+   used; unused; alias; weak.
+   Variable Attributes: alias;      Specifying attributes of variables
+   deprecated; unused; used;
+   transparent_union; weak
+   Type Attributes: deprecated;     Specifying attributes of types
+   unused; used; transparent_union
+   Asm Labels                       Specifying the assembler name to use
+                                    for a C symbol
+   Other Builtins:                  Other built-in functions
+   __builtin_types_compatible_p,
+   __builtin_choose_expr;
+   __builtin_constant_p;
+   __builtin_huge_val;
+   __builtin_huge_valf;
+   __builtin_huge_vall;
+   __builtin_inf; __builtin_inff;
+   __builtin_infl; __builtin_nan;
+   __builtin_nanf; __builtin_nanl;
+   __builtin_nans; __builtin_nansf;
+   __builtin_nansl
+   ------------------------------------------------------------------------
+
+               Special files such as /dev/null may be used as source files.
+
+   Table 1. General Language Options
+     -h restrict=args
+               Globally tells the compiler to treat certain classes of
+               pointers as restricted pointers. You can use this option to
+               enhance optimizations (this includes vectorization).
+
+               Classes of affected pointers are determined by the value
+               contained in args, as follows:
+
+             --------------------------------------------------------------
+             args         Description
+             --------------------------------------------------------------
+             a            All pointers to object and incomplete types are
+                          to be considered restricted pointers, regardless
+                          of where they appear in the source code. This
+                          includes pointers in class, struct, and union
+                          declarations, type casts, function prototypes,
+                          and so on.
+             f            All function parameters that are pointers to
+                          objects or incomplete types can be treated as
+                          restricted pointers.
+             --------------------------------------------------------------
+
+          Caution:
+
+                    Do not specify restrict=a if, during execution of any
+                    function, an object is modified and that object is
+                    referenced through either two different pointers or
+                    through the declared name of the object and a pointer.
+                    Undefined behavior may result.
+
+                    Do not specify restrict=f if, during execution of any
+                    function, an object is modified and that object is
+                    referenced through either two different pointer
+                    function parameters or through the declared name of the
+                    object and a pointer function parameter. Undefined
+                    behavior may result.
+
+               The args arguments tell the compiler to assume that in the
+               current compilation unit each pointer (=a) or each pointer
+               that is a function parameter (=f) points to a unique object.
+               This assumption eliminates those pointers as sources of
+               potential aliasing and may allow additional vectorization or
+               other optimizations. These options cause only data
+               dependencies from pointer aliasing to be ignored, rather
+               than all data dependencies, so they can be used safely.
+
+          Caution:
+
+                    The arguments make assertions about your program that,
+                    if incorrect, can introduce undefined behavior. You
+                    should not use -h restrict=a if, during the execution
+                    of any function, an object is modified and that object
+                    is referenced through either of the following:
+
+                    ·  Two different pointers
+
+                    ·  The declared name of the object and a pointer
+
+                    The -h restrict=f option is subject to the analogous
+                    restriction, with "function parameter pointer"
+                    replacing "pointer."
+
+     -h [no]calchars
+               Allows the use of the $ character in identifier names. This
+               option is useful for porting codes in which identifiers
+               include this character. With -h nocalchars, this character
+               is not allowed in identifier names.
+
+               The default is -h nocalchars.
+
+          Caution:
+
+                    Use this option with extreme care, because identifiers
+                    with this character are within CNL name space and are
+                    included in many library identifiers, internal compiler
+                    labels, objects, and functions. You must prevent
+                    conflicts between any of these uses, current or future,
+                    and identifier declarations or references in your code;
+                    any such conflict is an error.
+
+     -h [no]signedshifts
+               Affects the result of the right shift operator. For the
+               expression e1 >> e2 where e1 has a signed type, when
+               -h signedshifts is in effect, the vacated bits are filled
+               with the sign bit of e1. When -h nosignedshifts is in
+               effect, the vacated bits are filled with zeros, identical to
+               the behavior when e1 has an unsigned type.
+
+               The default is -h nosignedshifts.
+
+   General Optimization Options
+     -h [no]add_paren
+               Forces the compiler to evaluate selected associative
+               operations (+,-,*) from left to right if the result type is
+               float or complex. Left to right evaluation is not required
+               by the language standards, but some applications may expect
+               it.
+
+               The default is -h noadd_paren.
+
+     -h [no]aggress
+               Provides greater opportunity to optimize loops that would
+               otherwise by inhibited from optimization due to an internal
+               compiler size limitation. -h noaggress leaves this size
+               limitation in effect.
+
+               With -h aggress, internal compiler tables are expanded to
+               accommodate larger loop bodies. This option can increase the
+               compilation's time and memory size.
+
+               The default is -h noaggress.
+
+     -h [no]autoprefetch
+               Controls automatic prefetch optimization. Does not affect
+               loop_info [no]prefetch directive.
+
+               Default: autoprefetch.
+
+     -h [no]autothread
+               Enables or disables automatic threading. The default is -h
+               noautothread.
+
+     -h display_opt
+               Displays the current optimization settings for this
+               compilation.
+
+     -h flex_mp=level
+               Controls the aggressiveness of optimizations which may
+               affect floating point and complex repeatability when
+               application requirements require identical results when
+               varying the number of ranks or threads. The default is -h
+               flex_mp=default.
+
+               The values for level are:
+
+   ------------------------------------------------------------------------
+   level                   Description
+   ------------------------------------------------------------------------
+   intolerant              Has the highest probability of repeatable
+                           results, but also the highest performance
+                           penalty.
+   strict                  Uses some safe optimizations and yields higher
+                           performance than intolerant, with a high
+                           probability of repeatable results.
+   conservative            Uses more aggressive optimization and yields
+                           higher performance than strict, but results may
+                           not be sufficiently repeatable for some
+                           applications.
+   default                 Uses more aggressive optimization and yields
+                           higher performance than conservative, but
+                           results may not be sufficiently repeatable for
+                           some applications.
+   tolerant                Uses most aggressive optimization and yields
+                           highest performance, but results may not be
+                           sufficiently repeatable for some applications.
+   ------------------------------------------------------------------------
+
+     -h fusionn
+               Controls loop fusion and changes the assertiveness of the
+               fusion pragma. Loop fusion can improve the performance of
+               loops, although in rare cases it may degrade performance.
+               The n argument allows you to turn loop fusion on or off and
+               determine where fusion should occur.
+
+               Note:  Loop fusion is disabled when the scalar level is set
+               to 0.
+
+               The default is -h fusion2.
+
+               The values for n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            No fusion (ignore all fusion pragmas and do not
+                          attempt to fuse other loops)
+             1            Attempt to fuse loops that are marked by the
+                          fusion pragma.
+             2            Attempt to fuse all loops (includes array syntax
+                          implied loops), except those marked with the
+                          nofusion pragma.
+             --------------------------------------------------------------
+
+     -h [no]intrinsics
+               Allows the use of intrinsic hardware functions, which allow
+               direct access to some hardware instructions or generate
+               inline code for some functions. This option has no effect on
+               specially handled library functions.
+
+               The default is -h intrinsics.
+
+               See the Cray C and C++ Reference Manual for a complete list
+               of hardware intrinsic functions.
+
+     -h loop_trips=[tiny|small|medium|large|huge]
+               Specifies runtime loop trip counts for all loops in a
+               compiled source file. This information is used to better
+               tune optimizations to the runtime characteristics of the
+               application.
+
+     -h mpin   Enables or disables optimization of MPI operations. -h mpi1
+               enables this option.
+
+               In the CCS environment, -h mpi1 is not supported.
+
+               The default is -h mpi0.
+
+     -h [no]msgs
+               Causes the compiler to write optimization messages to
+               stderr.
+
+               When the -h msgs option is in effect, you may request that a
+               listing be produced so that you can see the optimization
+               messages in the listing. For information about obtaining
+               listings, see -h list=opt.
+
+               The default is -h nomsgs.
+
+     -h [no]negmsgs
+               Causes the compiler to generate messages to stderr that
+               indicate why optimizations such as vectorization or inlining
+               did not occur in a given instance.
+
+               The -h negmsgs option enables the -h msgs option. The -h
+               list=a option enables the -h negmsgs option.
+
+               The default is -h nonegmsgs.
+
+     -h [no]overindex
+               Declares that there are array subscripts that index a
+               dimension of an array that is outside the declared bounds of
+               that array. The -h nooverindex option declares that there
+               are no array subscripts that index a dimension of an array
+               that is outside the declared bounds of that array.
+
+               The default is -h nooverindex.
+
+     -h [no]pattern
+               Globally enables or disables pattern matching. Pattern
+               matching is on by default.
+
+               When the compiler recognizes certain patterns in the source
+               code, it replaces the construct with a call to an optimized
+               library routine. A loop or statement that has been pattern
+               matched and replaced with a call to a library routine is
+               indicated with an A in the loopmark listing.
+
+               Note:  Pattern matching is not always worthwhile. If there
+               is a small amount of work in the pattern-matched construct,
+               the call overhead may outweigh the time saved by using the
+               optimized library routine. When compiling using the default
+               optimization settings, the compiler attempts to determine
+               whether each given candidate for pattern matching will in
+               fact yield improved performance.
+
+     -h pl=program_library
+               Create and use a persistent repository of compiler
+               information specified by program_library. When used with -h
+               wp, this option provides application-wide, cross-file,
+               automatic inlining. See -h wp.
+
+               The program_library repository is implemented as a directory
+               and the information contained in program library is built up
+               with each compiler invocation. Any compilation that does not
+               have the -hpl option will not add information to this
+               repository.
+
+               Because of the persistence of program_library, it is the
+               user's responsibility to manage it. For example, rm -r
+               program_library might be added to the make clean target in
+               an application makefile. Because program_library is a
+               directory, use rm -r to remove it.
+
+               If an application makefile works by creating files in
+               multiple directories during a single build, the
+               program_library should be an absolute path, otherwise
+               multiple and incomplete program library repositories will be
+               created. For example, avoid -hpl=./PL.1 and use
+               -hpl=/fullpath/builddir/PL.1 instead.
+
+     -h threadn
+               Controls the compilation and optimization of OpenMP
+               directives and autothreading, where n is a value from 0 to 3
+               with 0 being off and 3 specifying the most aggressive
+               optimization.
+
+               The default is -h thread2.
+
+               The values for n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            No autothreading or OMP threading. The thread0
+                          option is similar to -h noomp, but -h noomp
+                          disables OpenMP only and does not affect
+                          autothreading.
+             1            Specifies strict compliance with the OpenMP
+                          standard for directive compilation. Strict
+                          compliance is defined as no extra optimizations
+                          in or around OpenMP constructs. In other words,
+                          the compiler performs only the requested
+                          optimizations.
+             2            OpenMP parallel regions are subjected to some
+                          optimizations; that is, some parallel region
+                          expansion. Parallel region expansion is an
+                          optimization that merges two adjacent parallel
+                          regions in a compilation unit into a single
+                          parallel region.
+             3            Full optimization: loop restructuring, including
+                          modifying iteration space for static schedules
+                          (breaking standard compliance). Reduction results
+                          may not be repeatable.
+             --------------------------------------------------------------
+
+     -h unrolln
+               Globally controls loop unrolling and changes the
+               assertiveness of the unroll pragma. By default, the compiler
+               attempts to unroll all loops, unless the nounroll pragma is
+               specified for a loop. Generally, unrolling loops increases
+               single processor performance at the cost of increased
+               compile time and code size.
+
+               The n argument allows you to turn loop unrolling on or off
+               and specify where unrolling should occur. It also affects
+               the assertiveness of the unroll pragma.
+
+               The default is -h unroll2.
+
+               The values for n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            No unrolling (ignore all unroll pragmas and do
+                          not attempt to unroll other loops).
+             1            Attempt to unroll loops that are marked by the
+                          unroll pragma.
+             2            Unroll loops when performance is expected to
+                          improve. Loops marked with the unroll or nounroll
+                          pragma override automatic unrolling.
+             --------------------------------------------------------------
+
+               Note:  Loop unrolling is disabled when the scalar level is
+               set to 0.
+
+     -h wp     Enables the whole program mode. This option causes the
+               compiler backend (IPA, optimizer, codegenerator) to be
+               invoked at application link time, enabling whole program
+               automatic inlining/cloning and future whole program
+               interprocedural analysis (IPA) optimizations. Since the -hwp
+               option provides automatic application-wide inlining, the
+               -Oipafrom option is no longer needed for cross-file inlining
+               and using these two options together is not permitted.
+               Requires that pl=program_library is also specified. See -h
+               pl=program_library.
+
+               The options -h pl=program_library and -hwp should be
+               specified on all compiler invocations and on the compiler
+               link invocation. Since -hwp delays the compiler optimization
+               step until link time, -c compiles will take less time and
+               the link step will take longer. Normally, this is just a
+               time shift from one build phase to another with roughly the
+               same overall compile time. In some cases increased inlining
+               may cause an increase in overall compile time. Using -hwp
+               allows the compiler backend to be invoked in parallel during
+               a build. Setting the environment variable NPROC controls the
+               number of concurrent compiler backend invocations and this
+               parallelism may reduce overall compile time.
+
+     -O level  Specifies the optimization level for a group of compiler
+               features. Specifying -O with no argument is the same as not
+               specifying the -O level option; this syntax is supported for
+               compatibility with other vendors.
+
+               The level values 0, 1, 2, and 3 enable you to specify
+               increasing general levels of optimization.
+
+               The -O 1, -O 2, and -O 3 specifications do not directly
+               correspond to the numeric optimization levels for scalar
+               optimization and vectorization. For example, specifying -O 3
+               does not necessarily enable scalar3 and vector3. Cray
+               reserves the right to alter the specific optimizations
+               performed at these levels from release to release. You can
+               use the -h display_opt option to display the optimization
+               options used during compilation.
+
+               The valid level values are:
+
+               level     Optimization Provided
+
+               -O 0      Disables all optimizations including floating
+                         point optimizations. Implies -h fp0.
+
+               -O 1, -O 2, -O 3
+
+               The default optimization level is 2.
+
+               See the Cray C and C++ Reference Manual for the -O and -h
+               equivalent values.
+
+   Performance Analysis Options
+     -h [no]func_trace
+               For use only with CrayPat. If this option is specified, the
+               compiler inserts CrayPat trace entry points into each
+               function in the compiled source file. The names of the trace
+               entry points are:
+
+               ·  __pat_tp_func_entry
+
+               ·  __pat_tp_func_return
+
+               These are resolved by CrayPat when the program is
+               instrumented using the pat_build command. When the
+               instrumented program is executed and it encounters either of
+               these trace entry points, CrayPat captures the address of
+               the current function and its return address.
+
+     -h gasp[=opt[:opt]]
+               Request GASP (Global Address Space Performance Analysis)
+               instrumentation. With no options specified, remote data
+               accesses are profiled. When opt is specified, the compiler
+               provides additional instrumentation as follows:
+
+               ·  local
+
+                  Enables instrumentation of events generated by shared
+                  local accesses. Instrumenting these events can add
+                  runtime overhead to the application.
+
+               ·  functions
+
+                  Enables function instrumentation. Sets -hipa0
+
+               #pragma pupc [on|off] has no effect in the current GASP
+               implementation.
+
+     -h keepfiles
+               Prevents the removal of the object (.o) and temporary
+               assembly (.s) files after an executable is created.
+               Normally, the compiler automatically removes these files
+               after linking them to create an executable. Since the
+               original object files are required to instrument a program
+               for performance analysis, if you plan to use CrayPat to
+               conduct performance analysis experiments, you can use this
+               option to preserve the object files.
+
+     -h keep_frame_pointer
+               Retain call stack information back to main entry point for
+               CrayPat performance sampling.
+
+               The default is off.
+
+     -h [no]omp_trace
+               Turns the insertion of the CrayPat OpenMP tracing calls on
+               and off.
+
+               The default is -h noomp_trace; tracing is off.
+
+     -h profile_generate
+               Directs that the source code be instrumented for gathering
+               profile information. The compiler inserts calls and data-
+               gathering instructions to allow CrayPat to gather
+               information about the loops in a compilation unit. If you
+               use this option, you must run CrayPat on the resulting
+               executable so the CrayPat data-gathering routines are linked
+               in.
+
+   Automatic Cache Management Options
+     -h cachen Specifies the levels of automatic cache management to
+               perform.
+
+               The default is -h cache2.
+
+               The values for n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            Cache blocking (including directive-based
+                          blocking) is turned off. This level is compatible
+                          with all scalar and vector optimization levels.
+             1            Conservative automatic cache management.
+                          Characteristics include moderate compile time.
+                          Symbols are placed in the cache when the
+                          possibility of cache reuse exists and the
+                          predicted cache footprint of the symbol in
+                          isolation is small enough to experience the
+                          reuse.
+             2            Moderately aggressive automatic cache management.
+                          Characteristics include moderate compile time.
+                          Symbols are placed in the cache when the
+                          possibility of cache reuse exists and the
+                          predicted state of the cache model is such that
+                          the symbol will experience the reuse.
+             3            Aggressive automatic cache management.
+                          Characteristics include potentially high compile
+                          time. Symbols are placed in the cache when the
+                          possibility of cache reuse exists and the
+                          allocation of the symbol to the cache is
+                          predicted to increase the number of cache hits.
+             --------------------------------------------------------------
+
+               For more information on automatic cache management, see the
+               Cray C and C++ Reference Manual.
+
+   Vector Optimization Options
+     -h vectorn
+               Specifies the level of automatic vectorizing to be
+               performed. Vectorization results in dramatic performance
+               improvements with a small increase in object code size.
+               Vectorization directives are unaffected by this option.
+
+               The default is -h vector2.
+
+               The values of n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            No automatic vectorization. Characteristics
+                          include low compile time and small compile size.
+                          This option is compatible with all scalar
+                          optimization levels.
+             1            Specifies conservative vectorization.
+                          Characteristics include moderate compile time and
+                          size.
+                          The -h vector1 option is compatible with
+                          -h scalar1, -h scalar2, and -h scalar3.
+             2            Specifies moderate vectorization. Characteristics
+                          include moderate compile time and size. Loop
+                          nests are restructured.
+                          The -h vector2 option is compatible with
+                          -h scalar2 or -h scalar3.
+             3            Specifies aggressive vectorization.
+             --------------------------------------------------------------
+
+               For more information about vectorization directives, see the
+               Cray C and C++ Reference Manual.
+
+   Inlining Optimization Options
+     -h ipan   Allows the compiler to automatically decide which procedures
+               to consider for inlining. Procedures that are potential
+               targets for inline expansion include all the procedures
+               within the input file to the compilation.
+
+             --------------------------------------------------------------
+             Inlining
+             level        Description
+             --------------------------------------------------------------
+             0            All interprocedural analysis and optimizations
+                          disabled. All inlining and cloning compiler
+                          directives are ignored.
+             1            Directive IPA. Inlining/cloning is attempted for
+                          call sites and routines that are under the
+                          control of a compiler directive.
+             2            Inlining. Inline a call site to an arbitrary
+                          depth as long as the expansion does not exceed
+                          some compiler-determined threshold. The call site
+                          must flatten for any expansion to occur. The call
+                          site is said to "flatten" when there are no calls
+                          present in the expanded code. The call site must
+                          reside within the body of a loop and the entire
+                          loop body must flatten. A loop body is said to
+                          "flatten" when all call sites within the body of
+                          the loop are flattened. Includes level 1.
+             3            Constant actual argument inlining and tiny
+                          routine inlining. This includes levels 1 and 2,
+                          plus any call site that contains a constant
+                          actual argument. Additionally, any call nest
+                          (regardless of location) that is below some small
+                          compiler-determined threshold will be inlined
+                          provided that call nest completely flattens.
+             4            Aggressive inlining. This includes levels 1, 2,
+                          and 3, plus a call site does not have to reside
+                          in a loop body to inline nor does the call site
+                          have to necessarily flatten.
+             5            Cloning. Includes levels 1, 2, 3, 4, plus routine
+                          cloning is attempted if inlining fails at a given
+                          call site.
+             --------------------------------------------------------------
+
+               The default is -h ipa3.
+
+     -h ipafrom=source[:source] ...
+               Allows you to explicitly indicate the procedures to consider
+               for inline expansion. The source arguments identify each
+               file or directory that contains the routines to consider for
+               inlining. Whenever a call is encountered in the input
+               program that matches a routine in source, inlining is
+               attempted for that call site.
+
+               Note:  Spaces are not allowed on either side of the equal
+               sign.
+
+               All inlining directives are recognized with explicit
+               inlining.
+
+               Note:  The routines in source are not actually linked with
+               the final program. They are simply templates for the
+               inliner. To have a routine contained in source linked with
+               the program, you must include it in an input file to the
+               compilation.
+
+               Use one or more of the following objects in the source
+               argument:
+
+               C source files
+                         The routines in C source files are candidates for
+                         inline expansion and must contain error-free code.
+
+               dir       A directory that contains any of the C file types.
+
+               For a description of combined inlining, see the Cray C and
+               C++ Reference Manual.
+
+   Scalar Optimization Options
+     -h [no]concurrent
+               Equivalent to adding a concurrent pragma before every loop
+               in the file, including loops created from array syntax. This
+               option may provide significant performance improvements for
+               some codes. The user must ensure that all loops are clearly
+               parallel; private arrays, ambiguous reductions and other
+               special forms may not yield valid parallel code in this
+               mode. -hnoconcurrent honors existing concurrent pragmas.
+
+               The default is -hnoconcurrent.
+
+     -h [no]interchange
+               Allows the compiler to attempt to interchange all loops, a
+               technique that is used to gain performance by having the
+               compiler swap an inner loop with an outer loop. The compiler
+               attempts the interchange only if the interchange will
+               increase performance. Loop interchange is performed only at
+               scalar optimization level 2 or higher.
+
+               The -h nointerchange option prevents the compiler from
+               attempting to interchange any loops. To disable interchange
+               of loops individually, use the #pragma _CRI nointerchange
+               directive.
+
+               The default is -h interchange.
+
+     -h scalarn
+               Specifies the level of automatic scalar optimization to be
+               performed. Scalar optimization directives are unaffected by
+               this option.
+
+               The default is -h scalar2.
+
+               The values for n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            Minimal automatic scalar optimization. The
+                          -h zeroinc option is implied by -h scalar0.
+             1            Conservative automatic scalar optimization. This
+                          level implies -h nozeroinc.
+             2            Aggressive automatic scalar optimization. The
+                          scalar optimizations that provide the best
+                          application performance are used, with some
+                          limitations imposed to allow for faster
+                          compilation times.
+             3            Very aggressive optimization: compilation times
+                          may increase significantly.
+             --------------------------------------------------------------
+
+     -h [no]zeroinc
+               Improves run time performance by causing the compiler to
+               assume that constant increment variables (CIVs) in loops are
+               not incremented by expressions with a value of 0.
+
+               This option causes the compiler to assume that some constant
+               increment variables (CIVs) in loops might be incremented by
+               0 for each pass through the loop, preventing generation of
+               optimized code.
+
+               For example, in a loop with index i, the expression expr in
+               the statement i += expr can evaluate to 0. This rarely
+               happens in actual code. -h zeroinc is the safer and slower
+               option. This option is affected by the -h scalarn option.
+
+               The default is -h nozeroinc.
+
+   Math Options
+     -h fpn    Allows you to control the level of floating-point and
+               complex arithmetic optimizations. The n argument controls
+               the level of allowable optimization; 0 gives the compiler
+               minimum freedom to optimize floating-point and complex
+               operations , while 4 gives it maximum freedom. The higher
+               the level, the lesser the floating-point operations conform
+               to the IEEE standard.
+
+               Generally, this is the behavior and usage for each -h fp
+               level:
+
+               ·  The -h fp0 causes your program's executable code to
+                  conform more closely to the IEEE floating-point standard
+                  than the default mode (-h fp2). When you specify this
+                  level, many identity optimizations are disabled,
+                  vectorization of floating-point and complex reductions
+                  are disabled, executable code is slower than higher
+                  floating-point optimization levels. Use the -h fp0 option
+                  only when your code pushes the limits of IEEE accuracy or
+                  requires strong IEEE standard conformance.
+
+               ·  The -h fp1 option performs various generally safe, non-
+                  conforming IEEE optimizations, such as folding a == a to
+                  true, where a is a floating point object. At this level,
+                  a scaled complex divide mechanism is enabled that
+                  increases the range of complex values that can be handled
+                  without producing an underflow, and rewrite of division
+                  into multiplication by reciprocal is inhibited. You
+                  should never use the -h fp1 option except when your code
+                  pushes the limits of IEEE accuracy or requires strong
+                  IEEE standard conformance.
+
+               ·  The -h fp2 option includes optimizations of -h fp1.
+
+               ·  The -h fp3 option includes optimizations of -h fp2. You
+                  should use the -h fp3 option when performance is more
+                  critical than the level of IEEE standard conformance
+                  provided by -h fp2. The -h fp3 option is an acceptable
+                  level of optimization for many applications.
+
+               ·  The -h fp4 option includes optimizations of -h fp3. You
+                  should only use -h fp4 if your application uses
+                  algorithms which are tolerant of reduced precision.
+
+               The Floating-point Optimization Levels table compares the
+               various optimization levels of the -h fp option The table
+               lists some of the optimizations performed; the compiler may
+               perform other optimizations not listed.
+
+                    Floating-point Optimization Levels
+---------------------------------------------------------------------------
+Optimization                             fp2
+Type             fp0         fp1         (default)   fp3         fp4
+---------------------------------------------------------------------------
+Safety           Maximum     High       High        Moderate    Low
+Complex          Accurate    Accurate   Fast        Fast        Fast
+divisions        and slower  and slower
+Exponentiation   None        None       When        Always      Always
+rewrite                                 beneficial
+Strength         None        None       Fast        Fast        Fast
+reduction
+Rewrite division None        None       Yes         Aggressive  Aggressive
+as reciprocal
+equivalent
+Floating point   Slow        Fast       Fast        Fast        Fast
+reductions
+Expression       None        Yes        Yes         Yes         Yes
+factoring
+Expression tree  None        None       Yes         Yes         Yes
+balancing
+Inline 32-bit    No          No         No          Yes         Yes
+operations
+Fused multiply-  No          Yes        Yes         Yes         Yes
+add
+---------------------------------------------------------------------------
+
+   Table 2. Debugging Options
+     -g        Identical to specifying the -G0 option.
+
+     -G level  Enables the generation of debugging information used by
+               symbolic debuggers. These options allow debugging with
+               breakpoints.
+
+                       Table 3. -G level Definitions
+ --------------------------------------------------------------------------
+ level  Optimization  Breakpoints allowed on  Debugging  Execution speed
+ --------------------------------------------------------------------------
+ -Gn    None          Every executable        Best        Limited
+ -G0                  statement
+ -Gp    Partial       Block boundaries        Better      Better
+ -G1
+ -Gf    Full          Function entry and exit Limited     Best
+ -G2
+ -Gfast Full          Every executable        Best:       Best
+ -G3                  statement               requires
+                                              fast-track
+                                              debugger
+ --------------------------------------------------------------------------
+
+               Better debugging information comes at the cost of inhibiting
+               certain optimization techniques, so choose the option that
+               best fits the debugging needs of any particular source file
+               in an application.
+
+               The -g option is equivalent to -G0. The -g option is
+               included for compatibility with earlier versions of the
+               compiler and many other UNIX systems; the -G option is the
+               preferred specification. The -G0 and -g options disable most
+               optimizations and imply -h fp0.
+
+               The -G3 option permits both full code optimization and the
+               greatest flexibility in setting breakpoints, but requires
+               use of the Cray fast-track debugger. For more information,
+               see the lgdb(1) man page.
+
+               The debugging options take precedence over any conflicting
+               options that appear on the command line. If more than one
+               debugging option appears, the last one specified overrides
+               the others.
+
+     -h [no]bounds
+               Provides checking of pointer and array references to ensure
+               that they are within acceptable boundaries. -h nobounds
+               disables these checks.
+
+               For each dimension, the checks verify that the subscript is
+               greater than or equal to 0 and less than the upper bound.
+               For pointers, the upper bound is computed based on the
+               amount of the memory on the node. This amount is scaled at
+               runtime by the number of UPC threads in the job for UPC
+               pointers-to-shared with definite blocksize. For arrays, the
+               (possibly implicit) declared upper bound of the dimension is
+               used. If the dimension is the THREADS-scaled dimension of a
+               UPC shared array with definite blocksize, the upper bound
+               for the check is computed at runtime based on the number of
+               UPC threads in the job.
+
+     -h dir_check
+               Enables directive checking at run time. Errors detected at
+               compile time are reported during compilation and so are not
+               reported at run time. The following directives are checked:
+               shortloop, shortloop128, collapse, and the loop_info clauses
+               min_trips and max_trips. Violation of a run time check
+               results in an immediate fatal error diagnostic.
+
+          Warning:
+
+                    Optimization of enclosing and adjacent loops is
+                    degraded when run time directive checking is enabled.
+                    This capability, though useful for debugging, is not
+                    recommended for production runs.
+
+     -h zero   Causes stack-allocated memory to be initialized to all
+               zeros.
+
+   Compiler Message Options
+     -h msglevel_n
+               Specifies the lowest level of severity of messages to be
+               issued. Messages at the specified level and above are
+               issued.
+
+               The default is -h msglevel_3.
+
+               Values for n are:
+
+             --------------------------------------------------------------
+             n            Description
+             --------------------------------------------------------------
+             0            Comment
+             1            Note
+             2            Caution
+             3            Warning
+             4            Error
+             --------------------------------------------------------------
+
+     -h [no]message=n[:n...]
+               Enables or disables specified compiler messages, where n is
+               the number of a message to be enabled or disabled. You can
+               specify more than one message number; multiple numbers must
+               be separated by a colon with no intervening spaces. For
+               example, to disable messages CC-1trunk and CC-9, specify:
+
+               -h nomessage=174:9
+
+               The -h [no]message=n option overrides -h msglevel_n for the
+               specified messages. If n is not a valid message number, it
+               is ignored. Any compiler message except ERROR, INTERNAL, and
+               LIMIT messages can be disabled; attempts to disable these
+               messages by using the -h nomessage=n option are ignored.
+
+     -h report=args
+               Generates report messages specified in args and lets you
+               direct the specified messages to a file. The values of args
+               are:
+
+             --------------------------------------------------------------
+             args         Description
+             --------------------------------------------------------------
+             f            Writes specified messages to file.V, where file
+                          is the source file specified on the command line.
+                          If the f option is not specified, messages are
+                          written to stderr.
+             i            Generates inlining optimization messages.
+             s            Generates scalar optimization messages.
+             v            Generates vector optimization messages.
+             --------------------------------------------------------------
+
+               No spaces are allowed around the equal sign (=) or any of
+               the args codes. For example, the following example prints
+               inlining and scalar optimization messages for myfile.c:
+
+               % cc -h report=is myfile.c
+
+     -h [no]abort
+               Controls whether a compilation aborts if an error is
+               detected.
+
+               The default is -h noabort.
+
+     -h errorlimit[=n]
+               Specifies the maximum number of error messages the compiler
+               prints before it exits, where n is a positive integer.
+               Specifying -h errorlimit=0 disables exiting on the basis of
+               the number of errors. Specifying -h errorlimit with no
+               qualifier is the same as setting n to 1.
+
+               The default is -h errorlimit=100.
+
+   Compilation Phase Options
+     -E        Directs the compiler to execute only the preprocessor phase
+               of the compiler. The -E and -P options are equivalent,
+               except that -E directs output to stdout and inserts
+               appropriate #line linenumber preprocessing directives. The
+               -E option takes precedence over the -h feonly, -S, and -c
+               options.
+
+     -P        Directs the compiler to execute only the preprocessor phase
+               of the compiler for each source file specified. The
+               preprocessed output for each source file is written to a
+               file with a name that corresponds to the name of the source
+               file and has a .i suffix substituted for the suffix of the
+               source file. The -P option is similar to the -E option,
+               except that #line linenumber directives are suppressed, and
+               the preprocessed source does not go to stdout. This option
+               takes precedence over -h feonly, -S, and -c.
+
+               When both the -P and -E options are specified, the last one
+               specified takes precedence.
+
+     -h feonly Limits the compiler to syntax checking. The optimizer and
+               code generator are not executed. This option takes
+               precedence over -S and -c.
+
+     -S        Compiles the named source files and leaves the assembly
+               language output in the corresponding files suffixed with a
+               .s. If this option is used with -G or -g, debugging
+               information is not generated. This option takes precedence
+               over -c.
+
+     -c        Creates a relocatable object file for each named source file
+               but does not link the object files. The relocatable object
+               file name corresponds to the name of the source file. The .o
+               suffix is substituted for the suffix of the source file.
+
+     -#        Produces output indicating each phase of the compilation as
+               it is executed. Each succeeding output line overwrites the
+               previous line.
+
+     -##       Produces output indicating each phase of the compilation as
+               it is executed.
+
+     -###      The same as -##, except the compilation phases are not
+               executed.
+
+     -W phase,"opt..."
+               Passes arguments directly to a phase of the compiling
+               system.
+
+               The values of phase are:
+
+           ----------------------------------------------------------------
+           phase                 System Phase          Command
+           ----------------------------------------------------------------
+           0 (zero)              Compiler              cc
+           a                     Assembler             as
+           l                     Linker                ld
+           P                     Preprocessor          cc
+           ----------------------------------------------------------------
+
+               Arguments to be passed to system phases can be entered in
+               either of two styles. If spaces appear within a string to be
+               passed, the string is enclosed in double quotes. When double
+               quotes are not used, spaces cannot appear in the string.
+               Commas can appear wherever spaces normally appear; an option
+               and its argument can be either separated by a comma or not
+               separated. If a comma is part of an argument, it must be
+               preceded by the \ character. For example, any of the
+               following command lines would send -e name to the linker:
+
+               % cc -Wl,"-e name" file.c
+
+               % cc -Wl,-e,name file.c
+
+               % cc -Wl,"-ename" file.c
+
+               Because the preprocessor is built into the compiler, -Wp and
+               -W0 are equivalent.
+
+               The -Wl,-rpath ldir linker option changes the runtime
+               library search algorithm to look for files in directory
+               ldir. To request more than one library directory, specify
+               multiple -rpath options. Note that a library may be found at
+               link time with a -L option, but may not be found at run time
+               if a corresponding -rpath option is not found. Also note
+               that the compiler driver does not pass the -rpath option to
+               the linker. You must explicitly specify -Wl when using this
+               option.
+
+          Caution:
+
+                    At link time, all ldir arguments are added to the
+                    executable. The dynamic linker will search these paths
+                    first for shared dynamic libraries at runtime, with one
+                    exception. The Linux environment variable
+                    LD_LIBRARY_PATH precedes all other search paths for
+                    shared dynamically linked libraries. The use of
+                    LD_LIBRARY_PATH is discouraged because it will change
+                    the shared dynamically linked library search paths for
+                    all executable files in your environment.
+
+     -Y phase,dirname
+               Specifies a new directory (dirname) from which the
+               designated phase should be executed. The values of phase
+               are:
+
+           ----------------------------------------------------------------
+           phase                 System phase          Command
+           ----------------------------------------------------------------
+           0 (zero)              Compiler              cc
+           a                     Assembler             as
+           l                     Linker                ld
+           ----------------------------------------------------------------
+
+               Because there is no separate preprocessor, -Yp and -Y0 are
+               equivalent.
+
+   Preprocessing Options
+     -C        Retains all comments in the preprocessed source code, except
+               those on preprocessor directive lines. By default, the
+               preprocessor phase strips comments from the source code.
+               This option is useful in combination with the -P or -E
+               option.
+
+     -D macro[=def]
+               Defines macro as if it were defined by a #define directive.
+               If no =def argument is specified, macro is defined as 1.
+
+               Predefined macros also exist and are described in the Cray C
+               and C++ Reference Manual. Any predefined macro except those
+               required by the standard can be redefined by the -D option.
+               The -U option overrides the -D option when the same macro
+               name is specified, regardless of the order of options on the
+               command line.
+
+     -h [no]pragma=name[:name ...]
+               Enables or disables the processing of specified directives
+               in the source code, where name can be the name of a
+               directive or a word shown in the following table to specify
+               a group of directives. More than one name can be specified.
+               Multiple names must be separated by a colon and have no
+               intervening spaces.
+
+           ----------------------------------------------------------------
+           name                  Group                 Directives affected
+           ----------------------------------------------------------------
+           all                   All                   All directives
+           allinline             Inlining              inline_enable,
+                                                       inline_disable,
+                                                       inline_reset,
+                                                       inline_always,
+                                                       inline_never
+           allscalar             Scalar optimization   concurrent,
+                                                       nointerchange,
+                                                       noreduction,
+                                                       suppress,
+                                                       unroll/nounroll
+           allvector             Vectorization         novector, loop_info,
+                                                       hand_tuned,
+                                                       nopattern, novector,
+                                                       permutation,
+                                                       pipeline/nopipeline,
+                                                       prefervector,
+                                                       safe_address,
+                                                       safe_conditional,
+                                                       shortloop,
+                                                       shortloop128
+           acc                   OpenACC               All OpenACC
+                                                       accelerator
+                                                       directives.
+           omp                   OpenMP                All OpenMP
+                                                       directives.
+           ----------------------------------------------------------------
+
+               When using this option to enable or disable individual
+               directives, note that some directives must occur in pairs.
+               For these directives, you must disable both directives if
+               you want to disable either; otherwise, the disabling of one
+               of the directives may cause errors when the other directive
+               is (or is not) present in the compilation unit.
+
+               By default, no directives are disabled.
+
+     -I incldir
+               Specifies a directory for files named in #include directives
+               when the #include file names do not have a specified path.
+               Each directory specified must be specified by a separate -I
+               option.
+
+               The order in which directories are searched for files named
+               on #include directives is determined by enclosing the file
+               name in either quotation marks ("") or angle brackets (< and
+               >).
+
+               Directories for #include "file" are searched in the
+               following order:
+
+               1. Directory of the input file.
+
+               2. Directories named in -I options, in command-line order.
+
+               3. Site-specific and compiler release-specific include files
+                  directories.
+
+               4. Directory /usr/include.
+
+               Directories for #include <file> are searched in the
+               following order:
+
+               1. Directories named in -I options, in command-line order.
+
+               2. Site-specific and compiler release-specific include files
+                  directories.
+
+               3. Directory /usr/include.
+
+               If the -I option specifies a directory name that does not
+               begin with a slash (/), the directory is interpreted as
+               relative to the current working directory and not relative
+               to the directory of the input file (if different from the
+               current working directory).
+
+               For example:
+
+               % cc -I. -I yourdir mydir/b.c
+
+               The preceding command line produces the following search
+               order:
+
+               1. mydir (#include "file" only).
+
+               2. Current working directory, specified by -I.
+
+               3. yourdir (relative to the current working directory),
+                  specified by -I yourdir.
+
+               4. Site-specific and compiler release-specific include files
+                  directories.
+
+               5. Directory /usr/include.
+
+     -M        Provides information about recompilation dependencies that
+               the source file invokes on #include files and other source
+               files. This information is printed in the form expected by
+               make. Such dependencies are introduced by the #include
+               directive. The output is directed to stdout.
+
+     -nostdinc Stops the preprocessor from searching for include files in
+               the standard directory (/usr/include).
+
+     -U macro  Removes any initial definition of macro. Any predefined
+               macro except those required by the standard can be undefined
+               by the -U option. The -U option overrides the -D option when
+               the same macro name is specified, regardless of the order of
+               options on the command line.
+
+               Predefined macros are described in the Cray C and C++
+               Reference Manual. Macros defined in the system headers are
+               not predefined macros and are not affected by the -U option.
+
+   Linker Options
+     -h [system|default]_alloc
+               The -h system_alloc option causes the compiler to use the
+               native malloc implementation provided by the OS. By default,
+               the compiler uses a modified malloc implementation which
+               offers better support for Cray memory needs.
+
+               In the CCS environment, -h default_alloc is not supported
+               and the default is -h system_alloc.
+
+               Default: default_alloc
+
+     -h dynamic
+               Directs the compiler driver to link dynamic libraries at
+               runtime. This option is used to create dynamically linked
+               executable files and may not be used with the -h static or
+               -h shared options. Note that the preferred invocation is to
+               call the generic cc command with the -dynamic option, rather
+               than using this compiler specific option. See the cc(1) man
+               page.
+
+     -h [no]pgas_runtime
+               The -h pgas_runtime option directs the compiler driver to
+               link with the runtime libraries required when linking
+               programs that use UPC, or coarrays. In general, aprun must
+               be used to launch the resulting executable.
+
+               The -hnopgas_runtime option prevents this runtime library
+               environment from being added to the link line.
+
+               Use the -hnopgas_runtime option when you have a program,
+               that does not use UPC or coarrays, and you wish to execute
+               it outside of the aprun/alps job launch context. For
+               example, you may wish to test a serial program which does
+               not contain any UPC or coarray code on a login or service
+               node, or fork/exec an executable on a compute node. Also,
+               compile non-coarray Fortran using the -hnocaf option.
+
+               In the CCS environment -hpgas_runtime is not supported and
+               -hnopgas_runtime is default.
+
+               Default: pgas_runtime
+
+     -h shared Creates a library which may be dynamically linked at
+               runtime. Note that the preferred invocation is to call the
+               generic cc command with the -shared option, rather than
+               using this compiler specific option. See the cc(1) man page.
+
+     -h static Directs the linker to use the static version of the
+               libraries, not the dynamic version of the libraries, to
+               create an executable file. Note that the preferred
+               invocation is to call the generic cc command with the
+               -static option. See the cc(1) man page.
+
+     -l libname
+               Directs the compiler driver to search for the specified
+               object library file when linking an executable file. To
+               request more than one library file, specify multiple -l
+               options.
+
+               When statically linking, the compiler driver searches for
+               libraries by prepending ldir/lib on the front of libname and
+               appending .a on the end of it, for each ldir that has been
+               specified by using the -L option. It uses the first file it
+               finds.
+
+               When dynamically linking, the library search process is
+               similar to the static case, with a few differences. The
+               compiler driver searches for libraries by prepending
+               ldir/lib on the front of libname and appending .so on the
+               end of it, for each ldir that has been specified by using
+               the -L option. If a matching .so is not found, the compiler
+               driver replaces .so with .a and repeats the process from the
+               beginning. It uses the first file it finds.
+
+               There is no search order dependency for libraries.
+
+               If you specify personal libraries by using the -l command
+               line option, as in the following example, those libraries
+               are added before the default CCE library list. (The -l
+               option is passed to the linker.)
+
+               % cc -l mylib target.c
+
+               When the previous command line is issued, the linker looks
+               for a library named libmylib.a (following the naming
+               convention) and adds it to the top of the list of default
+               libraries.
+
+     -L ldir   Changes the -l option search algorithm to look for library
+               files in directory ldir during link time. To request more
+               than one library directory, specify multiple -L options.
+
+               The linker searches for library files in the compiler
+               release-specific directories.
+
+               Note:  Multiple -L options are treated cumulatively as if
+               all ldir arguments appeared on one -L option preceding all
+               -l options. Therefore, do not attempt to link functions of
+               the same name from different libraries through the use of
+               alternating -L and -l options.
+
+     -o outfile
+               Produces an absolute binary file named outfile. A file named
+               a.out is produced by default. When this option is used in
+               conjunction with the -c option and a single source file, a
+               relocatable object file named outfile is produced.
+
+     files     The source files to be compiled or assembled. Valid file
+               suffixes are .c and .i.
+
+   Miscellaneous Options
+     -h [no]acc
+               Enables or disables the compiler recognition of OpenACC
+               accelerator directives. The default is -h acc. For details,
+               see Cray C and C++ Reference Manual, and the
+               intro_openacc(7) man page.
+
+     -h acc_model=option[:option] ...
+               Explicitly control execution and memory model utilized by
+               the accelerator support system. The option arguments
+               identify the type of behavior desired. There are three
+               option sets, only one member of a set may be used at a time;
+               however, all three sets may be used together.
+
+               Default: auto_async_kernel:fast_addr:no_deep_copy
+
+               option Set 1:
+
+               auto_async_none
+                         Execute kernels and updates synchronously, unless
+                         there is an async clause present on the kernels or
+                         update directive.
+
+               auto_async_kernel
+                         Default. Execute all kernels asynchronously
+                         ensuring program order is maintained.
+
+               auto_async_all
+                         Execute all kernels and data transfers
+                         asynchronously, ensuring program order is
+                         maintained.
+
+               option Set 2:
+
+               no_fast_addr
+                         Use default types for addressing.
+
+               fast_addr Default. Attempt to use 32 bit integers in all
+                         addressing to improve performance. Base addresses
+                         remain as 64 bit. The performance is improved by
+                         potentially using fewer registers and faster
+                         arithmetic for offset calculations. This
+                         optimization may result in incorrect behavior for
+                         codes that make use within accelerator regions of
+                         any of the following: very large arrays (offsets
+                         would require greater than 32 bits); very large
+                         array lower bounds (max offset plus lower bound is
+                         greater than 32 bits); bitfields/other bit
+                         operations.
+
+               option Set 3:
+
+               no_deep_copy
+                         Default. Do not look inside of an object type to
+                         transfer sub-objects. Allocatable members of
+                         derived type objects will not be allocated on the
+                         device.
+
+               deep_copy (Fortran only) Look inside of derived type objects
+                         and recreate the derived type on the accelerator
+                         recursively. A derived type object that contains
+                         an allocatable member will have memory allocated
+                         on the device for the member.
+
+     -h cpu=target_system
+               Specifies the target Cray system on which the absolute
+               binary file is to be executed, where target_system can be
+               either x86-64 or opteron (single or dual-core), barcelona or
+               shanghai (quad-core), istanbul (6-core), mc8 (8-core), mc12
+               (12-core), interlagos (16-core), interlagos-cu (8-compute
+               unit), abudhabi (16-core), abudhabi-cu (8-compute unit),
+               ivybridge, sandybridge, or haswell.
+
+               The interlagos and abudhabi processors contain up to 8
+               compute units, each of which contains two integer cores and
+               a shared FPU. These targets assume that the user intends to
+               run with one thread per core (up to 16 per processor), while
+               the cpu-cu target assumes that the user intends to run with
+               one thread per compute unit (up to 8 per processor or one
+               thread per FPU).
+
+               If target_system is set during compilation of any source
+               file, it must be set to the same target during linking and
+               loading.
+
+               Rather than setting this option directly, users should load
+               one of the targeting modules (craype-mc12 or craype-
+               interlagos-cu, for example). The targeting modules set
+               CRAY_CPU_TARGET and define paths to the corresponding
+               libraries. The compiler driver script translates
+               CRAY_CPU_TARGET to the corresponding cpu=target_system
+               option when calling the compiler.
+
+               If a user wishes to override the current target_system value
+               set by the module environment (via the CRAY_CPU_TARGET
+               definition), they should do so by specifying
+               -hcpu=target_system on the compiler command line.
+
+     -h [no]fp_trap
+               Controls whether the compiler generates code compatible with
+               floating point traps being enabled.
+
+               Default: fp_trap, if traps are enabled using the -K trap
+               option, or if -Ofp[0,1] is in effect. Otherwise, the default
+               is nofp_trap.
+
+     -h ident=name
+               Changes the ident name to name. This name is used as the
+               module name in the object file (.o suffix) and assembler
+               file (.s suffix). Regardless of whether name is specified or
+               the default is used, the following transformations are
+               performed on name:
+
+               ·  All . characters in the ident name are changed to $.
+
+               ·  If the ident name starts with a number, a $ is added to
+                  the beginning of the ident name.
+
+               The default is the file name specified on the command line.
+
+     -h list=opt
+               Allows you to create listings and control their formats. The
+               listings are written to source_file_name_without_suffix.lst.
+
+               The values for opt are:
+
+             --------------------------------------------------------------
+             opt          Description
+             --------------------------------------------------------------
+             a            Use all list options;
+                          source_file_name_without_suffix.lst includes
+                          summary report, options report, and source
+                          listing.
+             d            Decompiles (translates) the intermediate
+                          representation of the compiler into listings that
+                          resemble the format of the source code. This is
+                          performed twice, resulting in two output files,
+                          at different points during the optimization
+                          process. You can use these files to examine the
+                          restructuring and optimization changes made by
+                          the compiler, which can lead to insights about
+                          changes you can make to your source code to
+                          improve its performance.
+                          The compiler produces two decompilation listing
+                          files with these extensions per specified source
+                          file: .opt and .cg. The compiler generates the
+                          .opt file after applying most high-level loop
+                          nest transformations to the code. The code
+                          structure of this listing most resembles your
+                          source code and is readable by most users. In
+                          some cases, because of optimizations, the
+                          structure of the loops and conditionals will be
+                          significantly different than the structure in
+                          your source file.
+                          The .cg file contains a much lower level of
+                          decompilation. It is quite close to what will be
+                          produced as assembly output. This version
+                          displays the intermediate text after all vector
+                          translation and other optimizations have been
+                          performed. An intimate knowledge of the hardware
+                          architecture of the system is helpful to
+                          understanding this listing.
+                          The .opt and .cg files are intended as a tool for
+                          performance analysis and are not valid source
+                          code. The format and contents of the files can be
+                          expected to change from release to release.
+             e            Expand include files.
+                          Using this option may result in a very large
+                          listing file. All system include files are also
+                          expanded.
+             i            Intersperse optimization messages within the
+                          source listing rather than at the end.
+             m            Create loopmark listing;
+                          source_file_name_without_suffix.lst includes
+                          summary report and source listing.
+             s            Create a complete source listing (include files
+                          not expanded).
+             T            Retains file.T after processing rather than
+                          deleting it.
+             --------------------------------------------------------------
+
+     -h [no]memory_alloc_intrinsics
+               Enables or disables compiler recognition and replacement of
+               the malloc(), calloc(), realloc(), and free() memory
+               allocation routines with calls to intrinsics. The default is
+               -hmemory_alloc_intrinsics
+
+     -h network=nic
+               Specifies the target machine's system interconnection
+               network. Currently, the supported values for nic are gemini
+               and aries.
+
+     -h nodwarf
+               Disables DWARF generation during compilation. By default,
+               DWARF source line information is generated to support
+               traceback analysis. Use this option to disable the
+               generation of DWARF source line information. This option has
+               no affect if -g or -G dbg_opt is specified.
+
+     -h [no]omp
+               Enables or disables compiler recognition of OpenMP
+               directives. If -O0 is specified, then -h noomp is implied.
+               The default is -h omp.
+
+     -h pic, -h PIC
+               Generates position independent code (PIC), which allows a
+               virtual address change from one process to another, as is
+               necessary in the case of shared, dynamically linked objects.
+               The virtual addresses of the instructions and data in PIC
+               code are not known until dynamic link time.
+
+     -h prototype_intrinsics
+               Simulates the effect of including intrinsics.h at the
+               beginning of a compilation. Use this option if the source
+               code does not include the intrinsics.h statement and you
+               cannot modify the code. This option is off by default.
+
+     -h [no]threadsafe
+               Enables or disables the generation of threadsafe code. Code
+               that is threadsafe can be used with pthreads and OpenMP.
+
+               C code compiled with -h threadsafe (the default) cannot be
+               linked with C code compiled with -h nothreadsafe.
+
+               The default is -h threadsafe.
+
+     -h upc    Enables compilation of Unified Parallel C (UPC) code. UPC is
+               a C language extension for parallel program development that
+               allows you to explicitly specify parallel programming
+               through language syntax rather than through library
+               functions such as are used in MPI or SHMEM. For details on
+               supported UPC functions, see the Cray C and C++ Reference
+               Manual.
+
+               In the CCS environment, -hupc is not supported.
+
+               This option is off by default.
+
+     -K trap=opt[,opt] ...
+               Enable traps for the specified exceptions. By default, no
+               exceptions are trapped. Enabling traps using this option
+               also has the effect of setting -h fp_trap.
+
+               If the specified options contradict each other, the last
+               option has priority. For example, -Ktrap=none,fp is
+               equivalent to -Ktrap=fp.
+
+               This option does not affect compile time optimizations; it
+               detects runtime exceptions. This option is processed only at
+               link time and affects the entire program; it is not
+               processed when compiling subprograms. Therefore, traps may
+               be set using this command line option at the beginning of
+               execution of the main program only. The program may
+               subsequently change these settings by calling intrinsic or
+               library procedures. Use of this option may require the
+               specification of -hfp_trap when compiling other files of the
+               application.
+
+               opt       Exceptions
+
+               denorm    Trap on denormalized operands.
+
+               divz      Trap on divide-by-zero.
+
+               fp        Trap on divz, inv, or ovf exceptions.
+
+               inexact   Trap on inexact result (i.e. rounded result).
+                         Enabling traps for inexact results is not
+                         recommended.
+
+               inv       Trap on invalid operation.
+
+               none      Disables all traps (default).
+
+               ovf       Trap on overflow (i.e. the result of an operation
+                         is too large to be represented).
+
+               unf       Trap on underflow (i.e. the result of an operation
+                         is too small to be represented).
+
+     -V        Displays compiler version information. If the command line
+               specifies no source file, no compilation occurs. Version
+               information consists of the product name, the version
+               number, and the current date and time.
+
+     -X  npes  Specifies the number of processing elements (PEs) that will
+               be specified through aprun at job launch. The value for npes
+               can range from 1 through 2**31 - 1 inclusive on Cray
+               systems.
+
+               Ensure that you compile all object files with the same -X
+               npes value and run the resulting executable with that number
+               of PEs. If you use mixed -X  npes values or if the number of
+               PEs provided at run time differs from the -X npes value, a
+               run time error is generated.
+
+               The number of PEs to use cannot be changed at link or run
+               time. You must recompile the program with a different value
+               for npes to change the number of PEs.
+
+#pragma DIRECTIVES
+     For a description of #pragma directives, including OpenMP, OpenACC,
+     and UPC directives, see the Cray C and C++ Reference Manual and the
+     intro_pragmas(1), and intro_openacc(7) man pages.
+
+COMPILE TIME ENVIRONMENT VARIABLES
+     For compile time, run time, and OpenMP environment variables, refer to
+     the Cray C and C++ Reference Manual.
+
+FILES
+     By default, the compilation process creates an absolute binary file
+     named a.out that reflects the contents of the source files and any
+     referenced library functions. File a.out can then be executed on the
+     target compute nodes. The compiler commands accept several types of
+     file arguments, as explained in the following paragraphs.
+
+     The cc command interprets files with .c or .i suffixes as C source
+     files. The source files are compiled, and each corresponding object
+     code is left in a file whose name is that of the source file, with .o
+     substituted for the previous suffix. If no options are selected to
+     control the compilation process, the cc command automatically calls
+     the linker. The linker uses file.o as input and produces the
+     executable file.
+
+     Files whose names end with .s are interpreted as assembly language
+     source files. They are assembled, and each corresponding object code
+     is left in a file. The file name is that of the source file, with .o
+     substituted for .s. Again, the linker uses file.o as input and
+     produces the executable file.
+
+     Any compatible object files whose names end with .o, plus files whose
+     names end with no suffix or a suffix other than those mentioned above
+     (for example, file.a), are passed to the linker (in the order
+     specified on the command line) to produce the executable file.
+
+     With the use of appropriate options, compilation can be terminated
+     early to produce one of several intermediate translations, including
+     object files (-c option), assembly source expansions for C code (-S
+     option), or the output of the preprocessor phase of the compiler (-P
+     and -E options). In general, the intermediate files can be saved and
+     later resubmitted to the cc command, with other files or libraries
+     included as necessary.
+
+     The following summarizes the files used by the C compiler:
+
+     --------------------------------------------------------------
+     File Name    Description
+     --------------------------------------------------------------
+     a.out        Default name of the executable output file
+     file.a       Library input file
+     file.c       C source file
+     file.i       Preprocessor output file
+     file.L       Pseudo-CAL listing file
+     file.o       Object file
+     file.s       Assembly language source file
+     file.V       Report file for -h report
+     --------------------------------------------------------------
+
+SEE ALSO
+     crayCC(1), crayftn(1), aprun(1), explain(1), intro_openacc(7)
+
+     Cray C and C++ Reference Manual
+
+     Cray Application Developer's Environment User's Guide
+
+     Cray Fortran Reference Manual
