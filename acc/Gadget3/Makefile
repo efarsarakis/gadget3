@@ -201,6 +201,16 @@ GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
 OPTIMIZE = -O3
 endif
 
+ifeq ($(SYSTYPE),"acc-swan")
+CC       = cc
+CXX      = cpc
+FC       = cc
+GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
+GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
+
+OPTIMIZE = -O3 -target-accel=nvidia35
+endif
+
 
 
 ifeq ($(SYSTYPE),"mvapich-intel")
