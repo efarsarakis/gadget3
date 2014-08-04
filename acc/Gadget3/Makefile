@@ -198,7 +198,7 @@ FC       = cc
 GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
 GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
 
-OPTIMIZE = -g
+OPTIMIZE = -O2
 endif
 
 ifeq ($(SYSTYPE),"acc-swan")
