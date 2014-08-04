@@ -26,4 +26,4 @@ export OMP_NUM_THREADS=1
 
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
-aprun -n 38 -N 19 ./N-GenIC ics.param
+aprun -n 38 ./N-GenIC ics.param
