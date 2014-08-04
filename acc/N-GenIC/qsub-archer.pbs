@@ -6,8 +6,8 @@
 
 # PBS job options (name, compute nodes, job time)
 #PBS -N GadgetTest
-#PBS -l select=5
-#PBS -l walltime=00:50:00
+#PBS -l select=2
+#PBS -l walltime=00:10:00
 
 # Replace [budget code] below with your project code (e.g. t01)
 #PBS -A d59
@@ -26,4 +26,4 @@ export OMP_NUM_THREADS=1
 
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
-aprun -n 120 ./N-GenIC ics_medium.param
+aprun -n 38 -N 19 ./N-GenIC ics.param
