@@ -1528,7 +1528,7 @@ void gravity_tree(void)
 			{
 
 //#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
-#pragma acc parallel loop //private(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
+#pragma acc parallel loop gang worker vector //private(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
 		m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_index, m_break, m_no, m_exitFlag) \
 				reduction(+:m_break,m_exitFlag)
 			for (m_index=0; m_index<m_num_active_part; m_index++) //manos
