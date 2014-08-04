@@ -1,0 +1,3558 @@
+s1361615@eslogin001:~/work/gadget3/acc/Gadget3> more Gadget3.o457351 
+--------------------------------------------------------------------------------
+*** s1361615   Job: 457351.sdb   started: 04/08/14 04:27:26   host: mom2 ***
+*** s1361615   Job: 457351.sdb   started: 04/08/14 04:27:26   host: mom2 ***
+*** s1361615   Job: 457351.sdb   started: 04/08/14 04:27:26   host: mom2 ***
+*** s1361615   Job: 457351.sdb   started: 04/08/14 04:27:26   host: mom2 ***
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-----------
+AvailMem:	 Largest =  128899.34 Mb (on task=24), Smallest =  128729.26 Mb 
+(on task=0), Average =  128791.92 Mb
+Total Mem:	 Largest =  129149.62 Mb (on task=0), Smallest =  129149.62 Mb (
+on task=0), Average =  129149.62 Mb
+Committed_AS:	 Largest =     420.37 Mb (on task=0), Smallest =     250.29 Mb (
+on task=24), Average =     357.71 Mb
+SwapTotal:	 Largest =       0.00 Mb (on task=0), Smallest =       0.00 Mb (
+on task=0), Average =       0.00 Mb
+SwapFree:	 Largest =       0.00 Mb (on task=0), Smallest =       0.00 Mb (
+on task=0), Average =       0.00 Mb
+AllocMem:	 Largest =     420.37 Mb (on task=0), Smallest =     250.29 Mb (
+on task=24), Average =     357.71 Mb
+--------------------------------------------------------------------------------
+-----------
+mom2
+Task with the maximum commited memoryUsing 1 OpenMP threads
+
+This is P-Gadget, version 3.0.
+
+Running on 38 MPI tasks.
+
+Using 1 OpenMP threads
+
+Code was compiled with settings:
+
+        PERIODIC
+        PMGRID=512
+        MULTIPLEDOMAINS=4
+        PEANOHILBERT
+        WALLCLOCK
+        MYSORT
+        NO_ISEND_IRECV_IN_DOMAIN
+        FIX_PATHSCALE_MPI_STATUS_IGNORE_BUG
+        LONGIDS
+        DEBUG
+
+Size of particle structure       120  [bytes]
+
+Size of sph particle structure   76  [bytes]
+Obtaining parameters from file 'param.txt':
+InitCondFile                       ../ICs/ICs_256
+OutputDir                          ../output
+MaxMemSize                         2000
+BoxSize                            250
+NumFilesWrittenInParallel          4
+TimebinFile                        timebins.txt
+EnergyFile                         energy.txt
+InfoFile                           info.txt
+TimingsFile                        timings.txt
+CpuFile                            cpu.txt
+SnapshotFileBase                   snap
+RestartFile                        restart
+TimeLimitCPU                       36000
+ResubmitOn                         0
+ResubmitCommand                    autosubmit
+ICFormat                           1
+SnapFormat                         1
+ComovingIntegrationOn              1
+NumFilesPerSnapshot                1
+CoolingOn                          0
+StarformationOn                    0
+TimeBegin                          0.015625
+TimeMax                            1
+Omega0                             0.3
+OmegaLambda                        0.7
+OmegaBaryon                        0.04
+HubbleParam                        0.7
+PeriodicBoundariesOn               1
+MinGasHsmlFractional               0.1
+SofteningGas                       0
+SofteningHalo                      0.05
+SofteningDisk                      0
+SofteningBulge                     0
+SofteningStars                     0
+SofteningBndry                     0
+SofteningGasMaxPhys                0
+SofteningHaloMaxPhys               0.05
+SofteningDiskMaxPhys               0
+SofteningBulgeMaxPhys              0
+SofteningStarsMaxPhys              0
+SofteningBndryMaxPhys              0
+OutputListOn                       0
+OutputListFilename                 outputs.txt
+TimeBetSnapshot                    1.1
+TimeOfFirstSnapshot                1
+CpuTimeBetRestartFile              7200
+TimeBetStatistics                  0.5
+MaxRMSDisplacementFac              0.25
+TypeOfTimestepCriterion            0
+ErrTolIntAccuracy                  0.025
+MaxSizeTimestep                    0.04
+MinSizeTimestep                    0
+ErrTolTheta                        0.8
+TypeOfOpeningCriterion             1
+ErrTolForceAcc                     0.008
+TreeDomainUpdateFrequency          0.2
+DesNumNgb                          48
+MaxNumNgbDeviation                 1
+ArtBulkViscConst                   1
+InitGasTemp                        145
+MinGasTemp                         5
+CourantFac                         0.15
+PartAllocFactor                    2
+BufferSize                         150
+UnitLength_in_cm                   3.08568e+24
+UnitMass_in_g                      1.989e+43
+UnitVelocity_in_cm_per_s           100000
+GravityConstantInternal            0
+
+stdout will now appear in the file '../output/run_38/logfile.txt'
+
+reading file `../ICs/ICs_256.1' on task=2 (contains 458752 particles.)
+distributing this file to tasks 2-2
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.3' on task=4 (contains 458752 particles.)
+distributing this file to tasks 4-4
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+reading file `../ICs/ICs_256.2' on task=3 (contains 458752 particles.)
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+distributing this file to tasks 3-3
+reading block 0 (Coordinates)...
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.5' on task=6 (contains 458752 particles.)
+distributing this file to tasks 6-6
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.7' on task=8 (contains 458752 particles.)
+distributing this file to tasks 8-8
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.6' on task=7 (contains 458752 particles.)
+distributing this file to tasks 7-7
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.4' on task=5 (contains 458752 particles.)
+distributing this file to tasks 5-5
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.8' on task=9 (contains 458752 particles.)
+distributing this file to tasks 9-9
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.10' on task=11 (contains 458752 particles.)
+distributing this file to tasks 11-11
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.11' on task=12 (contains 458752 particles.)
+distributing this file to tasks 12-12
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.9' on task=10 (contains 458752 particles.)
+distributing this file to tasks 10-10
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 1 (Velocities)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.12' on task=13 (contains 458752 particles.)
+distributing this file to tasks 13-13
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.13' on task=14 (contains 458752 particles.)
+distributing this file to tasks 14-14
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.15' on task=16 (contains 458752 particles.)
+distributing this file to tasks 16-16
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.14' on task=15 (contains 458752 particles.)
+distributing this file to tasks 15-15
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.16' on task=17 (contains 458752 particles.)
+distributing this file to tasks 17-17
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.19' on task=20 (contains 458752 particles.)
+distributing this file to tasks 20-20
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.18' on task=19 (contains 458752 particles.)
+distributing this file to tasks 19-19
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.17' on task=18 (contains 458752 particles.)
+distributing this file to tasks 18-18
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.23' on task=24 (contains 458752 particles.)
+distributing this file to tasks 24-24
+
+reading file `../ICs/ICs_256.22' on task=23 (contains 458752 particles.)
+distributing this file to tasks 23-23
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.21' on task=22 (contains 458752 particles.)
+distributing this file to tasks 22-22
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.20' on task=21 (contains 458752 particles.)
+distributing this file to tasks 21-21
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.26' on task=27 (contains 458752 particles.)
+distributing this file to tasks 27-27
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.24' on task=25 (contains 458752 particles.)
+distributing this file to tasks 25-25
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.27' on task=28 (contains 458752 particles.)
+distributing this file to tasks 28-28
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+reading file `../ICs/ICs_256.25' on task=26 (contains 458752 particles.)
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+distributing this file to tasks 26-26
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+reading block 0 (Coordinates)...
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.30' on task=31 (contains 458752 particles.)
+distributing this file to tasks 31-31
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.31' on task=32 (contains 458752 particles.)
+distributing this file to tasks 32-32
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.29' on task=30 (contains 458752 particles.)
+distributing this file to tasks 30-30
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.28' on task=29 (contains 458752 particles.)
+distributing this file to tasks 29-29
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.33' on task=34 (contains 458752 particles.)
+distributing this file to tasks 34-34
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.35' on task=36 (contains 458752 particles.)
+distributing this file to tasks 36-36
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.32' on task=33 (contains 458752 particles.)
+distributing this file to tasks 33-33
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+
+reading file `../ICs/ICs_256.34' on task=35 (contains 458752 particles.)
+distributing this file to tasks 35-35
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    458752  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 2 (ParticleIDs)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+
+reading file `../ICs/ICs_256.36' on task=37 (contains 262144 particles.)
+distributing this file to tasks 37-37
+Type 0 (gas):          0  (tot=     0000000000) masstab=0
+Type 1 (halo):    262144  (tot=     0016777216) masstab=7.75466
+Type 2 (disk):         0  (tot=     0000000000) masstab=0
+Type 3 (bulge):        0  (tot=     0000000000) masstab=0
+Type 4 (stars):        0  (tot=     0000000000) masstab=0
+Type 5 (bndry):        0  (tot=     0000000000) masstab=0
+
+reading block 0 (Coordinates)...
+reading block 1 (Velocities)...
+reading block 2 (ParticleIDs)...
+reading block 3 (Masses)...
+reading block 5 (InternalEnergy)...
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  10    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+  37    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  36    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  37    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  30    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  37    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  36    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+--------------------------------------------------------------------------------
+--------
+  36    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  27    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+--------------------------------------------------------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+  37    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  28    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  36    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  28    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  29    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  28    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  29    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  37    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  29    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  28    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  37    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  29    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  28    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  37    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  29    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  28    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  37    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  29    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  28    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  37    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  28    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  29    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  37    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  29    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  28    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  37   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  28    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  29    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  37   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  28   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  29    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  28   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  29   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  37   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  28   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  29   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  37   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  29   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  28   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  37   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  29   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  28   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  37   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  29   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  28   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  37   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  29   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  28   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  37   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  29   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  28   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  37   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  29   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  28   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  37   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  29   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  28   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  37   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  28   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  37   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  28   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  37   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  28   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  37   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  28   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  37   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  28   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  37   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  28   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  37   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  28   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  37   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  28   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  37   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  28   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  37   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  28   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  37   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  37   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  28   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+--------------------------------------------------------------------------------
+--------
+  28   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+
+--------------------------------------------------------------------------------
+--------
+
+Task=37: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+Task=28: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+task 37: endrun called with an error level of 812
+
+task 28: endrun called with an error level of 812
+
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+  26    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  26    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  26    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  26    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  26    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  26    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  26    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  26    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  26    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  26    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  26   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  26   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  26   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  26   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  26   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  26   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  26   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  26   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  26   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  26   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  26   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  26   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  26   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  26   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+  26   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  26   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  32    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  26   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  32    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  26   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  32    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  32    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  26   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  32    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  26   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  32    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  26   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  32    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  26   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  32    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+--------------------------------------------------------------------------------
+--------
+  32    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+
+  32    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  32   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  32   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+Task=26: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+task 26: endrun called with an error level of 812
+
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  32   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  32   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+  32   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  32   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  35    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  32   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  35    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  32   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  35    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  32   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  35    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  35    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  32   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  35    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  32   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  35    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  32   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  32   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  32   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  35    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  32   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  35    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+--------------------------------------------------------------------------------
+--------
+  32   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  35    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  32   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  25    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  35   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  32   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  25    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  35   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  32   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  25    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  32   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  35   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  25    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  35   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  32   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  25    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  35   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  25    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  32   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+  25    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  35   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+
+  25    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  33    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+io   2    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_p
+eriodic.c/121
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  10    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+   8    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+--------------------------------------------------------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+  23    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+--------------------------------------------------------------------------------
+--------
+   2    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  11    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+   8    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  23    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  13    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  15    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+   8    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  11    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  15    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  23    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  11    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  15    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  23    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  15    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+   5    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  13    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  15    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  23    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  11    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  23    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  11    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  15    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  13    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  23    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  15    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  23    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  13    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  15    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  15    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  23    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  15    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  23    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+--------------------------------------------------------------------------------
+--------
+  13    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  15   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  23   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  15   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  13    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  23   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   7    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  23   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  13    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  15   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  23   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  13    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  15   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   7    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  13    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  15   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  23   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  13    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  15   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   7    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  23   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  15   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  13   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  23   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  23   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  15   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  13   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   7    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  23   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  15   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  13   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   7    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  23   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  15   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  13   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  15   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   7    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  15   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  13   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   7    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  23   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  13   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  15   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  23   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  13   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  23   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   7    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  13   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  23   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  15   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  23   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   7    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  15   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   7    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  23   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  13   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  15   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   7   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  13   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   7   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  15   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  13   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   7   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  15   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  23   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  13   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  15   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  23   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  13   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   7   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  15   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  23   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  13   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   7   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  15   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  13   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  23   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   7   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  15   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  13   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+--------------------------------------------------------------------------------
+--------
+   7   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  13   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+
+   7   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  13   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  23   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   7   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+Task=15: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  23   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  13   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+--------------------------------------------------------------------------------
+--------
+task 15: endrun called with an error level of 812
+
+  13   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   7   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  13   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+
+   7   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  13   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+Task=23: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+--------------------------------------------------------------------------------
+--------
+   7   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+task 23: endrun called with an error level of 812
+
+   7   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+Task=13: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+   7   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+task 13: endrun called with an error level of 812
+
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+   7   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   7   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+--------------------------------------------------------------------------------
+--------
+   7   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  22    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+   7   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+--------------------------------------------------------------------------------
+--------
+  22    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+   7   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+   6    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+   7   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+   6    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  22    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   6    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+--------------------------------------------------------------------------------
+--------
+   7   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  22    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+   7   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  22    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+   1    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+   6    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  22    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+--------------------------------------------------------------------------------
+--------
+   1    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+   6    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  22    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   1    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   6    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+
+   1    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+   6    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   1    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+Task=7: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+  22    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+task 7: endrun called with an error level of 812
+
+   1    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  22    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+   1    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  22    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+   1    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  22   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+   1    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  22   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   1    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  22   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   1   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  22   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   1   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+--------------------------------------------------------------------------------
+--------
+  22   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   1   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  22   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   1   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   9    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  22   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   1   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   9    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  22   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+   9    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   1   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   9    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+   1   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   9    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  22   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+   1   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+   9    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+   1   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  22   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   9    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   1   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  22   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+   9    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  22   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+--------------------------------------------------------------------------------
+--------
+   1   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  22   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   1   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+   4    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  22   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   1   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   4    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+   9    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  22   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   9    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+   4    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  22   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   9   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+   4    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  22   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   9   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   4    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  22   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   9   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   4    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  22   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   9   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  22   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   9   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  22   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   9   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  22   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+   9   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+--------------------------------------------------------------------------------
+--------
+   9   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+
+   9   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+Task=22: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+   9   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+task 22: endrun called with an error level of 812
+
+   9   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+   9   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+   9   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+--------------------------------------------------------------------------------
+--------
+   9   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   9   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  16    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+   9   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   9   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  16    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  16    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   9   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  16    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  16    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  16    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+   9   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   9   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  16    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  16    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   9   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  16    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+   9   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+--------------------------------------------------------------------------------
+--------
+  16    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  18    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+
+  18    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  16   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+Task=9: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+  18    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  16   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+task 9: endrun called with an error level of 812
+
+  18    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  16   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  18    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  16   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  18    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  18    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  16   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+--------------------------------------------------------------------------------
+--------
+  18    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  16   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  18    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  20    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  18    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  16   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  20    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  18   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  16   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  20    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  18   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  20    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  18   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  16   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  20    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  18   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  20    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  16   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  18   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  16   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  18   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  20    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  16   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  18   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  20    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  18   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  16   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  20    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  18   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  16   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  20    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  18   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  16   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  20   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  16   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  20   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  18   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  16   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+--------------------------------------------------------------------------------
+--------
+  20   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  16   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  18   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  20   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  21    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  16   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  18   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  21    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  20   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  18   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  16   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  20   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  18   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  21    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  16   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  18   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  21    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  20   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  16   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  21    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+--------------------------------------------------------------------------------
+--------
+  20   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+
+  18   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  20   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  21    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+Task=16: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  18   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  20   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+task 16: endrun called with an error level of 812
+
+  21    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  20   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  18   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  21    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  20   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  21    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  20   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  18   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  21    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  20   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  21   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  18   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  21   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  20   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  18   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  21   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  20   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+--------------------------------------------------------------------------------
+--------
+  21   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  20   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+
+  21   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  20   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+Task=18: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  20   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  21   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+task 18: endrun called with an error level of 812
+
+  20   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  21   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+--------------------------------------------------------------------------------
+--------
+  21   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  20   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  20   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  21   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  12    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  21   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+--------------------------------------------------------------------------------
+--------
+  12    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  21   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  12    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+
+--------------------------------------------------------------------------------
+--------
+Task=20: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  21   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+task 20: endrun called with an error level of 812
+
+  12    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  14    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  12    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  14    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+--------------------------------------------------------------------------------
+--------
+  21   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  14    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  12    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  17    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  14    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  21   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  12    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  17    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  21   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  12    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  17    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  14    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  21   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  12    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  14    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  17    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  21   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  14    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  12    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  21   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  17    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  14    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  21   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  17    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  14    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  21   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  12   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  14    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  17    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  12   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  21   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  14   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  12   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  17    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  21   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  14   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+--------------------------------------------------------------------------------
+--------
+  12   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+
+  14   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  17    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+Task=21: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  12   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  14   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  17    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+task 21: endrun called with an error level of 812
+
+  12   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  14   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  17   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  12   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  17   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  14   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  12   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  17   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  12   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  14   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  17   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+--------------------------------------------------------------------------------
+--------
+  17   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  14   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  12   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  14   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  17   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  12   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  19    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  14   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  17   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  12   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  14   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  17   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  19    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  12   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  14   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  17   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  12   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  19    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  14   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  12   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  19    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  17   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  14   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  12   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  14   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  17   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  19    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  14   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  17   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  12   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  14   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  19    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  17   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  19    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  14   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  17   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  12   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  14   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  19    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  12   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  17   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  19    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  14   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  17   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  12   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  19    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  14   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  12   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  17   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  19   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  14   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  12   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+  19   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+
+  17   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+--------------------------------------------------------------------------------
+--------
+  19   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+Task=14: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+
+task 14: endrun called with an error level of 812
+
+  17   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  19   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+Task=12: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  17   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  19   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+task 12: endrun called with an error level of 812
+
+  17   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   2    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  19   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  17   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+
+  19   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  19   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+   2    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+Task=17: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  19   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+task 17: endrun called with an error level of 812
+
+   2    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  19   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   2    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+   2    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  19   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   2    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  19   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+   2    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+   2    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  19   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  10    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   2   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  19   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   2   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  19   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   2   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  10    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  19   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  10    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+   2   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  19   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  10    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+   2   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  19   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  10    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   2   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  10    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   2   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  10    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+   8    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  19   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   2   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  10    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  19   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  10   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+   8    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  19   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   8    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  10   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  19   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  10   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   8    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  10   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   8    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   5    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+   8    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+--------------------------------------------------------------------------------
+--------
+   8    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+
+   5    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   8   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+Task=19: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+   8   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+task 19: endrun called with an error level of 812
+
+   5    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+   8   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   5    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+   8   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  11    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+   8   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   5    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+   8   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+   8   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   5    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+--------------------------------------------------------------------------------
+--------
+   8   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+   5    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  11    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   5    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+   3    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+   8   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  11    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   5    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+   3    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+   5   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+   6    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   5   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   3    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+   6    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+   3    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+   5   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   6    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+   3    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+   1   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   6   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+   5   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   3    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+   6   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   5   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   1   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   6   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   3    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   1   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   5   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   3    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   6   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   1   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   1   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   1   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   1   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   1   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   1   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+
+Task=1: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+task 1: endrun called with an error level of 812
+
+   4    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+   4    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+   4    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+   4    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+   4   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+   4   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   4   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   4   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   4   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   4   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   4   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   4   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+   4   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+   4   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   4   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   2   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+   4   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+   4   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   4   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   4   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   2   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   4   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   2   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   4   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   2   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+   4   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   2   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   4   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   2   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   4   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   2   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   4   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   2   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   4   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+   2   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+
+   2   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+Task=4: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+task 4: endrun called with an error level of 812
+
+  10   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   2   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   2   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   2   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  10   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   2   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  10   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+--------------------------------------------------------------------------------
+--------
+  10   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+
+  10   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+Task=2: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+task 2: endrun called with an error level of 812
+
+  11    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  10   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  10   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  10   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  11    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  10   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  11   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  11   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  10   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  10   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  11   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   8   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  11   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  10   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  11   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  10   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  11   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  10   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   8   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  11   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  10   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   8   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  11   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  10   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   8   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  11   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  10   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   8   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  11   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  10   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  11   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   8   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+--------------------------------------------------------------------------------
+--------
+
+  11   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+   8   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+Task=10: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  11   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   8   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+task 10: endrun called with an error level of 812
+
+   5   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   8   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  11   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   8   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  11   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   8   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   5   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  11   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   8   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   5   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  11   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   8   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  11   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+--------------------------------------------------------------------------------
+--------
+   5   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+
+  11   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   5   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+Task=8: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+  11   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   5   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+task 8: endrun called with an error level of 812
+
+  11   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   5   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   3    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  11   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+   5   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+--------------------------------------------------------------------------------
+--------
+
+   5   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   3    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+   5   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+Task=11: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+   3   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+task 11: endrun called with an error level of 812
+
+   3   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+   5   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   3   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+   3   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+   6   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   5   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   3   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+   5   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   3   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   5   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   3   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   6   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+   5   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   3   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+   6   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+   5   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+   3   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+--------------------------------------------------------------------------------
+--------
+   6   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+
+   3   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   6   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+   3   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+Task=5: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+   6   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+   3   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+task 5: endrun called with an error level of 812
+
+   6   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+   3   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   6   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+   3   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   6   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+   3   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   6   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+   3   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   6   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+   3   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   6   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+   3   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   6   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+   3   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   6   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+   3   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   6   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+   3   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+   6   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+   3   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+   6   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+
+   6   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+Task=3: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+--------------------------------------------------------------------------------
+--------
+task 3: endrun called with an error level of 812
+
+Task=6: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for vari
+able 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 M
+B).
+task 6: endrun called with an error level of 812
+
+dic.c/121
+Task=32: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  25    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  35   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  33    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+task 32: endrun called with an error level of 812
+
+  25    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  33    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  35   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  25   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  33    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  25   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  35   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  33    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  25   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  35   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  33    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  25   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  35   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  33    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  25   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  33    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  35   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  25   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  33    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  35   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  25   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  33    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  35   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  25   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  33   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  35   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  33   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  25   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  35   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  33   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  25   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  35   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  33   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  25   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  35   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  33   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  25   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+------------------------ Allocated Memory Blocks--------------------------------
+--------
+  25   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  33   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  35   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  25   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  35   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  33   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  25   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+--------------------------------------------------------------------------------
+--------
+  35   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  33   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  25   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  35   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  33   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  25   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+--------------------------------------------------------------------------------
+--------
+  31    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  33   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  25   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+
+  31    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  33   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  31    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  25   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+Task=35: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  31    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+task 35: endrun called with an error level of 812
+
+  33   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  25   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  31    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  33   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  25   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  31    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  33   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  25   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  31    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+--------------------------------------------------------------------------------
+--------
+  33   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  31    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+
+  33   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  31    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+Task=25: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  33   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+task 25: endrun called with an error level of 812
+
+  31    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  33   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  33   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  31   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  33   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  31   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+--------------------------------------------------------------------------------
+--------
+  33   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  31   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  33   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  31   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+--------------------------------------------------------------------------------
+--------
+  34    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+
+  31   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  34    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  31   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+Task=33: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  34    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  31   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+task 33: endrun called with an error level of 812
+
+  34    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  31   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  30    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  31   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  34    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  31   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  34    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  31   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  34    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  31   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  30    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  34    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  31   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  30    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  34    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  31   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  30    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  34    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  31   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  30    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  34   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  30    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  31   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  34   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  30    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  31   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  34   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  31   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  30    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  34   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  30    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  31   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  34   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  30   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  31   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  34   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  30   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  31   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  34   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  30   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  31   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  34   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+--------------------------------------------------------------------------------
+--------
+  30   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  34   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+
+  30   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  34   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+Task=31: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  30   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  34   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+task 31: endrun called with an error level of 812
+
+  27    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  34   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  30   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  34   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  30   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  27    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  34   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  30   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  27    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  36    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  30   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  34   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  27    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  30   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  36    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  27    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  34   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  27    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  36    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  27    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  34   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  36    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  27    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  34   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  27    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  34   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  27   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  34   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  36    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  34   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  27   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  34   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  36    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+--------------------------------------------------------------------------------
+--------
+  27   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+
+  36   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  27   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+Task=34: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  36   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  27   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  29   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+task 34: endrun called with an error level of 812
+
+  36   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  27   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  29   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  36   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  29   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  36   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  29   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  36   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  29   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  36   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  29   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  36   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  29   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  36   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  29   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  36   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  29   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+Task   Nr F          Variable      MBytes   Cumulative         Function/File/Lin
+enumber
+  29   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  36   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  29   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  30   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  29   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  36   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  30   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  29   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  30   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+--------------------------------------------------------------------------------
+--------
+  36   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+
+  30   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  36   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+Task=29: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  30   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  36   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+task 29: endrun called with an error level of 812
+
+  30   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  36   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  30   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  27   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  30   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  36   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  27   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  30   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  27   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  36   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  30   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  27   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  36   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  30   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+  27   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+--------------------------------------------------------------------------------
+--------
+  36   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+
+  27   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  36   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  27   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+Task=30: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  36   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+task 30: endrun called with an error level of 812
+
+--------------------------------------------------------------------------------
+--------
+  27   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+
+  27   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+Task=36: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+  27   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+task 36: endrun called with an error level of 812
+
+  27   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+--------------------------------------------------------------------------------
+--------
+  27   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  27   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  27   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  27   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  27   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+
+Task=27: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+task 27: endrun called with an error level of 812
+
+  24    0 0    slabs_per_task      0.0001       0.0001  pm_init_periodi()/pm_per
+iodic.c/121
+  24    1 0   first_slab_of_t      0.0001       0.0003  pm_init_periodi()/pm_per
+iodic.c/124
+  24    2 0        Exportflag      0.0001       0.0004  allocate_memory()/alloca
+te.c/31
+  24    3 0       Exportindex      0.0001       0.0006  allocate_memory()/alloca
+te.c/32
+  24    4 0   Exportnodecount      0.0001       0.0007  allocate_memory()/alloca
+te.c/33
+  24    5 0        Send_count      0.0001       0.0009  allocate_memory()/alloca
+te.c/35
+  24    6 0       Send_offset      0.0001       0.0010  allocate_memory()/alloca
+te.c/36
+  24    7 0        Recv_count      0.0001       0.0012  allocate_memory()/alloca
+te.c/37
+  24    8 0       Recv_offset      0.0001       0.0013  allocate_memory()/alloca
+te.c/38
+  24    9 0     ProcessedFlag      0.8421       0.8434  allocate_memory()/alloca
+te.c/48
+  24   10 0   NextActiveParti      3.3684       4.2118  allocate_memory()/alloca
+te.c/51
+  24   11 0     NextInTimeBin      3.3684       7.5802  allocate_memory()/alloca
+te.c/59
+  24   12 0     PrevInTimeBin      3.3684      10.9487  allocate_memory()/alloca
+te.c/62
+  24   13 0                 P    101.0525     112.0011  allocate_memory()/alloca
+te.c/68
+  24   14 0   DomainStartList      0.0006     112.0017  domain_allocate()/domain
+.c/563
+  24   15 0     DomainEndList      0.0006     112.0023  domain_allocate()/domain
+.c/566
+  24   16 0          TopNodes    917.8244    1029.8267  domain_allocate()/domain
+.c/571
+  24   17 0        domain_key      6.7368    1036.5636  domain_Decompos()/domain
+.c/237
+  24   18 0              toGo      0.0001    1036.5637  domain_Decompos()/domain
+.c/240
+  24   19 0           toGoSph      0.0001    1036.5639  domain_Decompos()/domain
+.c/242
+  24   20 0             toGet      0.0001    1036.5640  domain_Decompos()/domain
+.c/244
+  24   21 0          toGetSph      0.0001    1036.5641  domain_Decompos()/domain
+.c/246
+  24   22 0      list_NumPart      0.0001    1036.5643  domain_Decompos()/domain
+.c/248
+  24   23 0        list_N_gas      0.0001    1036.5644  domain_Decompos()/domain
+.c/250
+  24   24 0         list_load      0.0001    1036.5646  domain_Decompos()/domain
+.c/252
+  24   25 0      list_loadsph      0.0001    1036.5647  domain_Decompos()/domain
+.c/254
+  24   26 0         list_work      0.0003    1036.5650  domain_Decompos()/domain
+.c/256
+  24   27 0      list_worksph      0.0003    1036.5653  domain_Decompos()/domain
+.c/258
+  24   28 0        domainWork     70.6019    1107.1672  domain_Decompos()/domain
+.c/260
+  24   29 0     domainWorkSph     70.6019    1177.7691  domain_Decompos()/domain
+.c/262
+  24   30 0       domainCount     70.6019    1248.3709  domain_Decompos()/domain
+.c/264
+  24   31 0    domainCountSph     70.6019    1318.9728  domain_Decompos()/domain
+.c/266
+--------------------------------------------------------------------------------
+--------
+
+Task=24: Not enough memory in mymalloc_fullinfo() to allocate 988.426 MB for var
+iable 'topNodes' at domain_Decomposition()/domain.c/line 296 (FreeBytes=681.027 
+MB).
+task 24: endrun called with an error level of 812
+
+Application 9669501 resources: utime ~379s, stime ~56s, Rss ~1818560, inblocks ~
+1409632, outblocks ~36424
+--------------------------------------------------------------------------------
+
+Resources requested: ncpus=48,place=free,walltime=00:50:00
+Resources allocated: cpupercent=0,cput=00:00:00,mem=6448kb,ncpus=48,vmem=84008kb
+,walltime=00:00:15
+
+*** s1361615   Job: 457351.sdb   ended: 04/08/14 04:27:40   queue: standard ***
+*** s1361615   Job: 457351.sdb   ended: 04/08/14 04:27:40   queue: standard ***
+*** s1361615   Job: 457351.sdb   ended: 04/08/14 04:27:40   queue: standard ***
+*** s1361615   Job: 457351.sdb   ended: 04/08/14 04:27:40   queue: standard ***
+--------------------------------------------------------------------------------
+s1361615@eslogin001:~/work/gadget3/acc/Gadget3> 
