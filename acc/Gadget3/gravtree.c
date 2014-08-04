@@ -1585,8 +1585,8 @@ void gravity_tree(void)
 
 											if(m_mode != 0 && m_mode != 1)
 											{
-												printf("%d %d %d %d %d\n", m_target, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
-												endrun(444);
+												//manos//printf("%d %d %d %d %d\n", m_target, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
+												//manos//endrun(444);
 											}
 
 											if(m_mode == 0)
