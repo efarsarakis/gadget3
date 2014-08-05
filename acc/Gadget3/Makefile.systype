@@ -11,9 +11,9 @@
 
 #SYSTYPE="swan-cray"
 
-#SYSTYPE="swan-pgi"
+SYSTYPE="swan-pgi"
 
-SYSTYPE="archer"
+#SYSTYPE="archer"
 
 
 

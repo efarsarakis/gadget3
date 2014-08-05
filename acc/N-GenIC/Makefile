@@ -34,8 +34,8 @@ INCL   = allvars.h proto.h  nrsrc/nrutil.h  Makefile
 #SYSTYPE="RZG_LinuxCluster-gcc"
 #SYSTYPE="Solaris"
 
-#SYSTYPE="swan"
-SYSTYPE="archer"
+SYSTYPE="swan"
+#SYSTYPE="archer"
 #SYSTYPE="all-intel"
 #SYSTYPE="mvapich-pgi"
 #SYSTYPE="mvapich-intel"

@@ -1622,11 +1622,8 @@ void gravity_tree(void)
 											m_h_inv = 1.0 / m_h;
 											m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
 
+											m_no = m_maxPart;		/* root node */
 
-
-											{
-												m_no = m_maxPart;		/* root node */
-											}
 
 											while(m_no >= 0)
 											{
@@ -1635,21 +1632,19 @@ void gravity_tree(void)
 													if(m_no < m_maxPart)
 													{
 														/* the index of the node is the index of the particle */
-														if(P[m_no].Ti_current != m_ti_Current)
-														{
-															LOCK_PARTNODEDRIFT;
-			//manos//		#pragma omp critical(_partnodedrift_)
-					////////manos//////// temp commenting to find other problems if there...//////////////////////
-					/////////////
-					////////////
-															//drift_particle(m_no, m_ti_Current);
-															//printf("Drift-particle()");
-															UNLOCK_PARTNODEDRIFT;
-														}
+																							//manos//
+																							//if(P[m_no].Ti_current != m_ti_Current)
+																							//{
+																							//	LOCK_PARTNODEDRIFT;
+																							//#pragma omp critical(_partnodedrift_)
+																							//	drift_particle(m_no, m_ti_Current);
+																							//	printf("Drift-particle()");
+																							//	UNLOCK_PARTNODEDRIFT;
+																							//}
 
-														m_dx = P[m_no].Pos[0] - m_pos_x;
-														m_dy = P[m_no].Pos[1] - m_pos_y;
-														m_dz = P[m_no].Pos[2] - m_pos_z;
+														m_dx = m_PPos[m_no][0] - m_pos_x;
+														m_dy = m_PPos[m_no][1] - m_pos_y;
+														m_dz = m_PPos[m_no][2] - m_pos_z;
 
 														m_dx = NEAREST(m_dx);
 														m_dy = NEAREST(m_dy);
@@ -1754,17 +1749,14 @@ void gravity_tree(void)
 															continue;
 														}
 
-														if(m_nop->Ti_current != m_ti_Current)
-														{
-															LOCK_PARTNODEDRIFT;
-//manos//					#pragma omp critical(_partnodedrift_)
-					////////manos//////// temp commenting to find other problems if there...//////////////////////
-					/////////////
-					////////////
-															//force_drift_node(m_no, m_ti_Current);
-															//printf("Force_drift_node()");
-															UNLOCK_PARTNODEDRIFT;
-														}
+																										//	if(m_nop->Ti_current != m_ti_Current)
+																										//	{
+																										//		LOCK_PARTNODEDRIFT;
+																										//		#pragma omp critical(_partnodedrift_)
+																										//		//force_drift_node(m_no, m_ti_Current);
+																										//		//printf("Force_drift_node()");
+																										//		UNLOCK_PARTNODEDRIFT;
+																										//	}
 
 														m_mass = m_nop->u.d.mass;
 
