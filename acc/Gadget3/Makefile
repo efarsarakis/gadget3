@@ -188,7 +188,7 @@ CXX      = cpc
 FC       = cc
 
 
-OPTIMIZE = -O3
+OPTIMIZE = -g
 endif
 
 ifeq ($(SYSTYPE),"swan-cray")
