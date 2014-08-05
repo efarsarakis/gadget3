@@ -1467,7 +1467,6 @@ void gravity_tree(void)
 			MyDouble m_PPos[All.MaxPart][3];
 			short int m_PType[All.MaxPart];
 
-			MyFloat m_GravDataGetPos[All.MaxPart][3], m_GraveDataGetOldAcc[All.MaxPart], m_POldAcc[All.MaxPart];
 
 			//manos get active
 
@@ -1491,16 +1490,6 @@ void gravity_tree(void)
 				m_PPos[m_index][1]=P[m_index].Pos[1];
 				m_PPos[m_index][2]=P[m_index].Pos[2];
 				m_PType[m_index]=P[m_index].Type;
-
-				m_POldAcc[m_index] = P[m_index].OldAcc;
-
-				m_GraveDataGetOldAcc[m_index] = GravDataGet[m_index].OldAcc;
-
-				m_GravDataGetPos[m_index][0] = GravDataGet[m_index].Pos[0];
-				m_GravDataGetPos[m_index][1] = GravDataGet[m_index].Pos[1];
-				m_GravDataGetPos[m_index][2] = GravDataGet[m_index].Pos[2];
-
-
 			}
 
 			//NextParticle=m_temp2;
@@ -1628,18 +1617,18 @@ void gravity_tree(void)
 												m_pos_y = m_PPos[m_target][1];//P[m_target].Pos[1];
 												m_pos_z = m_PPos[m_target][2];//P[m_target].Pos[2];
 												m_ptype = m_PType[m_target];//P[m_target].Type;
-												m_aold = All.ErrTolForceAcc * m_POldAcc[m_target];//P[m_target].OldAcc;
+												m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
 											}
 											else
 											{
-												m_pos_x = m_GravDataGetPos[m_target][0];//GravDataGet[m_target].Pos[0];
-												m_pos_y = m_GravDataGetPos[m_target][1];//GravDataGet[m_target].Pos[1];
-												m_pos_z = m_GravDataGetPos[m_target][2];//GravDataGet[m_target].Pos[2];
+												m_pos_x = GravDataGet[m_target].Pos[0];
+												m_pos_y = GravDataGet[m_target].Pos[1];
+												m_pos_z = GravDataGet[m_target].Pos[2];
 												//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
-												m_ptype = m_PType[0];//P[0].Type;
+												m_ptype = P[0].Type;
 
-												m_aold = All.ErrTolForceAcc * m_GraveDataGetOldAcc[m_target];//GravDataGet[m_target].OldAcc;
+												m_aold = All.ErrTolForceAcc * GravDataGet[m_target].OldAcc;
 
 											}
 
