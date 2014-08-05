@@ -1669,7 +1669,7 @@ void gravity_tree(void)
 														//entered!!!
 														if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 														{
-															printf("Ever entered?");
+															//entered!!
 															{
 																if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 																{
