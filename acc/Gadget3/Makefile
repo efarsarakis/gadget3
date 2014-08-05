@@ -191,7 +191,7 @@ FC       = cc
 OPTIMIZE = -g
 endif
 
-ifeq ($(SYSTYPE),"swan")
+ifeq ($(SYSTYPE),"swan-cray")
 CC       = cc
 CXX      = cpc
 FC       = cc
@@ -199,6 +199,16 @@ GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
 GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
 
 OPTIMIZE = -O1
+endif
+
+ifeq ($(SYSTYPE),"swan-pgi")
+CC       = cc
+CXX      = cpc
+FC       = cc
+GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
+GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
+
+OPTIMIZE = -O3
 endif
 
 ifeq ($(SYSTYPE),"acc-swan")
