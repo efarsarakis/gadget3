@@ -1464,8 +1464,8 @@ void gravity_tree(void)
 
 
 			//manos//simple arrays
-			MyDouble PPos[All.MaxPart][3];
-
+			MyDouble m_PPos[All.MaxPart][3];
+			short int m_PType[All.MaxPart];
 
 
 			//manos get active
@@ -1486,9 +1486,10 @@ void gravity_tree(void)
 
 			for(m_index=0; m_index<All.MaxPart; m_index++)
 			{
-				PPos[m_index][0]=P[m_index].Pos[0];
-				PPos[m_index][1]=P[m_index].Pos[1];
-				PPos[m_index][2]=P[m_index].Pos[2];
+				m_PPos[m_index][0]=P[m_index].Pos[0];
+				m_PPos[m_index][1]=P[m_index].Pos[1];
+				m_PPos[m_index][2]=P[m_index].Pos[2];
+				m_PType[m_index]=P[m_index].Type;
 			}
 
 			//NextParticle=m_temp2;
@@ -1612,10 +1613,10 @@ void gravity_tree(void)
 
 											if(m_mode == 0)
 											{
-												m_pos_x = PPos[m_target][0];//P[m_target].Pos[0];
-												m_pos_y = PPos[m_target][1];//P[m_target].Pos[1];
-												m_pos_z = PPos[m_target][2];//P[m_target].Pos[2];
-												m_ptype = P[m_target].Type;
+												m_pos_x = m_PPos[m_target][0];//P[m_target].Pos[0];
+												m_pos_y = m_PPos[m_target][1];//P[m_target].Pos[1];
+												m_pos_z = m_PPos[m_target][2];//P[m_target].Pos[2];
+												m_ptype = m_PType[m_target];//P[m_target].Type;
 												m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
 											}
