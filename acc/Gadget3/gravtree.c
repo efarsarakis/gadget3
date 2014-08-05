@@ -1589,7 +1589,7 @@ void gravity_tree(void)
 						{
 
 							int m_target = i;
-							int m_mode = 0;
+
 
 
 							m_nop=0;
@@ -1605,32 +1605,13 @@ void gravity_tree(void)
 
 
 
-											if(m_mode != 0 && m_mode != 1)
-											{
-												//manos//printf("%d %d %d %d %d\n", m_target, m_mode, *m_exportflag, *m_exportnodecount, *m_exportindex);
-												//manos//endrun(444);
-											}
 
-											if(m_mode == 0)
-											{
 												m_pos_x = m_PPos[m_target][0];//P[m_target].Pos[0];
 												m_pos_y = m_PPos[m_target][1];//P[m_target].Pos[1];
 												m_pos_z = m_PPos[m_target][2];//P[m_target].Pos[2];
 												m_ptype = m_PType[m_target];//P[m_target].Type;
 												m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
-											}
-											else
-											{
-												m_pos_x = GravDataGet[m_target].Pos[0];
-												m_pos_y = GravDataGet[m_target].Pos[1];
-												m_pos_z = GravDataGet[m_target].Pos[2];
-												//used/13TH ////////////////////////////////////////////////////////////////////////////////////////////
-												m_ptype = P[0].Type;
-
-												m_aold = All.ErrTolForceAcc * GravDataGet[m_target].OldAcc;
-
-											}
 
 											m_rcut2 = m_rcut * m_rcut;
 
@@ -1642,15 +1623,9 @@ void gravity_tree(void)
 											m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
 
 
-											if(m_mode == 0)
+
 											{
 												m_no = m_maxPart;		/* root node */
-											}
-											else
-											{
-												m_nodesinlist++;
-												m_no = GravDataGet[m_target].NodeList[0];
-												m_no = Nodes[m_no].u.d.nextnode;	/* open it */
 											}
 
 											while(m_no >= 0)
@@ -1697,7 +1672,7 @@ void gravity_tree(void)
 													{
 														if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 														{
-															if(m_mode == 0)
+
 															{
 																if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 																{
@@ -1770,14 +1745,7 @@ void gravity_tree(void)
 
 														m_nop = &Nodes[m_no];
 
-														if(m_mode == 1)
-														{
-															if(m_nop->u.d.bitflags & (1 << BITFLAG_TOPLEVEL))	/* we reached a top-level node again, which means that we are done with the branch */
-															{
-																m_no = -1;
-																continue;
-															}
-														}
+
 
 														if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
 														{
@@ -1937,19 +1905,7 @@ void gravity_tree(void)
 													continue;
 												}
 												else{
-												if(m_mode == 1)
-												{
-													m_listindex++;
-													if(m_listindex < NODELISTLENGTH)
-													{
-														m_no = GravDataGet[m_target].NodeList[m_listindex];
-														if(m_no >= 0)
-														{
-															m_nodesinlist++;
-															m_no = Nodes[m_no].u.d.nextnode;	/* open it */
-														}
-													}
-												}
+
 											}
 											}
 
@@ -1958,19 +1914,11 @@ void gravity_tree(void)
 											}
 											else{
 											/* store result at the proper place */
-											if(m_mode == 0)
-											{
 												P[m_target].g.dGravAccel[0] = m_acc_x;
 												P[m_target].g.dGravAccel[1] = m_acc_y;
 												P[m_target].g.dGravAccel[2] = m_acc_z;
-											}
-											else
-											{
-												GravDataResult[m_target].Acc[0] = m_acc_x;
-												GravDataResult[m_target].Acc[1] = m_acc_y;
-												GravDataResult[m_target].Acc[2] = m_acc_z;
-												*m_exportflag = m_nodesinlist;
-											}
+
+
 											}
 
 											ret = m_ninteractions;

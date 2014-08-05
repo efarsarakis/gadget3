@@ -34,8 +34,8 @@ INCL   = allvars.h proto.h  nrsrc/nrutil.h  Makefile
 #SYSTYPE="RZG_LinuxCluster-gcc"
 #SYSTYPE="Solaris"
 
-SYSTYPE="swan"
-#SYSTYPE="archer"
+#SYSTYPE="swan"
+SYSTYPE="archer"
 #SYSTYPE="all-intel"
 #SYSTYPE="mvapich-pgi"
 #SYSTYPE="mvapich-intel"
@@ -86,7 +86,7 @@ ifeq ($(SYSTYPE),"archer")
 $(info ****************** Using mvapich-pgi config ********************)
 
 CC       =   cc
-OPTIMIZE =  -g
+OPTIMIZE =  -O3
 #GSL_INCL =  -I/shared/apps/gadget/libraries/gsl-intel/include/
 #GSL_LIBS =  -L/shared/apps/gadget/libraries/gsl-intel/lib/
 #FFTW_INCL=  -I/shared/apps/gadget/libraries/fftw2-mvapichPGI/include/
