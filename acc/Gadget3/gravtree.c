@@ -1462,6 +1462,12 @@ void gravity_tree(void)
 			int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
 			m_num_active_part=0;
 
+
+			//manos//simple arrays
+			MyDouble PPos[All.MaxPart][3];
+
+
+
 			//manos get active
 
 			while(NextParticle>=0){
@@ -1475,6 +1481,14 @@ void gravity_tree(void)
 				m_num_active_part++;
 				ProcessedFlag[m_index]=m_temp;
 				UNLOCK_NEXPORT;
+			}
+
+
+			for(m_index=0; m_index<All.MaxPart; m_index++)
+			{
+				PPos[m_index][0]=P[m_index].Pos[0];
+				PPos[m_index][1]=P[m_index].Pos[1];
+				PPos[m_index][2]=P[m_index].Pos[2];
 			}
 
 			//NextParticle=m_temp2;
@@ -1518,6 +1532,14 @@ void gravity_tree(void)
 			m_maxNodes = MaxNodes;
 			m_ti_Current = All.Ti_Current;
 			m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
+
+			//manos//other
+
+			m_rcut = All.Rcut[0];
+			m_asmth = All.Asmth[0];
+
+
+
 
 
 			//manos//end shotrange vars
@@ -1580,8 +1602,7 @@ void gravity_tree(void)
 											m_ninteractions = 0;
 											m_nodesinlist = 0;
 
-											m_rcut = All.Rcut[0];
-											m_asmth = All.Asmth[0];
+
 
 											if(m_mode != 0 && m_mode != 1)
 											{
@@ -1591,9 +1612,9 @@ void gravity_tree(void)
 
 											if(m_mode == 0)
 											{
-												m_pos_x = P[m_target].Pos[0];
-												m_pos_y = P[m_target].Pos[1];
-												m_pos_z = P[m_target].Pos[2];
+												m_pos_x = PPos[m_target][0];//P[m_target].Pos[0];
+												m_pos_y = PPos[m_target][1];//P[m_target].Pos[1];
+												m_pos_z = PPos[m_target][2];//P[m_target].Pos[2];
 												m_ptype = P[m_target].Type;
 												m_aold = All.ErrTolForceAcc * P[m_target].OldAcc;
 
