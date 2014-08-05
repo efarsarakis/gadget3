@@ -1656,7 +1656,7 @@ void gravity_tree(void)
 
 														if(TakeLevel >= 0)
 														{
-															printf("Ever entered?");
+															//entered!!!
 															LOCK_WORKCOUNT;
 
 															P[m_no].GravCost[TakeLevel] += 1.0;
@@ -1666,6 +1666,7 @@ void gravity_tree(void)
 													}
 													else			/* we have an  internal node */
 													{
+														printf("Ever entered?");
 														if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 														{
 
