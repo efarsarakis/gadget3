@@ -7,9 +7,9 @@
 
 #SYSTYPE="mvapich-pgi"
 
-SYSTYPE="acc-swan"
+#SYSTYPE="acc-swan"
 
-#SYSTYPE="swan"
+SYSTYPE="swan"
 
 #SYSTYPE="archer"
 
