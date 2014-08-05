@@ -1640,7 +1640,7 @@ void gravity_tree(void)
 																							//	drift_particle(m_no, m_ti_Current);
 																							//	printf("Drift-particle()");
 																							//	UNLOCK_PARTNODEDRIFT;
-}
+																							//}
 
 														m_dx = m_PPos[m_no][0] - m_pos_x;
 														m_dy = m_PPos[m_no][1] - m_pos_y;
