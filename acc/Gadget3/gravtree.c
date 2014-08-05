@@ -1656,7 +1656,7 @@ void gravity_tree(void)
 
 														if(TakeLevel >= 0)
 														{
-															//printf("Ever entered?");
+															printf("Ever entered?");
 															LOCK_WORKCOUNT;
 
 															P[m_no].GravCost[TakeLevel] += 1.0;
