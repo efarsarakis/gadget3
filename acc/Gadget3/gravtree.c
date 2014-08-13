@@ -1744,7 +1744,7 @@ void gravity_tree(void)
 																continue;
 															}
 															else{
-															m_no = Nextnode[m_no - m_maxNodes];
+															m_no = m_Nextnode[m_no - m_maxNodes];//Nextnode[m_no - m_maxNodes];
 															continue;
 															}
 														}
