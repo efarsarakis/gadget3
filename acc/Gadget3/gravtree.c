@@ -1757,6 +1757,7 @@ void gravity_tree(void)
 
 										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
 										{
+											printf("Entered???\n");
 											/* open cell */
 											m_no = m_nop->u.d.nextnode;
 											continue;
@@ -1859,72 +1860,59 @@ void gravity_tree(void)
 
 									}
 
-									if(m_exitFlag)
+
+
+
+									m_r = sqrt(m_r2);
+
+									//used/31ST ////////////////////////////////////////////////////////////////////////////////////////////
+									if(m_r >= m_h)
 									{
-										continue;
+										m_fac = m_mass / (m_r2 * m_r);
 									}
-									else{
 
+									else
+									{
 
-
-										m_r = sqrt(m_r2);
-
-										//used/31ST ////////////////////////////////////////////////////////////////////////////////////////////
-										if(m_r >= m_h)
-										{
-											m_fac = m_mass / (m_r2 * m_r);
-										}
-
+										//used34TH  ////////////////////////////////////////////////////////////////////////////////////////////
+										m_u = m_r * m_h_inv;
+										if(m_u < 0.5)
+											m_fac = m_mass * m_h3_inv * (10.666666666667 + m_u * m_u * (32.0 * m_u - 38.4));
 										else
-										{
-
-											//used34TH  ////////////////////////////////////////////////////////////////////////////////////////////
-											m_u = m_r * m_h_inv;
-											if(m_u < 0.5)
-												m_fac = m_mass * m_h3_inv * (10.666666666667 + m_u * m_u * (32.0 * m_u - 38.4));
-											else
-												m_fac =
-														m_mass * m_h3_inv * (21.333333333333 - 48.0 * m_u +
-																38.4 * m_u * m_u - 10.666666666667 * m_u * m_u * m_u - 0.066666666667 / (m_u * m_u * m_u));
-
-
-										}
-
-										m_tabindex = (int) (m_asmthfac * m_r);
-
-										if(m_tabindex < NTAB)
-										{
-											m_fac *= shortrange_table[m_tabindex];
-
-											m_acc_x += FLT(m_dx * m_fac);
-											m_acc_y += FLT(m_dy * m_fac);
-											m_acc_z += FLT(m_dz * m_fac);
-										}
-
-										m_ninteractions++;
+											m_fac =
+													m_mass * m_h3_inv * (21.333333333333 - 48.0 * m_u +
+															38.4 * m_u * m_u - 10.666666666667 * m_u * m_u * m_u - 0.066666666667 / (m_u * m_u * m_u));
 
 
 									}
-								}
-								if(m_exitFlag){
-									continue;
-								}
-								else{
+
+									m_tabindex = (int) (m_asmthfac * m_r);
+
+									if(m_tabindex < NTAB)
+									{
+										m_fac *= shortrange_table[m_tabindex];
+
+										m_acc_x += FLT(m_dx * m_fac);
+										m_acc_y += FLT(m_dy * m_fac);
+										m_acc_z += FLT(m_dz * m_fac);
+									}
+
+									m_ninteractions++;
+
+
 
 								}
-							}
-
-							if(m_exitFlag){
-								continue;
-							}
-							else{
-								/* store result at the proper place */
-								P[m_target].g.dGravAccel[0] = m_acc_x;
-								P[m_target].g.dGravAccel[1] = m_acc_y;
-								P[m_target].g.dGravAccel[2] = m_acc_z;
-
 
 							}
+
+
+							/* store result at the proper place */
+							P[m_target].g.dGravAccel[0] = m_acc_x;
+							P[m_target].g.dGravAccel[1] = m_acc_y;
+							P[m_target].g.dGravAccel[2] = m_acc_z;
+
+
+
 
 							ret = m_ninteractions;
 						}
