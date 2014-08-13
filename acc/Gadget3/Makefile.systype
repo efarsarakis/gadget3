@@ -5,9 +5,9 @@
 # a new system.
 #SYSTYPE="acc-boston"
 
-SYSTYPE="mvapich-pgi"
+#SYSTYPE="mvapich-pgi"
 
-#SYSTYPE="acc-swan"
+SYSTYPE="acc-swan"
 
 #SYSTYPE="swan-cray"
 
