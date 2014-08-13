@@ -1497,6 +1497,14 @@ void gravity_tree(void)
 				m_PMass[m_index]=P[m_index].Mass;
 			}
 
+			//manos//simple arrays #2
+			int m_Nextnode[All.MaxPart + NTopnodes];
+
+			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
+			{
+				m_Nextnode[m_index]= Nextnode[m_index];
+			}
+
 			//NextParticle=m_temp2;
 			//manos//printf("Active parts with for loop: %d \n", m_index);
 			m_break = 0;
@@ -1667,7 +1675,7 @@ void gravity_tree(void)
 															P[m_no].GravCost[TakeLevel] += 1.0;
 															UNLOCK_WORKCOUNT;
 														}
-														m_no = Nextnode[m_no];
+														m_no = m_Nextnode[m_no];//Nextnode[m_no];
 													}
 													else			/* we have an  internal node */
 													{
