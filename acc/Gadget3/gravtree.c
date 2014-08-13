@@ -1748,117 +1748,115 @@ void gravity_tree(void)
 												continue;
 											}
 										} //pseudoparticle region end
-										if(m_exitFlag){
+
+
+
+										m_nop = &Nodes[m_no];
+
+
+
+										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
+										{
+											/* open cell */
+											m_no = m_nop->u.d.nextnode;
 											continue;
 										}
-										else{
 
-											m_nop = &Nodes[m_no];
+										//	if(m_nop->Ti_current != m_ti_Current)
+										//	{
+										//		LOCK_PARTNODEDRIFT;
+										//		#pragma omp critical(_partnodedrift_)
+										//		//force_drift_node(m_no, m_ti_Current);
+										//		//printf("Force_drift_node()");
+										//		UNLOCK_PARTNODEDRIFT;
+										//	}
+
+										m_mass = m_nop->u.d.mass;
+
+										m_dx = m_nop->u.d.s[0] - m_pos_x;
+										m_dy = m_nop->u.d.s[1] - m_pos_y;
+										m_dz = m_nop->u.d.s[2] - m_pos_z;
+
+										m_dx = NEAREST(m_dx);
+										m_dy = NEAREST(m_dy);
+										m_dz = NEAREST(m_dz);
+										m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
+										//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
+										/* check whether we can stop walking along this branch */
+										if(m_r2 > m_rcut2)
+										{
+											m_eff_dist = m_rcut + 0.5 * m_nop->len;
+
+											m_dist = NEAREST(m_nop->center[0] - m_pos_x);
+											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+											{
+												m_no = m_nop->u.d.sibling;
+												continue;
+											}
+
+											m_dist = NEAREST(m_nop->center[1] - m_pos_y);
+											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+											{
+												m_no = m_nop->u.d.sibling;
+												continue;
+											}
+
+											m_dist = NEAREST(m_nop->center[2] - m_pos_z);
+											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+											{
+												m_no = m_nop->u.d.sibling;
+												continue;
+											}
+										}
 
 
+										if(m_errTol2)	/* check Barnes-Hut opening criterion */
+										{
+											if(m_nop->len * m_nop->len > m_r2 * m_errTol2)
+											{
+												/* open cell */
+												m_no = m_nop->u.d.nextnode;
+												continue;
+											}
+										}
+										else		/* check relative opening criterion */
+										{
 
-											if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
+											//used/23RD ////////////////////////////////////////////////////////////////////////////////////////////
+											if(m_mass * m_nop->len * m_nop->len > m_r2 * m_r2 * m_aold)
 											{
 												/* open cell */
 												m_no = m_nop->u.d.nextnode;
 												continue;
 											}
 
-											//	if(m_nop->Ti_current != m_ti_Current)
-											//	{
-											//		LOCK_PARTNODEDRIFT;
-											//		#pragma omp critical(_partnodedrift_)
-											//		//force_drift_node(m_no, m_ti_Current);
-											//		//printf("Force_drift_node()");
-											//		UNLOCK_PARTNODEDRIFT;
-											//	}
+											/* check in addition whether we lie inside the cell */
 
-											m_mass = m_nop->u.d.mass;
-
-											m_dx = m_nop->u.d.s[0] - m_pos_x;
-											m_dy = m_nop->u.d.s[1] - m_pos_y;
-											m_dz = m_nop->u.d.s[2] - m_pos_z;
-
-											m_dx = NEAREST(m_dx);
-											m_dy = NEAREST(m_dy);
-											m_dz = NEAREST(m_dz);
-											m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
-											//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
-											/* check whether we can stop walking along this branch */
-											if(m_r2 > m_rcut2)
+											if(fabs(m_nop->center[0] - m_pos_x) < 0.60 * m_nop->len)
 											{
-												m_eff_dist = m_rcut + 0.5 * m_nop->len;
-
-												m_dist = NEAREST(m_nop->center[0] - m_pos_x);
-												if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
+												if(fabs(m_nop->center[1] - m_pos_y) < 0.60 * m_nop->len)
 												{
-													m_no = m_nop->u.d.sibling;
-													continue;
-												}
-
-												m_dist = NEAREST(m_nop->center[1] - m_pos_y);
-												if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
-												{
-													m_no = m_nop->u.d.sibling;
-													continue;
-												}
-
-												m_dist = NEAREST(m_nop->center[2] - m_pos_z);
-												if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
-												{
-													m_no = m_nop->u.d.sibling;
-													continue;
-												}
-											}
-
-
-											if(m_errTol2)	/* check Barnes-Hut opening criterion */
-											{
-												if(m_nop->len * m_nop->len > m_r2 * m_errTol2)
-												{
-													/* open cell */
-													m_no = m_nop->u.d.nextnode;
-													continue;
-												}
-											}
-											else		/* check relative opening criterion */
-											{
-
-												//used/23RD ////////////////////////////////////////////////////////////////////////////////////////////
-												if(m_mass * m_nop->len * m_nop->len > m_r2 * m_r2 * m_aold)
-												{
-													/* open cell */
-													m_no = m_nop->u.d.nextnode;
-													continue;
-												}
-
-												/* check in addition whether we lie inside the cell */
-
-												if(fabs(m_nop->center[0] - m_pos_x) < 0.60 * m_nop->len)
-												{
-													if(fabs(m_nop->center[1] - m_pos_y) < 0.60 * m_nop->len)
+													if(fabs(m_nop->center[2] - m_pos_z) < 0.60 * m_nop->len)
 													{
-														if(fabs(m_nop->center[2] - m_pos_z) < 0.60 * m_nop->len)
-														{
-															m_no = m_nop->u.d.nextnode;
-															continue;
-														}
+														m_no = m_nop->u.d.nextnode;
+														continue;
 													}
 												}
-
 											}
-
-
-											if(TakeLevel >= 0)
-											{
-												LOCK_WORKCOUNT;
-												m_nop->GravCost += 1.0;
-												UNLOCK_WORKCOUNT;
-											}
-
-											m_no = m_nop->u.d.sibling;	/* ok, node can be used */
 
 										}
+
+
+										if(TakeLevel >= 0)
+										{
+											LOCK_WORKCOUNT;
+											m_nop->GravCost += 1.0;
+											UNLOCK_WORKCOUNT;
+										}
+
+										m_no = m_nop->u.d.sibling;	/* ok, node can be used */
+
+
 									}
 
 									if(m_exitFlag)
