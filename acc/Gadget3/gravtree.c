@@ -1903,7 +1903,7 @@ void gravity_tree(void)
 
 								}
 
-							}
+							}//outer while loop end
 
 
 							/* store result at the proper place */
