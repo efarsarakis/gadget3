@@ -1463,10 +1463,6 @@ void gravity_tree(void)
 			m_num_active_part=0;
 
 
-			//manos//simple arrays
-			MyDouble m_PPos[All.MaxPart][3];
-			short int m_PType[All.MaxPart];
-			MyFloat m_POldAcc[All.MaxPart];
 
 
 			//manos get active
@@ -1484,6 +1480,12 @@ void gravity_tree(void)
 				UNLOCK_NEXPORT;
 			}
 
+			//manos//simple arrays
+						MyDouble m_PPos[All.MaxPart][3], m_PMass[All.MaxPart];
+						short int m_PType[All.MaxPart];
+						MyFloat m_POldAcc[All.MaxPart];
+
+
 
 			for(m_index=0; m_index<All.MaxPart; m_index++)
 			{
@@ -1492,6 +1494,7 @@ void gravity_tree(void)
 				m_PPos[m_index][2]=P[m_index].Pos[2];
 				m_PType[m_index]=P[m_index].Type;
 				m_POldAcc[m_index]=P[m_index].OldAcc;
+				m_PMass[m_index]=P[m_index].Mass;
 			}
 
 			//NextParticle=m_temp2;
@@ -1654,7 +1657,7 @@ void gravity_tree(void)
 
 														m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
 
-														m_mass = P[m_no].Mass;
+														m_mass = m_PMass[m_no];
 
 														if(TakeLevel >= 0)
 														{
