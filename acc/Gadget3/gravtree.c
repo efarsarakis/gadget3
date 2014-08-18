@@ -1731,9 +1731,20 @@ void gravity_tree(void)
 			//manos//simple arrays #2
 			int m_Nextnode[All.MaxPart + NTopnodes];
 
+
+			//manos//simple arrays for output
+			MyLongDouble m_out_PdGravAccel[All.MaxPart + NTopnodes][3];
+
+
+
+
 			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
 			{
 				m_Nextnode[m_index]= Nextnode[m_index];
+				m_out_PdGravAccel[m_index][0] = P[m_index].g.dGravAccel[0];
+				m_out_PdGravAccel[m_index][1] = P[m_index].g.dGravAccel[1];
+				m_out_PdGravAccel[m_index][2] = P[m_index].g.dGravAccel[2];
+
 			}
 
 			//NextParticle=m_temp2;
@@ -1924,75 +1935,47 @@ void gravity_tree(void)
 												if(m_exportnodecount[m_task] == NODELISTLENGTH)
 												{
 													//int m_exitFlag=0;
-													LOCK_NEXPORT;
-													//manos//					#pragma omp critical(_nexport_)
-													{
-														if(Nexport >= m_bunchSize)
-														{
-															/* out of buffer space. Need to discard work for this particle and interrupt */
-															//BufferFullFlag = 1;
-															m_exitFlag = 1;
-														}
-														else
-														{
-															m_nexp = Nexport;
-															Nexport++;
-														}
-													}
-													UNLOCK_NEXPORT;
-													if(m_exitFlag)
-													{ //m
-														//return -1;
-														m_ninteractions=-1;
-														ret=-1;
 
-													} //m
-													//////////return statement to fix.........
-													//m
+													//manos//					#pragma omp critical(_nexport_)
+
+													if(Nexport >= m_bunchSize)
+													{
+														/* out of buffer space. Need to discard work for this particle and interrupt */
+														//BufferFullFlag = 1;
+														m_exitFlag = 1;
+													}
 													else
 													{
-														m_exportnodecount[m_task] = 0;
-														m_exportindex[m_task] = m_nexp;
-														DataIndexTable[m_nexp].Task = m_task;
-														DataIndexTable[m_nexp].Index = m_target;
-														DataIndexTable[m_nexp].IndexGet = m_nexp;
+														m_nexp = Nexport;
+														Nexport++;
 													}
-												}
-												if(m_exitFlag){
-													continue;
-												}
-												else{
 
 
-													DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
-															DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
-													if(m_exportnodecount[m_task] < NODELISTLENGTH)
-														DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
+													m_exportnodecount[m_task] = 0;
+													m_exportindex[m_task] = m_nexp;
+													DataIndexTable[m_nexp].Task = m_task;
+													DataIndexTable[m_nexp].Index = m_target;
+													DataIndexTable[m_nexp].IndexGet = m_nexp;
+
 												}
+
+
+
+												DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
+														DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
+
+												if(m_exportnodecount[m_task] < NODELISTLENGTH)
+													DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
+
 											}
-											if(m_exitFlag){
-												continue;
-											}
-											else{
-												m_no = m_Nextnode[m_no - m_maxNodes];//Nextnode[m_no - m_maxNodes];
-												continue;
-											}
+
 										} //pseudoparticle region end
 
 
 
 										m_nop = &Nodes[m_no];
 
-
-
-										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
-										{
-											printf("Entered???\n");
-											/* open cell */
-											m_no = m_nop->u.d.nextnode;
-											continue;
-										}
 
 										//	if(m_nop->Ti_current != m_ti_Current)
 										//	{
@@ -2013,7 +1996,7 @@ void gravity_tree(void)
 										m_dy = NEAREST(m_dy);
 										m_dz = NEAREST(m_dz);
 										m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
-										//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
+
 										/* check whether we can stop walking along this branch */
 										if(m_r2 > m_rcut2)
 										{
@@ -2096,7 +2079,6 @@ void gravity_tree(void)
 
 									m_r = sqrt(m_r2);
 
-									//used/31ST ////////////////////////////////////////////////////////////////////////////////////////////
 									if(m_r >= m_h)
 									{
 										m_fac = m_mass / (m_r2 * m_r);
@@ -2105,7 +2087,6 @@ void gravity_tree(void)
 									else
 									{
 
-										//used34TH  ////////////////////////////////////////////////////////////////////////////////////////////
 										m_u = m_r * m_h_inv;
 										if(m_u < 0.5)
 											m_fac = m_mass * m_h3_inv * (10.666666666667 + m_u * m_u * (32.0 * m_u - 38.4));
@@ -2138,10 +2119,9 @@ void gravity_tree(void)
 
 
 							/* store result at the proper place */
-							P[m_target].g.dGravAccel[0] = m_acc_x;
-							P[m_target].g.dGravAccel[1] = m_acc_y;
-							P[m_target].g.dGravAccel[2] = m_acc_z;
-
+							m_out_PdGravAccel[m_target][0] = m_acc_x;
+							m_out_PdGravAccel[m_target][1] = m_acc_y;
+							m_out_PdGravAccel[m_target][2] = m_acc_z;
 
 
 
@@ -2179,6 +2159,17 @@ void gravity_tree(void)
 				}//manos// end of for loop
 
 			}//manos// end of data region
+
+
+			//manos//copy computed values to cpu values
+			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
+			{
+				m_Nextnode[m_index]= Nextnode[m_index];
+				P[m_index].g.dGravAccel[0] = m_out_PdGravAccel[m_index][0];
+				P[m_index].g.dGravAccel[1] = m_out_PdGravAccel[m_index][1];
+				P[m_index].g.dGravAccel[2] = m_out_PdGravAccel[m_index][2];
+
+			}
 
 			if(m_break)BufferFullFlag = 1;
 
