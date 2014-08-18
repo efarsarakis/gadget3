@@ -1937,7 +1937,7 @@ void gravity_tree(void)
 												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
-												if(m_exportflag[m_task = m_topNodes[m_no] != m_target)
+												if(m_exportflag[m_task = m_topNodes[m_no]] != m_target)
 												{
 													m_exportflag[m_task] = m_target;
 													m_exportnodecount[m_task] = NODELISTLENGTH;
