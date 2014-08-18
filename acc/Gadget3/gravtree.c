@@ -1694,7 +1694,7 @@ void gravity_tree(void)
 			m_num_active_part=0;
 
 
-
+			int m_max_no=0;
 
 			//manos get active
 
@@ -1702,12 +1702,14 @@ void gravity_tree(void)
 				//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
 				LOCK_NEXPORT;
 				m_index=NextParticle;
+				if(m_max_no < m_index)m_max_no = m_index;
 				m_active_part[m_num_active_part]=m_index;
 				m_temp=ProcessedFlag[m_index];
 				ProcessedFlag[m_index]=0;
 				NextParticle = NextActiveParticle[m_index];
 				m_num_active_part++;
 				ProcessedFlag[m_index]=m_temp;
+
 				UNLOCK_NEXPORT;
 			}
 
@@ -1735,11 +1737,12 @@ void gravity_tree(void)
 				m_out_PdGravAccel[m_index][0] = P[m_index].g.dGravAccel[0];
 				m_out_PdGravAccel[m_index][1] = P[m_index].g.dGravAccel[1];
 				m_out_PdGravAccel[m_index][2] = P[m_index].g.dGravAccel[2];
+
 			}
 
 			//manos//simple arrays #2
 			int m_Nextnode[All.MaxPart + NTopnodes];
-			int m_max_no=0;
+
 
 			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
 			{
