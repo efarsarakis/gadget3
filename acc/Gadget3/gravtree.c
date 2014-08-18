@@ -1440,6 +1440,237 @@ void gravity_tree(void)
 
 
 
+		void *gravity_secondary_loop(void *p)
+		{
+			int j, nodesinlist, dummy, ret;
+
+			while(1)
+			{
+				LOCK_NEXPORT;
+#ifdef _OPENMP
+#pragma omp critical(_nexport_)
+#endif
+				{
+					j = NextJ;
+					NextJ++;
+				}
+				UNLOCK_NEXPORT;
+
+				if(j >= Nimport)
+					break;
+
+#if !defined(PMGRID)
+#if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
+				if(Ewald_iter)
+				{
+					int cost = force_treeevaluate_ewald_correction(j, 1, &dummy, &dummy, &dummy);
+
+					LOCK_WORKCOUNT;
+#ifdef _OPENMP
+#pragma omp critical(_workcount_)
+#endif
+					Ewaldcount += cost;
+					UNLOCK_WORKCOUNT;
+				}
+				else
+#endif
+				{
+					ret = force_treeevaluate(j, 1, &nodesinlist, &dummy, &dummy);
+					LOCK_WORKCOUNT;
+#ifdef _OPENMP
+#pragma omp critical(_workcount_)
+#endif
+					{
+						N_nodesinlist += nodesinlist;
+						Costtotal += ret;
+					}
+					UNLOCK_WORKCOUNT;
+				}
+#else
+				ret = force_treeevaluate_shortrange(j, 1, &nodesinlist, &dummy, &dummy);
+				LOCK_WORKCOUNT;
+#ifdef _OPENMP
+#pragma omp critical(_workcount_)
+#endif
+				{
+					N_nodesinlist += nodesinlist;
+					Costtotal += ret;
+				}
+				UNLOCK_WORKCOUNT;
+#endif
+			}
+
+			return NULL;
+		}
+
+
+
+		void sum_top_level_node_costfactors(void)
+		{
+			int i;
+
+			double *costlist = (double *) mymalloc("costlist", NTopnodes * sizeof(double));
+			double *costlist_all = (double *) mymalloc("costlist_all", NTopnodes * sizeof(double));
+
+			for(i = 0; i < NTopnodes; i++)
+				costlist[i] = Nodes[All.MaxPart + i].GravCost;
+
+			MPI_Allreduce(costlist, costlist_all, NTopnodes, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+			for(i = 0; i < NTopnodes; i++)
+				Nodes[All.MaxPart + i].GravCost = costlist_all[i];
+
+			myfree(costlist_all);
+			myfree(costlist);
+		}
+
+
+
+
+
+		/*! This function sets the (comoving) softening length of all particle
+		 *  types in the table All.SofteningTable[...].  We check that the physical
+		 *  softening length is bounded by the Softening-MaxPhys values.
+		 */
+		void set_softenings(void)
+		{
+			int i;
+
+			if(All.ComovingIntegrationOn)
+			{
+				if(All.SofteningGas * All.Time > All.SofteningGasMaxPhys)
+					All.SofteningTable[0] = All.SofteningGasMaxPhys / All.Time;
+				else
+					All.SofteningTable[0] = All.SofteningGas;
+
+				if(All.SofteningHalo * All.Time > All.SofteningHaloMaxPhys)
+					All.SofteningTable[1] = All.SofteningHaloMaxPhys / All.Time;
+				else
+					All.SofteningTable[1] = All.SofteningHalo;
+
+				if(All.SofteningDisk * All.Time > All.SofteningDiskMaxPhys)
+					All.SofteningTable[2] = All.SofteningDiskMaxPhys / All.Time;
+				else
+					All.SofteningTable[2] = All.SofteningDisk;
+
+				if(All.SofteningBulge * All.Time > All.SofteningBulgeMaxPhys)
+					All.SofteningTable[3] = All.SofteningBulgeMaxPhys / All.Time;
+				else
+					All.SofteningTable[3] = All.SofteningBulge;
+
+				if(All.SofteningStars * All.Time > All.SofteningStarsMaxPhys)
+					All.SofteningTable[4] = All.SofteningStarsMaxPhys / All.Time;
+				else
+					All.SofteningTable[4] = All.SofteningStars;
+
+				if(All.SofteningBndry * All.Time > All.SofteningBndryMaxPhys)
+					All.SofteningTable[5] = All.SofteningBndryMaxPhys / All.Time;
+				else
+					All.SofteningTable[5] = All.SofteningBndry;
+#ifdef SINKS
+				All.SofteningTable[5] = All.SinkHsml / All.Time * All.HubbleParam;
+#endif
+			}
+			else
+			{
+				All.SofteningTable[0] = All.SofteningGas;
+				All.SofteningTable[1] = All.SofteningHalo;
+				All.SofteningTable[2] = All.SofteningDisk;
+				All.SofteningTable[3] = All.SofteningBulge;
+				All.SofteningTable[4] = All.SofteningStars;
+				All.SofteningTable[5] = All.SofteningBndry;
+#ifdef SINKS
+				All.SofteningTable[5] = All.SinkHsml;
+#endif
+			}
+
+			for(i = 0; i < 6; i++)
+				All.ForceSoftening[i] = 2.8 * All.SofteningTable[i];
+
+			All.MinGasHsml = All.MinGasHsmlFractional * All.ForceSoftening[0];
+
+		}
+
+
+		/*! This function is used as a comparison kernel in a sort routine. It is
+		 *  used to group particles in the communication buffer that are going to
+		 *  be sent to the same CPU.
+		 */
+		int data_index_compare(const void *a, const void *b)
+		{
+			if(((struct data_index *) a)->Task < (((struct data_index *) b)->Task))
+				return -1;
+
+			if(((struct data_index *) a)->Task > (((struct data_index *) b)->Task))
+				return +1;
+
+			if(((struct data_index *) a)->Index < (((struct data_index *) b)->Index))
+				return -1;
+
+			if(((struct data_index *) a)->Index > (((struct data_index *) b)->Index))
+				return +1;
+
+			if(((struct data_index *) a)->IndexGet < (((struct data_index *) b)->IndexGet))
+				return -1;
+
+			if(((struct data_index *) a)->IndexGet > (((struct data_index *) b)->IndexGet))
+				return +1;
+
+			return 0;
+		}
+
+		static void msort_dataindex_with_tmp(struct data_index *b, size_t n, struct data_index *t)
+		{
+			struct data_index *tmp;
+			struct data_index *b1, *b2;
+			size_t n1, n2;
+
+			if(n <= 1)
+				return;
+
+			n1 = n / 2;
+			n2 = n - n1;
+			b1 = b;
+			b2 = b + n1;
+
+			msort_dataindex_with_tmp(b1, n1, t);
+			msort_dataindex_with_tmp(b2, n2, t);
+
+			tmp = t;
+
+			while(n1 > 0 && n2 > 0)
+			{
+				if(b1->Task < b2->Task || (b1->Task == b2->Task && b1->Index <= b2->Index))
+				{
+					--n1;
+					*tmp++ = *b1++;
+				}
+				else
+				{
+					--n2;
+					*tmp++ = *b2++;
+				}
+			}
+
+			if(n1 > 0)
+				memcpy(tmp, b1, n1 * sizeof(struct data_index));
+
+			memcpy(b, t, (n - n2) * sizeof(struct data_index));
+		}
+
+		void mysort_dataindex(void *b, size_t n, size_t s, int (*cmp) (const void *, const void *))
+		{
+			const size_t size = n * s;
+
+			struct data_index *tmp = (struct data_index *) mymalloc("struct data_index *tmp", size);
+
+			msort_dataindex_with_tmp((struct data_index *) b, n, tmp);
+
+			myfree(tmp);
+		}
+
+
+
 
 		void *gravity_primary_loop(void *p)
 		{
@@ -1956,232 +2187,3 @@ void gravity_tree(void)
 			return NULL;
 		}
 
-
-		void *gravity_secondary_loop(void *p)
-		{
-			int j, nodesinlist, dummy, ret;
-
-			while(1)
-			{
-				LOCK_NEXPORT;
-#ifdef _OPENMP
-#pragma omp critical(_nexport_)
-#endif
-				{
-					j = NextJ;
-					NextJ++;
-				}
-				UNLOCK_NEXPORT;
-
-				if(j >= Nimport)
-					break;
-
-#if !defined(PMGRID)
-#if defined(PERIODIC) && !defined(GRAVITY_NOT_PERIODIC)
-				if(Ewald_iter)
-				{
-					int cost = force_treeevaluate_ewald_correction(j, 1, &dummy, &dummy, &dummy);
-
-					LOCK_WORKCOUNT;
-#ifdef _OPENMP
-#pragma omp critical(_workcount_)
-#endif
-					Ewaldcount += cost;
-					UNLOCK_WORKCOUNT;
-				}
-				else
-#endif
-				{
-					ret = force_treeevaluate(j, 1, &nodesinlist, &dummy, &dummy);
-					LOCK_WORKCOUNT;
-#ifdef _OPENMP
-#pragma omp critical(_workcount_)
-#endif
-					{
-						N_nodesinlist += nodesinlist;
-						Costtotal += ret;
-					}
-					UNLOCK_WORKCOUNT;
-				}
-#else
-				ret = force_treeevaluate_shortrange(j, 1, &nodesinlist, &dummy, &dummy);
-				LOCK_WORKCOUNT;
-#ifdef _OPENMP
-#pragma omp critical(_workcount_)
-#endif
-				{
-					N_nodesinlist += nodesinlist;
-					Costtotal += ret;
-				}
-				UNLOCK_WORKCOUNT;
-#endif
-			}
-
-			return NULL;
-		}
-
-
-
-		void sum_top_level_node_costfactors(void)
-		{
-			int i;
-
-			double *costlist = (double *) mymalloc("costlist", NTopnodes * sizeof(double));
-			double *costlist_all = (double *) mymalloc("costlist_all", NTopnodes * sizeof(double));
-
-			for(i = 0; i < NTopnodes; i++)
-				costlist[i] = Nodes[All.MaxPart + i].GravCost;
-
-			MPI_Allreduce(costlist, costlist_all, NTopnodes, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
-
-			for(i = 0; i < NTopnodes; i++)
-				Nodes[All.MaxPart + i].GravCost = costlist_all[i];
-
-			myfree(costlist_all);
-			myfree(costlist);
-		}
-
-
-
-
-
-		/*! This function sets the (comoving) softening length of all particle
-		 *  types in the table All.SofteningTable[...].  We check that the physical
-		 *  softening length is bounded by the Softening-MaxPhys values.
-		 */
-		void set_softenings(void)
-		{
-			int i;
-
-			if(All.ComovingIntegrationOn)
-			{
-				if(All.SofteningGas * All.Time > All.SofteningGasMaxPhys)
-					All.SofteningTable[0] = All.SofteningGasMaxPhys / All.Time;
-				else
-					All.SofteningTable[0] = All.SofteningGas;
-
-				if(All.SofteningHalo * All.Time > All.SofteningHaloMaxPhys)
-					All.SofteningTable[1] = All.SofteningHaloMaxPhys / All.Time;
-				else
-					All.SofteningTable[1] = All.SofteningHalo;
-
-				if(All.SofteningDisk * All.Time > All.SofteningDiskMaxPhys)
-					All.SofteningTable[2] = All.SofteningDiskMaxPhys / All.Time;
-				else
-					All.SofteningTable[2] = All.SofteningDisk;
-
-				if(All.SofteningBulge * All.Time > All.SofteningBulgeMaxPhys)
-					All.SofteningTable[3] = All.SofteningBulgeMaxPhys / All.Time;
-				else
-					All.SofteningTable[3] = All.SofteningBulge;
-
-				if(All.SofteningStars * All.Time > All.SofteningStarsMaxPhys)
-					All.SofteningTable[4] = All.SofteningStarsMaxPhys / All.Time;
-				else
-					All.SofteningTable[4] = All.SofteningStars;
-
-				if(All.SofteningBndry * All.Time > All.SofteningBndryMaxPhys)
-					All.SofteningTable[5] = All.SofteningBndryMaxPhys / All.Time;
-				else
-					All.SofteningTable[5] = All.SofteningBndry;
-#ifdef SINKS
-				All.SofteningTable[5] = All.SinkHsml / All.Time * All.HubbleParam;
-#endif
-			}
-			else
-			{
-				All.SofteningTable[0] = All.SofteningGas;
-				All.SofteningTable[1] = All.SofteningHalo;
-				All.SofteningTable[2] = All.SofteningDisk;
-				All.SofteningTable[3] = All.SofteningBulge;
-				All.SofteningTable[4] = All.SofteningStars;
-				All.SofteningTable[5] = All.SofteningBndry;
-#ifdef SINKS
-				All.SofteningTable[5] = All.SinkHsml;
-#endif
-			}
-
-			for(i = 0; i < 6; i++)
-				All.ForceSoftening[i] = 2.8 * All.SofteningTable[i];
-
-			All.MinGasHsml = All.MinGasHsmlFractional * All.ForceSoftening[0];
-
-		}
-
-
-		/*! This function is used as a comparison kernel in a sort routine. It is
-		 *  used to group particles in the communication buffer that are going to
-		 *  be sent to the same CPU.
-		 */
-		int data_index_compare(const void *a, const void *b)
-		{
-			if(((struct data_index *) a)->Task < (((struct data_index *) b)->Task))
-				return -1;
-
-			if(((struct data_index *) a)->Task > (((struct data_index *) b)->Task))
-				return +1;
-
-			if(((struct data_index *) a)->Index < (((struct data_index *) b)->Index))
-				return -1;
-
-			if(((struct data_index *) a)->Index > (((struct data_index *) b)->Index))
-				return +1;
-
-			if(((struct data_index *) a)->IndexGet < (((struct data_index *) b)->IndexGet))
-				return -1;
-
-			if(((struct data_index *) a)->IndexGet > (((struct data_index *) b)->IndexGet))
-				return +1;
-
-			return 0;
-		}
-
-		static void msort_dataindex_with_tmp(struct data_index *b, size_t n, struct data_index *t)
-		{
-			struct data_index *tmp;
-			struct data_index *b1, *b2;
-			size_t n1, n2;
-
-			if(n <= 1)
-				return;
-
-			n1 = n / 2;
-			n2 = n - n1;
-			b1 = b;
-			b2 = b + n1;
-
-			msort_dataindex_with_tmp(b1, n1, t);
-			msort_dataindex_with_tmp(b2, n2, t);
-
-			tmp = t;
-
-			while(n1 > 0 && n2 > 0)
-			{
-				if(b1->Task < b2->Task || (b1->Task == b2->Task && b1->Index <= b2->Index))
-				{
-					--n1;
-					*tmp++ = *b1++;
-				}
-				else
-				{
-					--n2;
-					*tmp++ = *b2++;
-				}
-			}
-
-			if(n1 > 0)
-				memcpy(tmp, b1, n1 * sizeof(struct data_index));
-
-			memcpy(b, t, (n - n2) * sizeof(struct data_index));
-		}
-
-		void mysort_dataindex(void *b, size_t n, size_t s, int (*cmp) (const void *, const void *))
-		{
-			const size_t size = n * s;
-
-			struct data_index *tmp = (struct data_index *) mymalloc("struct data_index *tmp", size);
-
-			msort_dataindex_with_tmp((struct data_index *) b, n, tmp);
-
-			myfree(tmp);
-		}
