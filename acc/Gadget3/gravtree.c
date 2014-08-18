@@ -1755,12 +1755,12 @@ void gravity_tree(void)
 
 //			int *m_DomainTaskPointer = DomainTask;//(int *)(TopNodes + MaxTopNodes);
 //			m_DomainTaskPointer -= (All.MaxPart + MaxNodes);
-			int m_DomainTask[m_max_no];
+			int m_DomainTask[m_max_no - (All.MaxPart + MaxNodes)];
 			//printf("m_max_no = %d\n", m_max_no);
 
-			for(int m_index = All.MaxPart + MaxNodes; m_index<m_max_no; m_index++)
+			for(int m_index = (All.MaxPart + MaxNodes); m_index<m_max_no; m_index++)
 			{
-				m_DomainTask[m_index - (All.MaxPart + MaxNodes)] = DomainTask[m_index];
+				m_DomainTask[m_index - (All.MaxPart + MaxNodes)] = DomainTask[m_index - (All.MaxPart + MaxNodes)];
 			}
 
 
