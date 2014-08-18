@@ -1719,6 +1719,7 @@ void gravity_tree(void)
 
 			//manos//output simple arrays
 			MyLongDouble m_out_PdGravAccel[All.MaxPart][3];
+			float m_out_PGravCost[m_num_active_part];
 
 
 			for(m_index=0; m_index<All.MaxPart; m_index++)
@@ -1808,6 +1809,7 @@ void gravity_tree(void)
 				reduction(+:m_break,m_exitFlag)
 				for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 				{
+					m_out_PGravCost[m_index] = 0;
 					int exitFlag = 0;
 					LOCK_NEXPORT;
 
@@ -1911,7 +1913,7 @@ void gravity_tree(void)
 											//entered!!!
 											LOCK_WORKCOUNT;
 
-											P[m_no].GravCost[TakeLevel] += 1.0;
+											m_out_PGravCost[m_no] += 1.0;
 											UNLOCK_WORKCOUNT;
 										}
 										m_no = m_Nextnode[m_no];//Nextnode[m_no];
@@ -2195,6 +2197,10 @@ void gravity_tree(void)
 				P[m_index].g.dGravAccel[0] = m_out_PdGravAccel[m_index][0];
 				P[m_index].g.dGravAccel[1] = m_out_PdGravAccel[m_index][1];
 				P[m_index].g.dGravAccel[2] = m_out_PdGravAccel[m_index][2];
+			}
+
+			for(m_index=0; m_index<m_num_active_part; m_index++){
+				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
 			}
 
 			return NULL;
