@@ -1739,10 +1739,12 @@ void gravity_tree(void)
 
 			//manos//simple arrays #2
 			int m_Nextnode[All.MaxPart + NTopnodes];
+			int m_max_no=0;
 
 			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
 			{
 				m_Nextnode[m_index]= Nextnode[m_index];
+				if(m_max_no < m_Nextnode[m_index])m_max_no = m_Nextnode[m_index];
 			}
 
 			//manos//DomainTask
@@ -1753,9 +1755,10 @@ void gravity_tree(void)
 
 			int *m_DomainTaskPointer = DomainTask;//(int *)(TopNodes + MaxTopNodes);
 			m_DomainTaskPointer -= (All.MaxPart + MaxNodes);
-			int m_DomainTask[(All.MaxPart + NTopnodes)];
+			int m_DomainTask[m_max_no];
+			printf("m_max_no = %d\n", m_max_no);
 
-			for(int m_index = 0; m_index<(All.MaxPart+ NTopnodes); m_index++)
+			for(int m_index = 0; m_index<m_max_no; m_index++)
 			{
 				m_DomainTask[m_index] = m_DomainTaskPointer[m_index];
 			}
