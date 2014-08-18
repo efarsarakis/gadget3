@@ -1913,7 +1913,7 @@ void gravity_tree(void)
 											//entered!!!
 											LOCK_WORKCOUNT;
 
-											m_out_PGravCost[m_no] += 1.0;
+											m_out_PGravCost[m_index] += 1.0;
 											UNLOCK_WORKCOUNT;
 										}
 										m_no = m_Nextnode[m_no];//Nextnode[m_no];
