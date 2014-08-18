@@ -1996,13 +1996,13 @@ void gravity_tree(void)
 
 
 
-										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
-										{
-											printf("Entered???\n");
-											/* open cell */
-											m_no = m_nop->u.d.nextnode;
-											continue;
-										}
+//										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
+//										{
+//											printf("Entered???\n");
+//											/* open cell */
+//											m_no = m_nop->u.d.nextnode;
+//											continue;
+//										}
 
 										//	if(m_nop->Ti_current != m_ti_Current)
 										//	{
