@@ -1750,7 +1750,7 @@ void gravity_tree(void)
 				if(m_max_no < m_Nextnode[m_index])m_max_no = m_Nextnode[m_index];
 			}
 
-			printf("max_no = %d,  Maxpart= $d,   ntopnodes= %d,  maxNodes= %d\n", m_max_no, All.MaxPart, NTopnodes, MaxNodes);
+			printf("max_no = %d,  Maxpart= %d,   ntopnodes= %d,  maxNodes= %d\n", m_max_no, All.MaxPart, NTopnodes, MaxNodes);
 			//manos//DomainTask
 //			//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 //														{//  //try using m_TopNodes instead of DomainTask...?
