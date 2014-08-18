@@ -1751,8 +1751,8 @@ void gravity_tree(void)
 //															//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 //															if(m_exportflag[m_task = m_TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
 
-			int *m_topNodes = (int *)TopNodes;
-
+			int *m_topNodes = (int *)(TopNodes + MaxTopNodes);
+			m_topNodes -= MaxTopNodes;
 
 
 
