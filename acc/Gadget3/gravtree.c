@@ -2146,9 +2146,9 @@ void gravity_tree(void)
 
 
 							/* store result at the proper place */
-							m_out_PdGravAccel[m_index][0] = m_acc_x;
-							m_out_PdGravAccel[m_index][1] = m_acc_y;
-							m_out_PdGravAccel[m_index][2] = m_acc_z;
+							m_out_PdGravAccel[m_target][0] = m_acc_x;
+							m_out_PdGravAccel[m_target][1] = m_acc_y;
+							m_out_PdGravAccel[m_target][2] = m_acc_z;
 
 
 
