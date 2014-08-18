@@ -1751,8 +1751,14 @@ void gravity_tree(void)
 //															//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 //															if(m_exportflag[m_task = m_TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
 
-			int *m_topNodes = DomainTask;//(int *)(TopNodes + MaxTopNodes);
-			m_topNodes -= (All.MaxPart + MaxNodes);
+			int *m_DomainTaskPointer = DomainTask;//(int *)(TopNodes + MaxTopNodes);
+			m_DomainTaskPointer -= (All.MaxPart + MaxNodes);
+			int m_DomainTask[(All.MaxPart + MaxNodes)];
+
+			for(int m_index = 0; m_index<(All.MaxPart+MaxNodes); m_index++)
+			{
+				m_DomainTask[m_index] = m_DomainTaskPointer[m_index];
+			}
 
 
 
@@ -1937,7 +1943,7 @@ void gravity_tree(void)
 												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
-												if(m_exportflag[m_task = m_topNodes[m_no]] != m_target)
+												if(m_exportflag[m_task = m_DomainTask[m_no]] != m_target)
 												{
 													m_exportflag[m_task] = m_target;
 													m_exportnodecount[m_task] = NODELISTLENGTH;
