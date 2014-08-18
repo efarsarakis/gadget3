@@ -1745,6 +1745,17 @@ void gravity_tree(void)
 				m_Nextnode[m_index]= Nextnode[m_index];
 			}
 
+			//manos//DomainTask
+//			//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
+//														{//  //try using m_TopNodes instead of DomainTask...?
+//															//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
+//															if(m_exportflag[m_task = m_TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
+
+			int * m_topNodes = (int*)TopNodes;
+
+
+
+
 			//NextParticle=m_temp2;
 			//manos//printf("Active parts with for loop: %d \n", m_index);
 			m_break = 0;
@@ -1926,7 +1937,7 @@ void gravity_tree(void)
 												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
-												if(m_exportflag[m_task = TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
+												if(m_exportflag[m_task = m_TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
 												{
 													m_exportflag[m_task] = m_target;
 													m_exportnodecount[m_task] = NODELISTLENGTH;
