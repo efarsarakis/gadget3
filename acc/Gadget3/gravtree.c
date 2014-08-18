@@ -1996,13 +1996,13 @@ void gravity_tree(void)
 
 
 
-//										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
-//										{
-//											printf("Entered???\n");
-//											/* open cell */
-//											m_no = m_nop->u.d.nextnode;
-//											continue;
-//										}
+										//										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
+										//										{
+										//											printf("Entered???\n");
+										//											/* open cell */
+										//											m_no = m_nop->u.d.nextnode;
+										//											continue;
+										//										}
 
 										//	if(m_nop->Ti_current != m_ti_Current)
 										//	{
@@ -2023,6 +2023,8 @@ void gravity_tree(void)
 										m_dy = NEAREST(m_dy);
 										m_dz = NEAREST(m_dz);
 										m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
+
+										//here I have calculated the distance from the node (not particle)
 										//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
 										/* check whether we can stop walking along this branch */
 										if(m_r2 > m_rcut2)
@@ -2064,7 +2066,6 @@ void gravity_tree(void)
 										else		/* check relative opening criterion */
 										{
 
-											//used/23RD ////////////////////////////////////////////////////////////////////////////////////////////
 											if(m_mass * m_nop->len * m_nop->len > m_r2 * m_r2 * m_aold)
 											{
 												/* open cell */
@@ -2106,7 +2107,6 @@ void gravity_tree(void)
 
 									m_r = sqrt(m_r2);
 
-									//used/31ST ////////////////////////////////////////////////////////////////////////////////////////////
 									if(m_r >= m_h)
 									{
 										m_fac = m_mass / (m_r2 * m_r);
@@ -2115,7 +2115,6 @@ void gravity_tree(void)
 									else
 									{
 
-										//used34TH  ////////////////////////////////////////////////////////////////////////////////////////////
 										m_u = m_r * m_h_inv;
 										if(m_u < 0.5)
 											m_fac = m_mass * m_h3_inv * (10.666666666667 + m_u * m_u * (32.0 * m_u - 38.4));
