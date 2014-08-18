@@ -1679,9 +1679,9 @@ void gravity_tree(void)
 
 			int *exportflag, *exportnodecount, *exportindex;
 
-			exportflag = Exportflag + thread_id * NTask;
-			exportnodecount = Exportnodecount + thread_id * NTask;
-			exportindex = Exportindex + thread_id * NTask;
+			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
+			exportnodecount = Exportnodecount + thread_id * NTask;//same
+			exportindex = Exportindex + thread_id * NTask;//same
 
 			/* Note: exportflag is local to each thread */
 			for(j = 0; j < NTask; j++)
@@ -1923,9 +1923,10 @@ void gravity_tree(void)
 										//entered!!!
 										if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 										{
-
-											{
-												if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
+												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
+											{//  //try using m_TopNodes instead of DomainTask...?
+												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
+												if(m_exportflag[m_task = TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
 												{
 													m_exportflag[m_task] = m_target;
 													m_exportnodecount[m_task] = NODELISTLENGTH;
