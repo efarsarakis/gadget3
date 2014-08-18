@@ -1731,9 +1731,16 @@ void gravity_tree(void)
 			//manos//simple arrays #2
 			int m_Nextnode[All.MaxPart + NTopnodes];
 
+			//manos//output simple arrays
+			MyLongDouble m_out_PdGravAccel[All.MaxPart + NTopnodes][3];
+
 			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
 			{
 				m_Nextnode[m_index]= Nextnode[m_index];
+				m_out_PdGravAccel[m_index][0] = P[m_index].g.dGravAccel[0];
+				m_out_PdGravAccel[m_index][1] = P[m_index].g.dGravAccel[1];
+				m_out_PdGravAccel[m_index][2] = P[m_index].g.dGravAccel[2];
+
 			}
 
 			//NextParticle=m_temp2;
@@ -2138,9 +2145,10 @@ void gravity_tree(void)
 
 
 							/* store result at the proper place */
-							P[m_target].g.dGravAccel[0] = m_acc_x;
-							P[m_target].g.dGravAccel[1] = m_acc_y;
-							P[m_target].g.dGravAccel[2] = m_acc_z;
+
+							m_out_PdGravAccel[m_index][0] = m_acc_x;
+							m_out_PdGravAccel[m_index][1] = m_acc_y;
+							m_out_PdGravAccel[m_index][2] = m_acc_z;
 
 
 
@@ -2182,6 +2190,15 @@ void gravity_tree(void)
 
 			if(m_break)BufferFullFlag = 1;
 
+			//manos//copy computed values to cpu values
+			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
+			{
+				m_Nextnode[m_index]= Nextnode[m_index];
+				P[m_index].g.dGravAccel[0] = m_out_PdGravAccel[m_index][0];
+				P[m_index].g.dGravAccel[1] = m_out_PdGravAccel[m_index][1];
+				P[m_index].g.dGravAccel[2] = m_out_PdGravAccel[m_index][2];
+
+			}
 
 
 			return NULL;
