@@ -2021,11 +2021,11 @@ void gravity_tree(void)
 												else{
 
 
-													DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
+													m_DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
 															DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
 													if(exportnodecount[m_task] < NODELISTLENGTH)
-														DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
+														m_DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
 												}
 											}
 											if(m_exitFlag){
