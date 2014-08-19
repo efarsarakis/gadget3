@@ -2171,7 +2171,7 @@ void gravity_tree(void)
 			//manos//export pseudoparticles stuff
 			int m_index2=0;
 			for(m_index=0; m_index<m_num_active_part; m_index++)
-				for(m_index2=0; m_index<m_pseudo_count[m_index]; m_pseudo_count++)
+				for(m_index2=0; m_index2<m_pseudo_count[m_index]; m_index2++)
 				{//  //try using m_TopNodes instead of DomainTask...?
 
 					if(exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_index)
