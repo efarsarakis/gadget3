@@ -1914,7 +1914,7 @@ void gravity_tree(void)
 							m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
 
 							m_no = m_maxPart;		/* root node */
-
+							m_pseudo_count[m_target] = 0;
 
 							while(m_no >= 0)
 							{
