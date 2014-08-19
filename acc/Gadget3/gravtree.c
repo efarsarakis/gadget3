@@ -1762,17 +1762,35 @@ void gravity_tree(void)
 				m_DomainTask[m_index] = DomainTask[m_index];
 			}
 
+
+
+
+
+
+
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
 			int myBunchSize = 16000;
-			int m_pseudo_no[m_num_active_part][4000], m_pseudo_count[m_num_active_part];
+			int m_pseudo_no[m_num_active_part][myBunchSize], m_pseudo_count[m_num_active_part];
 			printf("reset");
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
+
+
+
+
+
+
 
 			//NextParticle=m_temp2;
 			//manos//printf("Active parts with for loop: %d \n", m_index);
 			m_break = 0;
 			MyLongDouble m_acc_x;
+
+
+
+
+
+
 
 
 			//manos//shortrange vars
