@@ -1962,17 +1962,8 @@ void gravity_tree(void)
 													LOCK_NEXPORT;
 													//manos//					#pragma omp critical(_nexport_)
 													{
-														if(Nexport >= m_bunchSize)
-														{
-															/* out of buffer space. Need to discard work for this particle and interrupt */
-															//BufferFullFlag = 1;
-															m_exitFlag = 1;
-														}
-														else
-														{
 															m_nexp = Nexport;
 															Nexport++;
-														}
 													}
 													UNLOCK_NEXPORT;
 
