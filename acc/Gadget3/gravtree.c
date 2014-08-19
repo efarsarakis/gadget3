@@ -1713,6 +1713,9 @@ void gravity_tree(void)
 				UNLOCK_NEXPORT;
 			}
 
+			//manos//extra arrays
+			int m_ProcessedFlag[m_num_active_part];
+
 			//manos//simple arrays
 			MyDouble m_PPos[All.MaxPart][3], m_PMass[All.MaxPart];
 			short int m_PType[All.MaxPart];
@@ -1828,7 +1831,7 @@ void gravity_tree(void)
 				reduction(+:m_break,m_exitFlag)
 				for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 				{
-					m_out_PGravCost[m_index] = 0;
+					m_out_PGravCost[m_index] = 0; //manos//make 2d if time allows
 					int exitFlag = 0;
 					LOCK_NEXPORT;
 
@@ -1840,7 +1843,7 @@ void gravity_tree(void)
 					else
 					{
 						i = m_active_part[m_index];
-						ProcessedFlag[i] = 0;
+						m_ProcessedFlag[i] = 0;
 					}
 					UNLOCK_NEXPORT;
 
@@ -1942,7 +1945,7 @@ void gravity_tree(void)
 										//entered!!!
 										if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 										{
-												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
+											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 												if(m_exportflag[m_task = m_DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
@@ -2199,7 +2202,7 @@ void gravity_tree(void)
 
 
 
-							ProcessedFlag[i] = 1;	/* particle successfully finished */
+							m_ProcessedFlag[i] = 1;	/* particle successfully finished */
 						}
 					}///manos//end m_break part (containing whole shortrange function)
 
@@ -2219,6 +2222,7 @@ void gravity_tree(void)
 			}
 
 			for(m_index=0; m_index<m_num_active_part; m_index++){
+				ProcessedFlag[m_active_part[m_index]] = m_ProcessedFlag[m_index];
 				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
 			}
 
