@@ -1944,7 +1944,7 @@ void gravity_tree(void)
 
 
 
-											m_pseudo_no[m_target][m_pseudo_count] = m_no;
+											m_pseudo_no[m_target][m_pseudo_count[m_target]] = m_no;
 											m_pseudo_count[m_target] += 1;
 
 
