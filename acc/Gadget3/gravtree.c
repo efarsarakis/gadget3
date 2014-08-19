@@ -1677,16 +1677,21 @@ void gravity_tree(void)
 			int i, j, ret;
 			int thread_id = *(int *) p;
 
-			int *exportflag, *exportnodecount, *exportindex;
+			int exportflag[NTask], exportnodecount[NTask], exportindex[NTask];
 
-			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
-			exportnodecount = Exportnodecount + thread_id * NTask;//same
-			exportindex = Exportindex + thread_id * NTask;//same
+//			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
+//			exportnodecount = Exportnodecount + thread_id * NTask;//same
+//			exportindex = Exportindex + thread_id * NTask;//same
 
 			/* Note: exportflag is local to each thread */
 			for(j = 0; j < NTask; j++)
 				exportflag[j] = -1;
 
+			for(j=0; j < NTask; j++)
+			{
+				exportnodecount[j] = Exportnodecount[j];
+				exportindex[j] = Exportindex[j];
+			}
 
 
 			//manos variables
@@ -1773,9 +1778,9 @@ void gravity_tree(void)
 			//manos//shortrange vars
 
 			//input
-			int *m_exportflag = exportflag;
-			int *m_exportnodecount = exportnodecount;
-			int *m_exportindex = exportindex;
+//			int *m_exportflag = exportflag;
+//			int *m_exportnodecount = exportnodecount;
+//			int *m_exportindex = exportindex;
 
 			//private
 			struct NODE *m_nop = 0;
@@ -1945,13 +1950,13 @@ void gravity_tree(void)
 												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
-												if(m_exportflag[m_task = m_DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
+												if(exportflag[m_task = m_DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 												{
-													m_exportflag[m_task] = m_target;
-													m_exportnodecount[m_task] = NODELISTLENGTH;
+													exportflag[m_task] = m_target;
+													exportnodecount[m_task] = NODELISTLENGTH;
 												}
 
-												if(m_exportnodecount[m_task] == NODELISTLENGTH)
+												if(exportnodecount[m_task] == NODELISTLENGTH)
 												{
 													//int m_exitFlag=0;
 													LOCK_NEXPORT;
@@ -1981,8 +1986,8 @@ void gravity_tree(void)
 													//m
 													else
 													{
-														m_exportnodecount[m_task] = 0;
-														m_exportindex[m_task] = m_nexp;
+														exportnodecount[m_task] = 0;
+														exportindex[m_task] = m_nexp;
 														DataIndexTable[m_nexp].Task = m_task;
 														DataIndexTable[m_nexp].Index = m_target;
 														DataIndexTable[m_nexp].IndexGet = m_nexp;
@@ -1994,11 +1999,11 @@ void gravity_tree(void)
 												else{
 
 
-													DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]++] =
+													DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
 															DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
-													if(m_exportnodecount[m_task] < NODELISTLENGTH)
-														DataNodeList[m_exportindex[m_task]].NodeList[m_exportnodecount[m_task]] = -1;
+													if(exportnodecount[m_task] < NODELISTLENGTH)
+														DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
 												}
 											}
 											if(m_exitFlag){
@@ -2220,6 +2225,14 @@ void gravity_tree(void)
 
 			for(m_index=0; m_index<m_num_active_part; m_index++){
 				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
+			}
+
+
+			for(m_index = 0; m_index<NTask; m_index++)
+			{
+				Exportflag[m_index] = exportflag[m_index];
+				Exportnodecount[m_index] = exportnodecount[m_index];
+				Exportindex[m_index] = exportindex[m_index];
 			}
 
 			return NULL;
