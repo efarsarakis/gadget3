@@ -1947,7 +1947,7 @@ void gravity_tree(void)
 
 
 											m_pseudo_no[m_target][m_pseudo_count[m_target]] = m_no;
-											m_pseudo_count[m_target] += 1;
+											m_pseudo_count[m_target]++;
 
 
 
@@ -2169,7 +2169,7 @@ void gravity_tree(void)
 				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
 			}
 
-
+			printf("Got here!");
 			//manos//export pseudoparticles stuff
 			int m_index2=0;
 			for(m_index=0; m_index<m_num_active_part; m_index++)
