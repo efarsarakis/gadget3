@@ -1769,11 +1769,11 @@ void gravity_tree(void)
 
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-			int myBunchSize = 10000;
-			int m_pseudo_no[m_num_active_part][myBunchSize], m_pseudo_count[m_num_active_part];
-			printf("reset");
-			for(m_index=0; m_index<m_num_active_part; m_index++)
-				m_pseudo_count[m_index]=0;
+//			int myBunchSize = 10000;
+//			int m_pseudo_no[m_num_active_part][myBunchSize], m_pseudo_count[m_num_active_part];
+//			printf("reset");
+//			for(m_index=0; m_index<m_num_active_part; m_index++)
+//				m_pseudo_count[m_index]=0;
 
 
 
@@ -2185,46 +2185,46 @@ void gravity_tree(void)
 			m_nexp = Nexport;
 			printf("Got here!");
 			//manos//export pseudoparticles stuff
-			int m_index2=0;
-			for(m_index=0; m_index<m_num_active_part; m_index++)
-			{
-				for(m_index2=0; m_index2<m_pseudo_count[m_index]; m_index2++)
-				{//
-
-					if(exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_index)
-					{
-						exportflag[m_task] = m_index;
-						exportnodecount[m_task] = NODELISTLENGTH;
-					}
-
-					if(exportnodecount[m_task] == NODELISTLENGTH)
-					{
-						//int m_exitFlag=0;
-						LOCK_NEXPORT;
-						//manos//					#pragma omp critical(_nexport_)
-						{
-							m_nexp = Nexport;
-							Nexport++;
-						}
-						UNLOCK_NEXPORT;
-
-						exportnodecount[m_task] = 0;
-						exportindex[m_task] = m_nexp;
-						DataIndexTable[m_nexp].Task = m_task;
-						DataIndexTable[m_nexp].Index = m_index;
-						DataIndexTable[m_nexp].IndexGet = m_nexp;
-
-					}
-
-					DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
-							DomainNodeIndex[m_pseudo_no[m_index][m_index2] - (m_maxPart + m_maxNodes)];
-
-					if(exportnodecount[m_task] < NODELISTLENGTH)
-						DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
-
-				}
-			}
-			printf("Got to after export");
+//			int m_index2=0;
+//			for(m_index=0; m_index<m_num_active_part; m_index++)
+//			{
+//				for(m_index2=0; m_index2<m_pseudo_count[m_index]; m_index2++)
+//				{//
+//
+//					if(exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_index)
+//					{
+//						exportflag[m_task] = m_index;
+//						exportnodecount[m_task] = NODELISTLENGTH;
+//					}
+//
+//					if(exportnodecount[m_task] == NODELISTLENGTH)
+//					{
+//						//int m_exitFlag=0;
+//						LOCK_NEXPORT;
+//						//manos//					#pragma omp critical(_nexport_)
+//						{
+//							m_nexp = Nexport;
+//							Nexport++;
+//						}
+//						UNLOCK_NEXPORT;
+//
+//						exportnodecount[m_task] = 0;
+//						exportindex[m_task] = m_nexp;
+//						DataIndexTable[m_nexp].Task = m_task;
+//						DataIndexTable[m_nexp].Index = m_index;
+//						DataIndexTable[m_nexp].IndexGet = m_nexp;
+//
+//					}
+//
+//					DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
+//							DomainNodeIndex[m_pseudo_no[m_index][m_index2] - (m_maxPart + m_maxNodes)];
+//
+//					if(exportnodecount[m_task] < NODELISTLENGTH)
+//						DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
+//
+//				}
+//			}
+//			printf("Got to after export");
 
 
 
