@@ -1762,7 +1762,7 @@ void gravity_tree(void)
 				m_DomainTask[m_index] = DomainTask[m_index];
 			}
 
-			printf("BunchSize = %d", All.BunchSize);
+			printf("BunchSize = %d", All.BunchSize/m_num_active_part);
 
 			int m_pseudo_no[m_num_active_part][All.BunchSize/m_num_active_part], m_pseudo_count[m_num_active_part];
 
