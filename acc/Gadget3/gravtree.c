@@ -1752,13 +1752,6 @@ void gravity_tree(void)
 
 
 			//manos//DomainTask
-//			//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
-//														{//  //try using m_TopNodes instead of DomainTask...?
-//															//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
-//															if(m_exportflag[m_task = m_TopNodes[m_no - (m_maxPart + m_maxNodes)+MaxTopNodes]] != m_target)
-
-//			int *m_DomainTaskPointer = DomainTask;//(int *)(TopNodes + MaxTopNodes);
-//			m_DomainTaskPointer -= (All.MaxPart + MaxNodes);
 			int m_DomainTask[NTopleaves];
 
 			//printf("size of array = %d \n", (m_max_no - (All.MaxPart + MaxNodes)));
