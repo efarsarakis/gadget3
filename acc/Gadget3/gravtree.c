@@ -1785,7 +1785,7 @@ void gravity_tree(void)
 					m_DataNodeList[m_index][m_index2];
 				}
 			}
-			DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
+//			DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
 //																	DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
 
