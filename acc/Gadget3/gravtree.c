@@ -1963,13 +1963,13 @@ void gravity_tree(void)
 											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 
 
-											if(m_pseudo_count[m_index]<myBunchSize){
-												m_pseudo_no[m_index][m_pseudo_count[m_index]] = m_no;
-												m_pseudo_count[m_index]++;
-											}
-											else{
-												printf("Exceeded Bunchsize! on %d \n", m_target);
-											}
+//											if(m_pseudo_count[m_index]<myBunchSize){
+//												m_pseudo_no[m_index][m_pseudo_count[m_index]] = m_no;
+//												m_pseudo_count[m_index]++;
+//											}
+//											else{
+//												printf("Exceeded Bunchsize! on %d \n", m_target);
+//											}
 
 
 
