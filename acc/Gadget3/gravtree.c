@@ -1769,6 +1769,8 @@ void gravity_tree(void)
 
 			//manos//DataIndexTable
 			int m_DataIndexTableTask[All.BunchSize], m_DataIndexTableIndex[All.BunchSize], m_DataIndexTableIndexGet[All.BunchSize];
+			int m_DataNodeList[All.BunchSize][NODELISTLENGTH];
+			int m_index2;
 //DataIndexTable =
 //		(struct data_index *) mymalloc("DataIndexTable", All.BunchSize * sizeof(struct data_index));
 //DataNodeList =
@@ -1778,8 +1780,13 @@ void gravity_tree(void)
 				m_DataIndexTableTask[m_index] = DataIndexTable[m_index].Task;
 				m_DataIndexTableIndex[m_index] = DataIndexTable[m_index].Index;
 				m_DataIndexTableIndexGet[m_index] = DataIndexTable[m_index].IndexGet;
-
+				for(m_index2 = 0; m_index2 < NODELISTLENGTH; m_index2++)
+				{
+					m_DataNodeList[m_index][m_index2];
+				}
 			}
+			DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
+//																	DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
 
 
