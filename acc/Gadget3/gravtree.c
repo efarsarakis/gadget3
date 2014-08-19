@@ -1763,9 +1763,9 @@ void gravity_tree(void)
 			}
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-
-			int m_pseudo_no[m_num_active_part][5000], m_pseudo_count[m_num_active_part];
-
+			int myBunchSize = 4000;
+			int m_pseudo_no[m_num_active_part][4000], m_pseudo_count[m_num_active_part];
+			printf("reset");
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
 
@@ -1945,10 +1945,13 @@ void gravity_tree(void)
 											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 
 
-
-											m_pseudo_no[m_target][m_pseudo_count[m_target]] = m_no;
-											m_pseudo_count[m_target]++;
-
+											if(m_pseudo_count<myBunchSize){
+												m_pseudo_no[m_target][m_pseudo_count[m_target]] = m_no;
+												m_pseudo_count[m_target]++;
+											}
+											else{
+												printf("Exceeded Bunchsize!");
+											}
 
 
 
