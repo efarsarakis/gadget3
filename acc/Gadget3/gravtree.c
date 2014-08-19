@@ -1679,9 +1679,9 @@ void gravity_tree(void)
 
 			int exportflag[NTask], exportnodecount[NTask], exportindex[NTask];
 
-//			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
-//			exportnodecount = Exportnodecount + thread_id * NTask;//same
-//			exportindex = Exportindex + thread_id * NTask;//same
+			//			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
+			//			exportnodecount = Exportnodecount + thread_id * NTask;//same
+			//			exportindex = Exportindex + thread_id * NTask;//same
 
 			/* Note: exportflag is local to each thread */
 			for(j = 0; j < NTask; j++)
@@ -1778,9 +1778,9 @@ void gravity_tree(void)
 			//manos//shortrange vars
 
 			//input
-//			int *m_exportflag = exportflag;
-//			int *m_exportnodecount = exportnodecount;
-//			int *m_exportindex = exportindex;
+			//			int *m_exportflag = exportflag;
+			//			int *m_exportnodecount = exportnodecount;
+			//			int *m_exportindex = exportindex;
 
 			//private
 			struct NODE *m_nop = 0;
@@ -1947,7 +1947,7 @@ void gravity_tree(void)
 										//entered!!!
 										if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 										{
-												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
+											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 												if(exportflag[m_task = m_DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
@@ -1962,81 +1962,33 @@ void gravity_tree(void)
 													LOCK_NEXPORT;
 													//manos//					#pragma omp critical(_nexport_)
 													{
-														if(Nexport >= m_bunchSize)
-														{
-															/* out of buffer space. Need to discard work for this particle and interrupt */
-															//BufferFullFlag = 1;
-															m_exitFlag = 1;
-														}
-														else
-														{
-															m_nexp = Nexport;
-															Nexport++;
-														}
+
+														m_nexp = Nexport;
+														Nexport++;
+
 													}
 													UNLOCK_NEXPORT;
-													if(m_exitFlag)
-													{ //m
-														//return -1;
-														m_ninteractions=-1;
-														ret=-1;
 
-													} //m
-													//////////return statement to fix.........
-													//m
-													else
-													{
-														exportnodecount[m_task] = 0;
-														exportindex[m_task] = m_nexp;
-														DataIndexTable[m_nexp].Task = m_task;
-														DataIndexTable[m_nexp].Index = m_target;
-														DataIndexTable[m_nexp].IndexGet = m_nexp;
-													}
+													exportnodecount[m_task] = 0;
+													exportindex[m_task] = m_nexp;
+													DataIndexTable[m_nexp].Task = m_task;
+													DataIndexTable[m_nexp].Index = m_target;
+													DataIndexTable[m_nexp].IndexGet = m_nexp;
 												}
-												if(m_exitFlag){
-													continue;
-												}
-												else{
 
+												DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
+														DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
-													DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
-															DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
+												if(exportnodecount[m_task] < NODELISTLENGTH)
+													DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
+											}
+											m_no = m_Nextnode[m_no - m_maxNodes];//Nextnode[m_no - m_maxNodes];
 
-													if(exportnodecount[m_task] < NODELISTLENGTH)
-														DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
-												}
-											}
-											if(m_exitFlag){
-												continue;
-											}
-											else{
-												m_no = m_Nextnode[m_no - m_maxNodes];//Nextnode[m_no - m_maxNodes];
-												continue;
-											}
 										} //pseudoparticle region end
 
 
 
 										m_nop = &Nodes[m_no];
-
-
-
-										//										if(!(m_nop->u.d.bitflags & (1 << BITFLAG_MULTIPLEPARTICLES)))
-										//										{
-										//											printf("Entered???\n");
-										//											/* open cell */
-										//											m_no = m_nop->u.d.nextnode;
-										//											continue;
-										//										}
-
-										//	if(m_nop->Ti_current != m_ti_Current)
-										//	{
-										//		LOCK_PARTNODEDRIFT;
-										//		#pragma omp critical(_partnodedrift_)
-										//		//force_drift_node(m_no, m_ti_Current);
-										//		//printf("Force_drift_node()");
-										//		UNLOCK_PARTNODEDRIFT;
-										//	}
 
 										m_mass = m_nop->u.d.mass;
 
