@@ -2168,11 +2168,12 @@ void gravity_tree(void)
 			for(m_index=0; m_index<m_num_active_part; m_index++){
 				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
 			}
-
+			m_nexp = Nexport;
 			printf("Got here!");
 			//manos//export pseudoparticles stuff
 			int m_index2=0;
 			for(m_index=0; m_index<m_num_active_part; m_index++)
+			{
 				for(m_index2=0; m_index2<m_pseudo_count[m_index]; m_index2++)
 				{//  //try using m_TopNodes instead of DomainTask...?
 
@@ -2208,7 +2209,8 @@ void gravity_tree(void)
 						DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
 
 				}
-
+			}
+			printf("Got to after export");
 			return NULL;
 		}
 
