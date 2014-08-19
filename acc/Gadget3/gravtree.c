@@ -1750,7 +1750,7 @@ void gravity_tree(void)
 				if(m_max_no < m_Nextnode[m_index])m_max_no = m_Nextnode[m_index];
 			}
 
-			printf("max_no = %d,  Maxpart= %d,   ntopnodes= %d,  maxNodes= %d\n", m_max_no, All.MaxPart, NTopnodes, MaxNodes);
+
 			//manos//DomainTask
 //			//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 //														{//  //try using m_TopNodes instead of DomainTask...?
@@ -1759,13 +1759,15 @@ void gravity_tree(void)
 
 //			int *m_DomainTaskPointer = DomainTask;//(int *)(TopNodes + MaxTopNodes);
 //			m_DomainTaskPointer -= (All.MaxPart + MaxNodes);
-//			int m_DomainTask[m_max_no - (All.MaxPart + MaxNodes)];
-//			//printf("m_max_no = %d\n", m_max_no);
-//
-//			for(int m_index = (All.MaxPart + MaxNodes); m_index<m_max_no; m_index++)
-//			{
-//				m_DomainTask[m_index - (All.MaxPart + MaxNodes)] = DomainTask[m_index - (All.MaxPart + MaxNodes)];
-//			}
+			int m_DomainTask[m_max_no - (All.MaxPart + MaxNodes)];
+
+			printf("size of array = %d \n", (m_max_no - (All.MaxPart + MaxNodes)));
+			//printf("m_max_no = %d\n", m_max_no);
+
+			for(int m_index = 0; m_index<(m_max_no - (All.MaxPart + MaxNodes)); m_index++)
+			{
+				m_DomainTask[m_index] = DomainTask[m_index];
+			}
 
 
 
