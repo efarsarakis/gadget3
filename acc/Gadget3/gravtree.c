@@ -1975,44 +1975,25 @@ void gravity_tree(void)
 														}
 													}
 													UNLOCK_NEXPORT;
-													if(m_exitFlag)
-													{ //m
-														//return -1;
-														m_ninteractions=-1;
-														ret=-1;
 
-													} //m
-													//////////return statement to fix.........
-													//m
-													else
-													{
 														exportnodecount[m_task] = 0;
 														exportindex[m_task] = m_nexp;
 														DataIndexTable[m_nexp].Task = m_task;
 														DataIndexTable[m_nexp].Index = m_target;
 														DataIndexTable[m_nexp].IndexGet = m_nexp;
-													}
-												}
-												if(m_exitFlag){
-													continue;
-												}
-												else{
 
+												}
 
 													DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]++] =
 															DomainNodeIndex[m_no - (m_maxPart + m_maxNodes)];
 
 													if(exportnodecount[m_task] < NODELISTLENGTH)
 														DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
-												}
+
 											}
-											if(m_exitFlag){
-												continue;
-											}
-											else{
+
 												m_no = m_Nextnode[m_no - m_maxNodes];//Nextnode[m_no - m_maxNodes];
 												continue;
-											}
 										} //pseudoparticle region end
 
 
