@@ -1679,9 +1679,9 @@ void gravity_tree(void)
 
 			int exportflag[NTask], exportnodecount[NTask], exportindex[NTask];
 
-//			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
-//			exportnodecount = Exportnodecount + thread_id * NTask;//same
-//			exportindex = Exportindex + thread_id * NTask;//same
+			//			exportflag = Exportflag + thread_id * NTask;  //=Exportflag[0], size=mpi_comm_size, thread_id=0, NTask=MPI_COMM_WORLD size
+			//			exportnodecount = Exportnodecount + thread_id * NTask;//same
+			//			exportindex = Exportindex + thread_id * NTask;//same
 
 			/* Note: exportflag is local to each thread */
 			for(j = 0; j < NTask; j++)
@@ -1762,9 +1762,23 @@ void gravity_tree(void)
 			//printf("size of array = %d \n", (m_max_no - (All.MaxPart + MaxNodes)));
 			//printf("m_max_no = %d\n", m_max_no);
 
-			for(int m_index = 0; m_index<NTopleaves; m_index++)
+			for(m_index = 0; m_index<NTopleaves; m_index++)
 			{
 				m_DomainTask[m_index] = DomainTask[m_index];
+			}
+
+			//manos//DataIndexTable
+			int m_DataIndexTableTask[All.BunchSize], m_DataIndexTableIndex[All.BunchSize], m_DataIndexTableIndexGet[All.BunchSize];
+//DataIndexTable =
+//		(struct data_index *) mymalloc("DataIndexTable", All.BunchSize * sizeof(struct data_index));
+//DataNodeList =
+//		(struct data_nodelist *) mymalloc("DataNodeList", All.BunchSize * sizeof(struct data_nodelist));
+			for(m_index=0; m_index<All.BunchSize; m_index++)
+			{
+				m_DataIndexTableTask[m_index] = DataIndexTable[m_index].Task;
+				m_DataIndexTableIndex[m_index] = DataIndexTable[m_index].Index;
+				m_DataIndexTableIndexGet[m_index] = DataIndexTable[m_index].IndexGet;
+
 			}
 
 
@@ -1778,9 +1792,9 @@ void gravity_tree(void)
 			//manos//shortrange vars
 
 			//input
-//			int *m_exportflag = exportflag;
-//			int *m_exportnodecount = exportnodecount;
-//			int *m_exportindex = exportindex;
+			//			int *m_exportflag = exportflag;
+			//			int *m_exportnodecount = exportnodecount;
+			//			int *m_exportindex = exportindex;
 
 			//private
 			struct NODE *m_nop = 0;
@@ -1947,7 +1961,7 @@ void gravity_tree(void)
 										//entered!!!
 										if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 										{
-												//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
+											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 											{//  //try using m_TopNodes instead of DomainTask...?
 												//if(m_exportflag[m_task = DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
 												if(exportflag[m_task = m_DomainTask[m_no - (m_maxPart + m_maxNodes)]] != m_target)
@@ -1988,9 +2002,10 @@ void gravity_tree(void)
 													{
 														exportnodecount[m_task] = 0;
 														exportindex[m_task] = m_nexp;
-														DataIndexTable[m_nexp].Task = m_task;
-														DataIndexTable[m_nexp].Index = m_target;
-														DataIndexTable[m_nexp].IndexGet = m_nexp;
+
+														m_DataIndexTableTask[m_nexp] = m_task;
+														m_DataIndexTableIndex[m_nexp] = m_target;
+														m_DataIndexTableIndexGet[m_nexp] = m_nexp;
 													}
 												}
 												if(m_exitFlag){
@@ -2234,6 +2249,16 @@ void gravity_tree(void)
 				Exportnodecount[m_index] = exportnodecount[m_index];
 				Exportindex[m_index] = exportindex[m_index];
 			}
+
+			for(m_index=0; m_index<All.BunchSize; m_index++)
+			{
+				DataIndexTable[m_index].Task = m_DataIndexTableTask[m_index];
+				DataIndexTable[m_index].Index = m_DataIndexTableIndex[m_index];
+				DataIndexTable[m_index].IndexGet = m_DataIndexTableIndexGet[m_index];
+
+			}
+
+
 
 			return NULL;
 		}
