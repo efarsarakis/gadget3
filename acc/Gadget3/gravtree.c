@@ -2156,18 +2156,6 @@ void gravity_tree(void)
 
 			}//manos// end of data region
 
-			if(m_break)BufferFullFlag = 1;
-
-			for(m_index=0; m_index<All.MaxPart; m_index++)
-			{
-				P[m_index].g.dGravAccel[0] = m_out_PdGravAccel[m_index][0];
-				P[m_index].g.dGravAccel[1] = m_out_PdGravAccel[m_index][1];
-				P[m_index].g.dGravAccel[2] = m_out_PdGravAccel[m_index][2];
-			}
-
-			for(m_index=0; m_index<m_num_active_part; m_index++){
-				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
-			}
 			m_nexp = Nexport;
 			printf("Got here!");
 			//manos//export pseudoparticles stuff
@@ -2211,6 +2199,20 @@ void gravity_tree(void)
 				}
 			}
 			printf("Got to after export");
+
+			if(m_break)BufferFullFlag = 1;
+
+			for(m_index=0; m_index<All.MaxPart; m_index++)
+			{
+				P[m_index].g.dGravAccel[0] = m_out_PdGravAccel[m_index][0];
+				P[m_index].g.dGravAccel[1] = m_out_PdGravAccel[m_index][1];
+				P[m_index].g.dGravAccel[2] = m_out_PdGravAccel[m_index][2];
+			}
+
+			for(m_index=0; m_index<m_num_active_part; m_index++){
+				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
+			}
+
 			return NULL;
 		}
 
