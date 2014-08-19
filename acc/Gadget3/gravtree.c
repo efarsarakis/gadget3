@@ -1769,8 +1769,8 @@ void gravity_tree(void)
 
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-			int myBunchSize = 10000;
-			int m_pseudo_no[m_num_active_part][myBunchSize], m_pseudo_count[m_num_active_part];
+			int m_BunchSize = 100;
+			int m_pseudo_no[m_num_active_part][m_BunchSize], m_pseudo_count[m_num_active_part];
 			//printf("reset");
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
@@ -1963,7 +1963,7 @@ void gravity_tree(void)
 											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
 
 
-											if(m_pseudo_count[m_index]<myBunchSize){
+											if(m_pseudo_count[m_index]<m_BunchSize){
 												m_pseudo_no[m_index][m_pseudo_count[m_index]] = m_no;
 												m_pseudo_count[m_index]++;
 											}
