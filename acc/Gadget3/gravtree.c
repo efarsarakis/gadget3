@@ -1761,7 +1761,7 @@ void gravity_tree(void)
 //			m_DomainTaskPointer -= (All.MaxPart + MaxNodes);
 			int m_DomainTask[m_max_no - (All.MaxPart + MaxNodes)];
 
-			printf("size of array = %d \n", (m_max_no - (All.MaxPart + MaxNodes)));
+			//printf("size of array = %d \n", (m_max_no - (All.MaxPart + MaxNodes)));
 			//printf("m_max_no = %d\n", m_max_no);
 
 			for(int m_index = 0; m_index<(m_max_no - (All.MaxPart + MaxNodes)); m_index++)
