@@ -1764,7 +1764,7 @@ void gravity_tree(void)
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
 
-			int m_pseudo_no[m_num_active_part][100], m_pseudo_count[m_num_active_part];
+			int m_pseudo_no[m_num_active_part][1000], m_pseudo_count[m_num_active_part];
 
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
@@ -2156,6 +2156,11 @@ void gravity_tree(void)
 
 			}//manos// end of data region
 
+
+
+
+
+
 			m_nexp = Nexport;
 			printf("Got here!");
 			//manos//export pseudoparticles stuff
@@ -2199,6 +2204,10 @@ void gravity_tree(void)
 				}
 			}
 			printf("Got to after export");
+
+
+
+
 
 			if(m_break)BufferFullFlag = 1;
 
