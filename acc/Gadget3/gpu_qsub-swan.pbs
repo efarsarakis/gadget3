@@ -25,6 +25,12 @@ cd $PBS_O_WORKDIR
 #   using threading.
 export OMP_NUM_THREADS=1
 module add perftools
+
+make clean
+
+make Config=Config.sh
+
+
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
 
