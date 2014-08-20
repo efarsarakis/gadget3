@@ -2080,7 +2080,6 @@ void gravity_tree(void)
 
 										if(TakeLevel >= 0)
 										{
-											printf("Entered?");
 											LOCK_WORKCOUNT;
 											m_nop->GravCost += 1.0;
 											UNLOCK_WORKCOUNT;
