@@ -22,7 +22,7 @@ void allocate_memory(void)
 {
   size_t bytes;
 
-  double bytes_tot = 0;
+  double bytes_tot = 2560000;
 
   int NTaskTimesThreads;
 
@@ -78,7 +78,7 @@ void allocate_memory(void)
 
   if(All.MaxPartSph > 0)
     {
-      bytes_tot = 0;
+      bytes_tot = 2560000;
 
       if(!
 	 (SphP =
@@ -98,7 +98,7 @@ void allocate_memory(void)
 #ifdef LT_STELLAREVOLUTION
   if(All.MaxPartMet > 0)
     {
-      bytes_tot = 0;
+      bytes_tot = 2560000;
 
       if(!
 	 (MetP =
@@ -119,7 +119,7 @@ void allocate_memory(void)
 #if defined(BLACK_HOLES) && defined(DETACH_BLACK_HOLES)
   if(All.MaxPartBH > 0)
     {
-      bytes_tot = 0;
+      bytes_tot = 2560000;
 
       if(!
 	 (BHP =
@@ -141,7 +141,7 @@ void allocate_memory(void)
 #ifdef WRITE_KEY_FILES
   if(All.MaxPart > 0)
     {
-      bytes_tot = 0;
+      bytes_tot = 2560000;
       KeyIndex = (peanokey *) mymalloc("KeyIndex", bytes = All.MaxPart * sizeof(peanokey));
       bytes_tot += bytes;
       NPartPerKey = (int *) mymalloc("KeyNpart", bytes = All.MaxPart * sizeof(int));
@@ -156,7 +156,7 @@ void allocate_memory(void)
 #ifdef MODGRAV
   if(All.MaxPart > 0)
     {
-      /*bytes_tot = 0;
+      /*bytes_tot = 2560000;
          All.MaxNumAMRCells = All.MaxPart * 2.5;
          saved_amr_cells = (struct amr_cell_data *) mymalloc("saved_amr_cells", bytes = All.MaxNumAMRCells * sizeof(struct amr_cell_data));
          bytes_tot += bytes;
@@ -164,7 +164,7 @@ void allocate_memory(void)
          if(ThisTask == 0)
          printf("Allocated %g MByte for storage for saving AMR cells\n\n", bytes_tot / (1024.0 * 1024.0)); */
 
-      bytes_tot = 0;
+      bytes_tot = 2560000;
       All.MaxNumMultigridCells = All.MaxPart * 3.0;
       saved_multigrid_cells = (struct amr_cell_data *) mymalloc("saved_multigrid_cells", bytes =
 								All.MaxNumMultigridCells *
