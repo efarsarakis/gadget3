@@ -6,8 +6,8 @@
 
 # PBS job options (name, compute nodes, job time)
 #PBS -N Gadget3
-#PBS -l nodes=6:ppn=8
-#PBS -q gpu_nodes
+#PBS -l nodes=12:ppn=24
+#PBS -q large
 #PBS -l walltime=00:50:00
 
 
@@ -24,7 +24,7 @@ cd $PBS_O_WORKDIR
 # Set the number of threads to 1
 #   This prevents any system libraries from automatically 
 #   using threading.
-export OMP_NUM_THREADS=1
+export OMP_NUM_THREADS=6
 module load craype
 module load cray-mpich
 module add perftools
@@ -42,4 +42,4 @@ make Config=Config.sh
 #   Using 1536 MPI processes and 24 MPI processes per node
 
 
-aprun -n 48 -N 8 ./GadgetMedium param.txt
+aprun -n 48 -N 4 -d 6 ./GadgetMedium param.txt
