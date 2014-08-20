@@ -1769,7 +1769,7 @@ void gravity_tree(void)
 
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-			int m_BunchSize = 10;
+			int m_BunchSize = 4;
 			int m_pseudo_no[m_num_active_part][m_BunchSize], m_pseudo_count[m_num_active_part];
 			//printf("reset");
 			for(m_index=0; m_index<m_num_active_part; m_index++)
