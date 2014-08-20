@@ -22,7 +22,7 @@ void allocate_memory(void)
 {
   size_t bytes;
 
-  double bytes_tot = 0;
+  double bytes_tot = 2560000;
 
   int NTaskTimesThreads;
 
