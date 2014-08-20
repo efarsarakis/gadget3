@@ -1769,7 +1769,7 @@ void gravity_tree(void)
 
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-			int m_BunchSize = 300;
+			int m_BunchSize = 10;
 			int m_pseudo_no[m_num_active_part][m_BunchSize], m_pseudo_count[m_num_active_part];
 			//printf("reset");
 			for(m_index=0; m_index<m_num_active_part; m_index++)
@@ -1997,8 +1997,8 @@ void gravity_tree(void)
 										} //pseudoparticle region end
 
 
-										int m_no_temp = m_no;
-										Nodes[m_no_temp];
+
+										m_nop = &Nodes[m_no];
 
 
 										m_mass = m_nop->u.d.mass;
