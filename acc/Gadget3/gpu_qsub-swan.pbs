@@ -24,7 +24,9 @@ cd $PBS_O_WORKDIR
 #   This prevents any system libraries from automatically 
 #   using threading.
 export OMP_NUM_THREADS=1
-#module add perftools
+module add perftools
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
+
+
 aprun -n 6 -N 1 ./GadgetMedium param.txt
