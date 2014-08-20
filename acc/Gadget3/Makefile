@@ -218,7 +218,7 @@ FC       = cc
 GSL_INCL = -I/lus/scratch/p02045/lib/mygsl/include/
 GSL_LIBS = -L/lus/scratch/p02045/lib/mygsl/lib/
 
-OPTIMIZE = -h display_opt -h pragma=acc,msgs -h cache1,fp1,scalar1,thread1,vector1,ipa1,noaggress,nounroll,fusion1,nopattern
+OPTIMIZE = -h display_opt -h pragma=acc,msgs -h cache0,fp0,scalar0,thread0,vector0,ipa0,noaggress,nounroll0,fusion0,nopattern
 endif
 
 
