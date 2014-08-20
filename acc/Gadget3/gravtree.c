@@ -2182,7 +2182,7 @@ void gravity_tree(void)
 
 
 
-			m_nexp = Nexport;
+
 			//printf("Got here!");
 			//manos//export pseudoparticles stuff
 			int m_index2=0;
@@ -2190,7 +2190,6 @@ void gravity_tree(void)
 			{
 				for(m_index2=0; m_index2<m_pseudo_count[m_index]; m_index2++)
 				{//
-					printf("Entered...");
 					if(exportflag[m_task = DomainTask[m_pseudo_no[m_index][m_index2] - (m_maxPart + m_maxNodes)]] != m_index)
 					{
 						exportflag[m_task] = m_index;
