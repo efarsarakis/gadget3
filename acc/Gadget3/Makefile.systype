@@ -7,11 +7,11 @@
 
 #SYSTYPE="mvapich-pgi"
 
-SYSTYPE="acc-swan"
+#SYSTYPE="acc-swan"
 
 #SYSTYPE="swan-cray"
 
-#SYSTYPE="swan-pgi"
+SYSTYPE="swan-pgi"
 
 #SYSTYPE="archer"
 

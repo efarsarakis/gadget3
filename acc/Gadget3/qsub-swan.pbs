@@ -6,8 +6,8 @@
 
 # PBS job options (name, compute nodes, job time)
 #PBS -N Gadget3
-#PBS -l nodes=6:ppn=2
-#PBS -q small
+#PBS -l nodes=6:ppn=8
+#PBS -q gpu_nodes
 #PBS -l walltime=00:50:00
 
 # Replace [budget code] below with your project code (e.g. t01)
@@ -45,4 +45,4 @@ make Config=Config.sh
 #module add perftools
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
-aprun -n 12 -N 2 ./GadgetMedium param.txt
+aprun -n 48 -N 8 ./GadgetMedium param.txt
