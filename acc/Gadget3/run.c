@@ -52,12 +52,12 @@ void run(void)
 #endif
       compute_statistics();	/* regular statistics outputs (like total energy) */
 
-      create_snapshot_if_desired();
+      //create_snapshot_if_desired();
 
       write_cpu_log();		/* output some CPU usage log-info (accounts for everything needed up to the current sync-point) */
 
-      //if(All.NumCurrentTiStep == 10)
-      //endrun(0);
+      if(All.NumCurrentTiStep == 10)
+       endrun(0);
       
       if(All.Ti_Current >= TIMEBASE)	/* check whether we reached the final time */
 	{
