@@ -1862,7 +1862,7 @@ void gravity_tree(void)
 					else
 					{
 						i = m_active_part[m_index];
-						ProcessedFlag[i] = 0;
+						//ProcessedFlag[i] = 0;
 					}
 					UNLOCK_NEXPORT;
 
@@ -2171,7 +2171,7 @@ void gravity_tree(void)
 
 
 
-							ProcessedFlag[i] = 1;	/* particle successfully finished */
+							//ProcessedFlag[i] = 1;	/* particle successfully finished */
 						}
 					}///manos//end m_break part (containing whole shortrange function)
 
