@@ -47,6 +47,7 @@ pthread_mutex_t mutex_partnodedrift;
 #define LOCK_PARTNODEDRIFT
 #define UNLOCK_PARTNODEDRIFT
 
+//12 gets exceeded but works.
 #define m_BunchSize 12
 
 int m_pseudo_no[500000][m_BunchSize], m_pseudo_count[500000];
@@ -1971,7 +1972,7 @@ void gravity_tree(void)
 												m_pseudo_count[m_index]++;
 											}
 											else{
-												printf("Exceeded Bunchsize! on %d \n", m_target);
+												//printf("Exceeded Bunchsize! on %d \n", m_target);
 											}
 
 
