@@ -2182,7 +2182,6 @@ void gravity_tree(void)
 
 
 
-
 			//printf("Got here!");
 			//manos//export pseudoparticles stuff
 			int m_index2=0;
@@ -2221,7 +2220,10 @@ void gravity_tree(void)
 					if(exportnodecount[m_task] < NODELISTLENGTH)
 						DataNodeList[exportindex[m_task]].NodeList[exportnodecount[m_task]] = -1;
 
+
 				}
+				m_pseudo_count[m_index] = 0;
+
 			}
 			//printf("Got to after export");
 
