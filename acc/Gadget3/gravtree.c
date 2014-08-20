@@ -49,7 +49,7 @@ pthread_mutex_t mutex_partnodedrift;
 
 #define m_BunchSize 8
 
-int m_pseudo_no[50000][m_BunchSize], m_pseudo_count[50000];
+int m_pseudo_no[500000][m_BunchSize], m_pseudo_count[500000];
 
 #ifdef STATICBRANDT
 inline double OmegaR(int i, int mode)
