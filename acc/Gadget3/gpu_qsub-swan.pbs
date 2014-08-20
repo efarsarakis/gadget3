@@ -6,11 +6,9 @@
 
 # PBS job options (name, compute nodes, job time)
 #PBS -N Gadget3
-#PBS -l nodes=6:ppn=16
+#PBS -l nodes=6:ppn=8
 #PBS -q gpu_nodes
 #PBS -l walltime=00:50:00
-#PBS -j oe
-
 
 # Replace [budget code] below with your project code (e.g. t01)
 #commented PBS -A d59
@@ -25,15 +23,17 @@ cd $PBS_O_WORKDIR
 # Set the number of threads to 1
 #   This prevents any system libraries from automatically 
 #   using threading.
-export OMP_NUM_THREADS=4
-module load craype
+export OMP_NUM_THREADS=1
+
 module load cray-mpich
 module add perftools
 module load fftw/2.1.5.7.1
-module load craype-accel-host
+module load craype-accel-nvidia35
+
  
 export CRAY_CUDA_MPS=1
 export LD_LIBRARY_PATH=/lus/scratch/p02045/lib/mygsl/lib:LD_LIBRARY_PATH
+
 
 make clean
 
@@ -42,6 +42,4 @@ make Config=Config.sh
 
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
-
-
-aprun -n 24 -N 4 -d 4 ./GadgetMedium param.txt
+aprun -n 48 -N 8 ./GadgetMedium param.txt
