@@ -1756,6 +1756,31 @@ void gravity_tree(void)
 			}
 
 
+			MyFloat m_nopUDmass[MaxNodes], m_nopUDs[MaxNodes][3], m_noplen[MaxNodes], m_nopcenter[MaxNodes][3];
+
+			int m_nopUDsibling[MaxNodes], m_nopUDnextnode[MaxNodes];
+
+			double m_nopGravCost[MaxNodes];
+
+			int m_index2;
+
+			for(m_index = 0; m_index<MaxNodes; m_index++)
+			{
+				m_index2 = m_index + All.MaxPart;
+				m_nopUDmass[m_index] = Nodes[m_index2].u.d.mass;
+				m_nopUDs[m_index][0] = Nodes[m_index2].u.d.s[0];
+				m_nopUDs[m_index][1] = Nodes[m_index2].u.d.s[1];
+				m_nopUDs[m_index][2] = Nodes[m_index2].u.d.s[2];
+				m_noplen[m_index] = Nodes[m_index2].len;
+				m_nopcenter[m_index][0] = Nodes[m_index2].center[0];
+				m_nopcenter[m_index][1] = Nodes[m_index2].center[1];
+				m_nopcenter[m_index][2] = Nodes[m_index2].center[2];
+				m_nopUDsibling[m_index] = Nodes[m_index2].u.d.sibling;
+				m_nopUDnextnode[m_index] = Nodes[m_index2].u.d.nextnode;
+				m_nopGravCost[m_index] = 0;
+			}
+
+
 			//manos//DomainTask
 			int m_DomainTask[NTopleaves];
 
@@ -2002,14 +2027,14 @@ void gravity_tree(void)
 
 
 
-										m_nop = &Nodes[m_no];
+//										m_nop = &Nodes[m_no];
+										int m_no_temp = m_no;
 
+										m_mass = m_nopUDmass[m_no_temp];
 
-										m_mass = m_nop->u.d.mass;
-
-										m_dx = m_nop->u.d.s[0] - m_pos_x;
-										m_dy = m_nop->u.d.s[1] - m_pos_y;
-										m_dz = m_nop->u.d.s[2] - m_pos_z;
+										m_dx = m_nopUDs[m_no_temp][0] - m_pos_x;
+										m_dy = m_nopUDs[m_no_temp][1] - m_pos_y;
+										m_dz = m_nopUDs[m_no_temp][2] - m_pos_z;
 
 										m_dx = NEAREST(m_dx);
 										m_dy = NEAREST(m_dy);
@@ -2021,26 +2046,26 @@ void gravity_tree(void)
 										/* check whether we can stop walking along this branch */
 										if(m_r2 > m_rcut2)
 										{
-											m_eff_dist = m_rcut + 0.5 * m_nop->len;
+											m_eff_dist = m_rcut + 0.5 * m_noplen[m_no_temp];
 
-											m_dist = NEAREST(m_nop->center[0] - m_pos_x);
+											m_dist = NEAREST(m_nopcenter[m_no_temp][0] - m_pos_x);
 											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
 											{
-												m_no = m_nop->u.d.sibling;
+												m_no = m_nopUDsibling[m_no_temp];
 												continue;
 											}
 
-											m_dist = NEAREST(m_nop->center[1] - m_pos_y);
+											m_dist = NEAREST(m_nopcenter[m_no_temp][1] - m_pos_y);
 											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
 											{
-												m_no = m_nop->u.d.sibling;
+												m_no = m_nopUDsibling[m_no_temp];
 												continue;
 											}
 
-											m_dist = NEAREST(m_nop->center[2] - m_pos_z);
+											m_dist = NEAREST(m_nopcenter[m_no_temp][2] - m_pos_z);
 											if(m_dist < -m_eff_dist || m_dist > m_eff_dist)
 											{
-												m_no = m_nop->u.d.sibling;
+												m_no = m_nopUDsibling[m_no_temp];
 												continue;
 											}
 										}
@@ -2048,32 +2073,32 @@ void gravity_tree(void)
 
 										if(m_errTol2)	/* check Barnes-Hut opening criterion */
 										{
-											if(m_nop->len * m_nop->len > m_r2 * m_errTol2)
+											if(m_noplen[m_no_temp] * m_noplen[m_no_temp] > m_r2 * m_errTol2)
 											{
 												/* open cell */
-												m_no = m_nop->u.d.nextnode;
+												m_no = m_nopUDnextnode[m_no_temp];
 												continue;
 											}
 										}
 										else		/* check relative opening criterion */
 										{
 
-											if(m_mass * m_nop->len * m_nop->len > m_r2 * m_r2 * m_aold)
+											if(m_mass * m_noplen * m_noplen[m_no_temp] > m_r2 * m_r2 * m_aold)
 											{
 												/* open cell */
-												m_no = m_nop->u.d.nextnode;
+												m_no = m_nopUDnextnode[m_no_temp];
 												continue;
 											}
 
 											/* check in addition whether we lie inside the cell */
 
-											if(fabs(m_nop->center[0] - m_pos_x) < 0.60 * m_nop->len)
+											if(fabs(m_nopcenter[m_no_temp][0] - m_pos_x) < 0.60 * m_noplen[m_no_temp])
 											{
-												if(fabs(m_nop->center[1] - m_pos_y) < 0.60 * m_nop->len)
+												if(fabs(m_nopcenter[m_no_temp][1] - m_pos_y) < 0.60 * m_noplen[m_no_temp])
 												{
-													if(fabs(m_nop->center[2] - m_pos_z) < 0.60 * m_nop->len)
+													if(fabs(m_nopcenter[m_no_temp][2] - m_pos_z) < 0.60 * m_noplen[m_no_temp])
 													{
-														m_no = m_nop->u.d.nextnode;
+														m_no = m_nopUDnextnode[m_no_temp];
 														continue;
 													}
 												}
@@ -2085,11 +2110,11 @@ void gravity_tree(void)
 										if(TakeLevel >= 0)
 										{
 											LOCK_WORKCOUNT;
-											m_nop->GravCost += 1.0;
+											m_nopGravCost[m_no_temp] += 1.0;
 											UNLOCK_WORKCOUNT;
 										}
 
-										m_no = m_nop->u.d.sibling;	/* ok, node can be used */
+										m_no = m_nopUDsibling[m_no_temp];	/* ok, node can be used */
 
 
 									}//end of non-particle region
@@ -2188,7 +2213,7 @@ void gravity_tree(void)
 
 			//printf("Got here!");
 			//manos//export pseudoparticles stuff
-			int m_index2=0;
+			m_index2=0;
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 			{
 				for(m_index2=0; m_index2<m_pseudo_count[m_index]; m_index2++)
@@ -2245,7 +2270,13 @@ void gravity_tree(void)
 			}
 
 			for(m_index=0; m_index<m_num_active_part; m_index++){
-				P[m_no].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
+				P[m_index].GravCost[TakeLevel]  += m_out_PGravCost[m_index];
+			}
+
+
+			for(m_index = 0; m_index<MaxNodes; m_index++)
+			{
+				Nodes[m_index + All.MaxPart].GravCost += m_nopGravCost[m_index];
 			}
 
 			return NULL;
