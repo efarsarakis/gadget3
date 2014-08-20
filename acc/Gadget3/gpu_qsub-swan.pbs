@@ -30,6 +30,8 @@ module add perftools
 module load fftw/2.1.5.7.1
 module load craype-accel-nvidia35
 
+export LD_LIBRARY_PATH=/lus/scratch/p02045/lib/mygsl/lib:LD_LIBRARY_PATH
+
 make clean
 
 make Config=Config.sh
