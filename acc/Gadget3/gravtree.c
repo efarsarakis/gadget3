@@ -2083,7 +2083,7 @@ void gravity_tree(void)
 										else		/* check relative opening criterion */
 										{
 
-											if(m_mass * m_noplen * m_noplen[m_no_temp] > m_r2 * m_r2 * m_aold)
+											if(m_mass * m_noplen[m_no_temp] * m_noplen[m_no_temp] > m_r2 * m_r2 * m_aold)
 											{
 												/* open cell */
 												m_no = m_nopUDnextnode[m_no_temp];
