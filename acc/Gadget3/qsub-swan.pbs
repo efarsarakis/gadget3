@@ -24,6 +24,24 @@ cd $PBS_O_WORKDIR
 #   This prevents any system libraries from automatically 
 #   using threading.
 export OMP_NUM_THREADS=1
+
+module load cray-mpich
+module add perftools
+module load fftw/2.1.5.7.1
+module swap PrgEnv-cray PrgEnv-pgi
+
+
+export LD_LIBRARY_PATH=/lus/scratch/p02045/lib/mygsl/lib:LD_LIBRARY_PATH
+
+
+make clean
+
+make Config=Config.sh
+
+
+
+
+
 #module add perftools
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
