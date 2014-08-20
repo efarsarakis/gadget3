@@ -9,9 +9,9 @@
 
 #SYSTYPE="acc-swan"
 
-#SYSTYPE="swan-cray"
+SYSTYPE="swan-cray"
 
-SYSTYPE="swan-pgi"
+#SYSTYPE="swan-pgi"
 
 #SYSTYPE="archer"
 
