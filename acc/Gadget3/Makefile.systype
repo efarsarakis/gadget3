@@ -3,11 +3,11 @@
 # Please copy this file to Makefile.systype and uncomment your
 # system. Don't commit changes to this file unless you add support for
 # a new system.
-SYSTYPE="acc-boston"
+#SYSTYPE="acc-boston"
 
 #SYSTYPE="mvapich-pgi"
 
-#SYSTYPE="acc-swan"
+SYSTYPE="acc-swan"
 
 #SYSTYPE="swan-cray"
 
