@@ -24,6 +24,8 @@ cd $PBS_O_WORKDIR
 #   This prevents any system libraries from automatically 
 #   using threading.
 export OMP_NUM_THREADS=1
+module load craype
+module load cray-mpich
 module add perftools
 module load fftw/2.1.5.7.1
 
