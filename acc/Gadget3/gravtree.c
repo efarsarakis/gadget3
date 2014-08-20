@@ -2028,7 +2028,7 @@ void gravity_tree(void)
 
 
 //										m_nop = &Nodes[m_no];
-										int m_no_temp = m_no;
+										int m_no_temp = m_no - m_maxPart;
 
 										m_mass = m_nopUDmass[m_no_temp];
 
