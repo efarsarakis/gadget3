@@ -1997,7 +1997,7 @@ void gravity_tree(void)
 												m_pseudo_count[m_index]++;
 											}
 											else{
-												//printf("Exceeded Bunchsize! on %d \n", m_target);
+												printf("Exceeded Bunchsize! should be about: \n", All.BunchSize / 6);
 											}
 
 
