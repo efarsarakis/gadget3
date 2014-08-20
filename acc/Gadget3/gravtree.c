@@ -47,6 +47,10 @@ pthread_mutex_t mutex_partnodedrift;
 #define LOCK_PARTNODEDRIFT
 #define UNLOCK_PARTNODEDRIFT
 
+#define m_BunchSize 8
+
+int m_pseudo_no[50000][m_BunchSize], m_pseudo_count[50000];
+
 #ifdef STATICBRANDT
 inline double OmegaR(int i, int mode)
 {
@@ -1769,8 +1773,7 @@ void gravity_tree(void)
 
 
 			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-			int m_BunchSize = 8;
-			int m_pseudo_no[m_num_active_part][m_BunchSize], m_pseudo_count[m_num_active_part];
+
 			//printf("reset");
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
