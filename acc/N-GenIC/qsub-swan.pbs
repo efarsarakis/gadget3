@@ -6,7 +6,7 @@
 
 # PBS job options (name, compute nodes, job time)
 #PBS -N NGenIC
-#PBS -l nodes=6:ppn=2
+#PBS -l nodes=6:ppn=8
 #PBS -q small
 #PBS -l walltime=00:10:00
 
@@ -27,4 +27,4 @@ export OMP_NUM_THREADS=1
 
 # Launch the parallel job
 #   Using 1536 MPI processes and 24 MPI processes per node
-aprun -n 12 -N 2 ./N-GenIC ics.param
+aprun -n 48 -N 8 ./N-GenIC ics.param
