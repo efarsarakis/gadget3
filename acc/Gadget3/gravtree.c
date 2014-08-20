@@ -47,7 +47,7 @@ pthread_mutex_t mutex_partnodedrift;
 #define LOCK_PARTNODEDRIFT
 #define UNLOCK_PARTNODEDRIFT
 
-#define m_BunchSize 8
+#define m_BunchSize 12
 
 int m_pseudo_no[500000][m_BunchSize], m_pseudo_count[500000];
 
