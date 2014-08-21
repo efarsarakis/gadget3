@@ -1700,8 +1700,8 @@ void gravity_tree(void)
 			int m_max_no=0;
 
 
-		//manos//calculate the number of active particles
-				//and collect the list of "NextActiveParticles" in an array
+			//manos//calculate the number of active particles
+			//and collect the list of "NextActiveParticles" in an array
 
 			while(NextParticle>=0){
 				//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
@@ -1786,18 +1786,11 @@ void gravity_tree(void)
 				m_reduce_nopGravCost[m_index] = 0;
 			}
 
-		//manos//pseudoparticle helper arrays are declared as global vars
-				//to avoid system crashes
+			//manos//pseudoparticle helper arrays are declared as global vars
+			//to avoid system crashes
 			//manos//initialise pseudo-export count array
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
-
-
-
-			//manos//shortrange structure replacement scalars
-			m_rcut = All.Rcut[0];
-			m_asmth = All.Asmth[0];
-
 
 
 			//shortrange temporary variables private to each thread
@@ -1809,6 +1802,11 @@ void gravity_tree(void)
 			double m_eff_dist;
 			double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
 			MyLongDouble m_acc_x, m_acc_y, m_acc_z;
+
+
+			//manos//shortrange structure replacement scalars
+			m_rcut = All.Rcut[0];
+			m_asmth = All.Asmth[0];
 
 
 			double m_xtmp;
