@@ -1694,14 +1694,14 @@ void gravity_tree(void)
 
 
 
-			//manos variables
-			int m_index, m_active_part[All.MaxPart], m_num_active_part, m_temp, m_break;
-			m_num_active_part=0;
-
-
+			//manos//helper variables
+			int m_index, m_index2, m_active_part[All.MaxPart], m_temp, m_break;
+			int m_num_active_part=0;
 			int m_max_no=0;
 
-			//manos get active
+
+		//manos//calculate the number of active particles
+				//and collect the list of "NextActiveParticles" in an array
 
 			while(NextParticle>=0){
 				//printf("ProcessedFlag[%d]=%d \n",NextParticle, ProcessedFlag[NextParticle]);
@@ -1718,17 +1718,22 @@ void gravity_tree(void)
 				UNLOCK_NEXPORT;
 			}
 
-			//manos//simple arrays
+
+			//manos//particle replacement variables
 			MyDouble m_PPos[All.MaxPart][3], m_PMass[All.MaxPart];
 			short int m_PType[All.MaxPart];
 			MyFloat m_POldAcc[All.MaxPart];
+			int m_Nextnode[All.MaxPart + NTopnodes];
 
 
-			//manos//output simple arrays
+
+			//manos//particle OUTPUT simple arrays
 			MyLongDouble m_out_PdGravAccel[All.MaxPart][3];
 			float m_out_PGravCost[m_num_active_part];
 
 
+
+			//manos//initialise particle replacement simple arrays
 			for(m_index=0; m_index<All.MaxPart; m_index++)
 			{
 				m_PPos[m_index][0]=P[m_index].Pos[0];
@@ -1745,10 +1750,10 @@ void gravity_tree(void)
 
 			}
 
-			//manos//simple arrays #2
-			int m_Nextnode[All.MaxPart + NTopnodes];
 
+			//manos//NODE LEVEL
 
+			//get Nextnode list onto array
 			for(m_index=0; m_index<(All.MaxPart + NTopnodes); m_index++)
 			{
 				m_Nextnode[m_index]= Nextnode[m_index];
@@ -1756,14 +1761,15 @@ void gravity_tree(void)
 			}
 
 
+			//manos//node replacement simple arrays
 			MyFloat m_nopUDmass[MaxNodes], m_nopUDs[MaxNodes][3], m_noplen[MaxNodes], m_nopcenter[MaxNodes][3];
-
 			int m_nopUDsibling[MaxNodes], m_nopUDnextnode[MaxNodes];
 
-			double m_nopGravCost[MaxNodes];
+			//manos//node replacement OUTPUT arrays
+			double m_reduce_nopGravCost[MaxNodes];
 
-			int m_index2;
 
+			//manos//initialise node arrays
 			for(m_index = 0; m_index<MaxNodes; m_index++)
 			{
 				m_index2 = m_index + All.MaxPart;
@@ -1777,54 +1783,24 @@ void gravity_tree(void)
 				m_nopcenter[m_index][2] = Nodes[m_index2].center[2];
 				m_nopUDsibling[m_index] = Nodes[m_index2].u.d.sibling;
 				m_nopUDnextnode[m_index] = Nodes[m_index2].u.d.nextnode;
-				m_nopGravCost[m_index] = 0;
+				m_reduce_nopGravCost[m_index] = 0;
 			}
 
-
-			//manos//DomainTask
-			int m_DomainTask[NTopleaves];
-
-			//printf("size of array = %d \n", (m_max_no - (All.MaxPart + MaxNodes)));
-			//printf("m_max_no = %d\n", m_max_no);
-
-			for(int m_index = 0; m_index<NTopleaves; m_index++)
-			{
-				m_DomainTask[m_index] = DomainTask[m_index];
-			}
-
-
-
-
-
-
-
-			//printf("BunchSize = %d", All.BunchSize/m_num_active_part);
-
-			//printf("reset");
+		//manos//pseudoparticle helper arrays are declared as global vars
+				//to avoid system crashes
+			//manos//initialise pseudo-export count array
 			for(m_index=0; m_index<m_num_active_part; m_index++)
 				m_pseudo_count[m_index]=0;
 
 
 
+			//manos//shortrange structure replacement scalars
+			m_rcut = All.Rcut[0];
+			m_asmth = All.Asmth[0];
 
 
 
-
-			//NextParticle=m_temp2;
-			//manos//printf("Active parts with for loop: %d \n", m_index);
-			m_break = 0;
-			MyLongDouble m_acc_x;
-
-
-
-
-
-
-
-
-			//manos//shortrange vars
-
-			//private
+			//shortrange temporary variables private to each thread
 			struct NODE *m_nop = 0;
 			int m_no, m_nodesinlist, m_ptype, m_ninteractions, m_nexp, m_tabindex, m_task, m_listindex = 0;
 			double m_r2, m_dx, m_dy, m_dz, m_mass, m_r, m_fac, m_u, m_h, m_h_inv, m_h3_inv;
@@ -1832,7 +1808,12 @@ void gravity_tree(void)
 			double m_pos_x, m_pos_y, m_pos_z, m_aold;
 			double m_eff_dist;
 			double m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist;
-			MyLongDouble m_acc_y, m_acc_z;
+			MyLongDouble m_acc_x, m_acc_y, m_acc_z;
+
+
+			double m_xtmp;
+
+
 			// cache some global vars in local vars to help compiler with alias analysis
 			int m_maxPart = All.MaxPart;
 			int m_bunchSize = All.BunchSize;
@@ -1841,44 +1822,30 @@ void gravity_tree(void)
 			double m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
 			int m_exitFlag = 0;
 
-			//used/1ST ////////////////////////////////////////////////////////////////////////////////////////////
-			double m_xtmp;
-
-			//initializations
-
-
-			m_maxPart = All.MaxPart;
-			m_bunchSize = All.BunchSize;
-			m_maxNodes = MaxNodes;
-			m_ti_Current = All.Ti_Current;
-			m_errTol2 = All.ErrTolTheta * All.ErrTolTheta;
-
-			//manos//other
-
-			m_rcut = All.Rcut[0];
-			m_asmth = All.Asmth[0];
-
-
-
-
+			m_break = 0;
 
 			//manos//end shotrange vars
 			//manos acc
+
+			//
+			//manos// pragmas for OpenACC begin:
+			//
 
 			//#pragma acc data copy(ProcessedFlag[0:All.MaxPart],P[0:All.MaxPart], All, m_break) //create(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
 			m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_no, m_exitFlag)
 			{
 
 				//#pragma acc parallel loop copy(ProcessedFlag[0:All.MaxPart])
-#pragma acc parallel loop gang worker vector //private(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
+#pragma acc parallel loop gang worker vector
+				//private(m_acc_x, m_acc_y, m_acc_z, m_maxPart, m_bunchSize, m_maxNodes, \
 				m_ti_Current, m_errTol2, m_rcut, m_asmth, m_asmthfac, m_rcut2, m_dist, m_eff_dist, m_index, m_break, m_no, m_exitFlag) \
 				reduction(+:m_break,m_exitFlag)
 				for (m_index=0; m_index<m_num_active_part; m_index++) //manos
 				{
 					m_out_PGravCost[m_index] = 0; //manos//make 2d if time allows
 					int exitFlag = 0;
-					LOCK_NEXPORT;
 
+					LOCK_NEXPORT;
 					//if(BufferFullFlag != 0 || m_break)
 					if(m_break)
 					{
@@ -1907,23 +1874,18 @@ void gravity_tree(void)
 						////////////// INLINE shortrange start...   //////////////////////////////////////////
 
 						{
-
-							int m_target = i;
-
-
+							//manos//shortrange inner variables
+							int m_target = i;	//same as for-loop iteration index
 
 							m_nop=0;
 							m_listindex=0;
 							m_exitFlag = 0;
-
 
 							m_acc_x = 0;
 							m_acc_y = 0;
 							m_acc_z = 0;
 							m_ninteractions = 0;
 							m_nodesinlist = 0;
-
-
 
 
 							m_pos_x = m_PPos[m_target][0];//P[m_target].Pos[0];
@@ -1937,7 +1899,6 @@ void gravity_tree(void)
 
 							m_asmthfac = 0.5 / m_asmth * (NTAB / 3.0);
 
-							//used/15TH ////////////////////////////////////////////////////////////////////////////////////////////
 							m_h = All.ForceSoftening[m_ptype];
 							m_h_inv = 1.0 / m_h;
 							m_h3_inv = m_h_inv * m_h_inv * m_h_inv;
@@ -1951,16 +1912,6 @@ void gravity_tree(void)
 								{
 									if(m_no < m_maxPart)
 									{
-										/* the index of the node is the index of the particle */
-										//manos//
-										//if(P[m_no].Ti_current != m_ti_Current)
-										//{
-										//	LOCK_PARTNODEDRIFT;
-										//#pragma omp critical(_partnodedrift_)
-										//	drift_particle(m_no, m_ti_Current);
-										//	printf("Drift-particle()");
-										//	UNLOCK_PARTNODEDRIFT;
-										//}
 
 										m_dx = m_PPos[m_no][0] - m_pos_x;
 										m_dy = m_PPos[m_no][1] - m_pos_y;
@@ -1976,9 +1927,7 @@ void gravity_tree(void)
 
 										if(TakeLevel >= 0)
 										{
-											//entered!!!
 											LOCK_WORKCOUNT;
-
 											m_out_PGravCost[m_index] += 1.0;
 											UNLOCK_WORKCOUNT;
 										}
@@ -1986,12 +1935,8 @@ void gravity_tree(void)
 									}
 									else			/* we have an  internal node */
 									{
-										//entered!!!
 										if(m_no >= m_maxPart + m_maxNodes)	/* pseudo particle */
 										{
-											//DomainTask = (int *) (TopNodes + MaxTopNodes) or DomainTask = (int *) (TopNodes + NTopNodes);;
-
-
 											if(m_pseudo_count[m_index]<m_BunchSize){
 												m_pseudo_no[m_index][m_pseudo_count[m_index]] = m_no;
 												m_pseudo_count[m_index]++;
@@ -2000,34 +1945,12 @@ void gravity_tree(void)
 												//printf("Exceeded Bunchsize! should be about: \n", All.BunchSize / 6);
 											}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 											m_no = m_Nextnode[m_no - m_maxNodes];//Nextnode[m_no - m_maxNodes];
 											continue;
-										} //pseudoparticle region end
+										} //manos//pseudoparticle region end
 
+										//manos//if I'm here then it is a Node
 
-
-//										m_nop = &Nodes[m_no];
 										int m_no_temp = m_no - m_maxPart;
 
 										m_mass = m_nopUDmass[m_no_temp];
@@ -2042,7 +1965,7 @@ void gravity_tree(void)
 										m_r2 = m_dx * m_dx + m_dy * m_dy + m_dz * m_dz;
 
 										//here I have calculated the distance from the node (not particle)
-										//used/21ST ////////////////////////////////////////////////////////////////////////////////////////////
+
 										/* check whether we can stop walking along this branch */
 										if(m_r2 > m_rcut2)
 										{
@@ -2110,7 +2033,7 @@ void gravity_tree(void)
 										if(TakeLevel >= 0)
 										{
 											LOCK_WORKCOUNT;
-											m_nopGravCost[m_no_temp] += 1.0;
+											m_reduce_nopGravCost[m_no_temp] += 1.0;
 											UNLOCK_WORKCOUNT;
 										}
 
@@ -2120,7 +2043,7 @@ void gravity_tree(void)
 									}//end of non-particle region
 
 
-
+									//manos// at this point (part. or node) distance and mass fetched will be used:
 
 									m_r = sqrt(m_r2);
 
@@ -2154,9 +2077,7 @@ void gravity_tree(void)
 										m_acc_z += FLT(m_dz * m_fac);
 									}
 
-									m_ninteractions++;
-
-
+									m_ninteractions++;  //manos//remember to reduce if needed
 
 								}
 
@@ -2167,9 +2088,6 @@ void gravity_tree(void)
 							m_out_PdGravAccel[m_target][0] = m_acc_x;
 							m_out_PdGravAccel[m_target][1] = m_acc_y;
 							m_out_PdGravAccel[m_target][2] = m_acc_z;
-
-
-
 
 							ret = m_ninteractions;
 						}
@@ -2193,7 +2111,6 @@ void gravity_tree(void)
 
 							Costtotal += ret;
 							UNLOCK_WORKCOUNT;
-
 
 
 							//ProcessedFlag[i] = 1;	/* particle successfully finished */
@@ -2276,7 +2193,7 @@ void gravity_tree(void)
 
 			for(m_index = 0; m_index<MaxNodes; m_index++)
 			{
-				Nodes[m_index + All.MaxPart].GravCost += m_nopGravCost[m_index];
+				Nodes[m_index + All.MaxPart].GravCost += m_reduce_nopGravCost[m_index];
 			}
 
 			return NULL;
