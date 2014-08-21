@@ -1822,8 +1822,11 @@ void gravity_tree(void)
 
 			m_break = 0;
 
-			//manos//end shotrange vars
-			//manos acc
+
+
+
+
+
 
 			//
 			//manos// pragmas for OpenACC begin:
